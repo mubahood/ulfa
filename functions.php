@@ -142,33 +142,6 @@ function getAllEnrollments() {
     }
 }
 
-// Verify admin login
-function verifyAdminLogin($password) {
-    return $password === ADMIN_PASSWORD;
-}
-
-// Check if admin is logged in
-function isAdminLoggedIn() {
-    return isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
-}
-
-// Admin login
-function adminLogin($password) {
-    if (verifyAdminLogin($password)) {
-        $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_login_time'] = time();
-        return true;
-    }
-    return false;
-}
-
-// Admin logout
-function adminLogout() {
-    unset($_SESSION['admin_logged_in']);
-    unset($_SESSION['admin_login_time']);
-    session_destroy();
-}
-
 // Handle enrollment form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'enroll') {
     // Create table if not exists

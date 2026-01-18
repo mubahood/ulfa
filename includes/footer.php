@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> ULFA - United Love for All. All rights reserved. | Developed by <a href="#" style="color: var(--primary-yellow); text-decoration: none;">Muhindo Mubaraka</a></p>
+                <p>&copy; <?php echo date('Y'); ?> ULFA - United Love for All. All rights reserved. | Developed by <a href="#" style="color: var(--primary-yellow); text-decoration: none;">Muhindo Mubaraka</a> | <a href="admin/login.php" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem;"><i class="fas fa-lock me-1"></i>Admin</a></p>
             </div>
         </div>
     </footer>

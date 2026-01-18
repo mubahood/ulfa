@@ -166,6 +166,38 @@ include 'includes/header.php';
         </div>
     </section>
 
+    <!-- Video Section -->
+    <section id="video-section" style="background: var(--primary-black); padding: 80px 0; position: relative;">
+        <div class="container">
+            <div class="section-title">
+                <span class="badge-section" style="background: rgba(255, 193, 7, 0.2); color: var(--primary-yellow);">SEE US IN ACTION</span>
+                <h2 style="color: var(--white);">Our Work in the Community</h2>
+                <p class="subtitle" style="color: rgba(255,255,255,0.8);">Watch how ULFA is transforming lives and building hope for vulnerable children in Mpondwe Lhubiriha</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="video-container">
+                        <div class="video-wrapper">
+                            <!-- Replace 'VIDEO_ID_HERE' with your actual YouTube video ID -->
+                            <!-- Example: If your video URL is https://www.youtube.com/watch?v=dQw4w9WgXcQ, use 'dQw4w9WgXcQ' -->
+                            <iframe 
+                                src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1" 
+                                title="ULFA Organization Video" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-caption">
+                            <i class="fas fa-play-circle" style="color: var(--primary-yellow); margin-right: 0.5rem;"></i>
+                            <span style="color: var(--white); font-size: 0.95rem;">Discover the impact of your support and see the children we serve</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Testimonials Preview -->
     <section id="testimonials-preview" style="background: #f8f9fa; padding: 80px 0;">
         <div class="container">
