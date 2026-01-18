@@ -1,0 +1,190 @@
+<?php 
+$currentPage = 'get-involved';
+$pageTitle = 'Get Involved';
+$pageDescription = 'Join ULFA mission to transform lives. Donate, volunteer, or partner with us to support orphaned children in Uganda.';
+include 'includes/header.php'; 
+?>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Get Involved</h1>
+            <p>Be part of the change. Every action makes a difference.</p>
+        </div>
+    </div>
+
+    <!-- Get Involved Options -->
+    <section id="get-involved">
+        <div class="container">
+            <div class="section-title">
+                <span class="badge-section">JOIN US</span>
+                <h2>Make an Impact Today</h2>
+                <p class="subtitle">Choose how you want to support our mission</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="involvement-card" id="donate">
+                        <div class="involvement-icon"><i class="fas fa-heart"></i></div>
+                        <h4>Donate</h4>
+                        <p>Your financial support helps us provide food, education, healthcare, and shelter to vulnerable children. Every contribution makes a real difference.</p>
+                        <div style="margin: 1.5rem 0;">
+                            <h5 style="color: var(--primary-yellow); margin-bottom: 1rem;">Donation Options:</h5>
+                            <ul style="text-align: left;">
+                                <li>One-time donation</li>
+                                <li>Monthly sponsorship</li>
+                                <li>Sponsor a child</li>
+                                <li>Support a program</li>
+                            </ul>
+                        </div>
+                        <a href="#contact-section" class="btn-involvement">Donate Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="involvement-card" id="volunteer">
+                        <div class="involvement-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                        <h4>Volunteer</h4>
+                        <p>Share your time, skills, and passion with our children. Volunteers play a crucial role in our programs and activities.</p>
+                        <div style="margin: 1.5rem 0;">
+                            <h5 style="color: var(--primary-yellow); margin-bottom: 1rem;">Volunteer Opportunities:</h5>
+                            <ul style="text-align: left;">
+                                <li>Teaching & tutoring</li>
+                                <li>Healthcare support</li>
+                                <li>Skills training</li>
+                                <li>Administrative help</li>
+                            </ul>
+                        </div>
+                        <a href="#contact-section" class="btn-involvement">Apply to Volunteer</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="involvement-card" id="partner">
+                        <div class="involvement-icon"><i class="fas fa-handshake"></i></div>
+                        <h4>Partner With Us</h4>
+                        <p>Organizations and businesses can partner with ULFA to create lasting impact through corporate social responsibility programs.</p>
+                        <div style="margin: 1.5rem 0;">
+                            <h5 style="color: var(--primary-yellow); margin-bottom: 1rem;">Partnership Benefits:</h5>
+                            <ul style="text-align: left;">
+                                <li>Corporate sponsorship</li>
+                                <li>In-kind donations</li>
+                                <li>Employee engagement</li>
+                                <li>Joint programs</li>
+                            </ul>
+                        </div>
+                        <a href="#contact-section" class="btn-involvement">Become a Partner</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsor a Child -->
+    <section id="sponsor">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="mb-4">Sponsor a Child</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text);">Child sponsorship is one of the most direct and personal ways to make a difference. Your monthly support provides a child with education, healthcare, nutrition, and a safe home environment.</p>
+                    <div style="background: var(--light-yellow); padding: 2rem; border: 3px solid var(--primary-black); margin: 2rem 0;">
+                        <h4 class="mb-3">What Your Sponsorship Provides:</h4>
+                        <ul style="font-size: 1.05rem; line-height: 2;">
+                            <li><i class="fas fa-check" style="color: var(--primary-yellow); margin-right: 0.5rem;"></i>Full education support (fees, books, uniforms)</li>
+                            <li><i class="fas fa-check" style="color: var(--primary-yellow); margin-right: 0.5rem;"></i>Three nutritious meals daily</li>
+                            <li><i class="fas fa-check" style="color: var(--primary-yellow); margin-right: 0.5rem;"></i>Regular healthcare and medical care</li>
+                            <li><i class="fas fa-check" style="color: var(--primary-yellow); margin-right: 0.5rem;"></i>Safe housing and personal care</li>
+                            <li><i class="fas fa-check" style="color: var(--primary-yellow); margin-right: 0.5rem;"></i>Recreational activities and life skills training</li>
+                        </ul>
+                    </div>
+                    <a href="#contact-section" class="btn btn-hero btn-hero-primary"><span>Sponsor a Child Today</span></a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="program-card">
+                        <h3 class="text-center mb-4">Sponsorship Levels</h3>
+                        <div style="border-bottom: 2px solid var(--gray-border); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+                            <h4 style="color: var(--primary-yellow);">$50/month</h4>
+                            <p><strong>Basic Support</strong><br>Education, meals, and basic healthcare</p>
+                        </div>
+                        <div style="border-bottom: 2px solid var(--gray-border); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+                            <h4 style="color: var(--primary-yellow);">$100/month</h4>
+                            <p><strong>Full Support</strong><br>Complete care including housing and specialized programs</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary-yellow);">$200/month</h4>
+                            <p><strong>Premium Support</strong><br>Comprehensive care plus advanced education and skills training</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section for Forms -->
+    <section id="contact-section">
+        <div class="container">
+            <div class="section-title">
+                <span class="badge-section">GET IN TOUCH</span>
+                <h2>Ready to Make a Difference?</h2>
+                <p class="subtitle">Contact us to donate, volunteer, or partner with ULFA</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h5>Call Us</h5>
+                            <p style="margin: 0;">+256 700 000 000</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h5>Email Us</h5>
+                            <p style="margin: 0;">info@ulfa.org</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h5>Visit Us</h5>
+                            <p style="margin: 0;">Mpondwe Lhubiriha, Kasese District, Uganda</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="contact-form">
+                        <div id="contactAlert"></div>
+                        <form id="contactForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name *" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" name="email" class="form-control" placeholder="Your Email *" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="tel" name="phone" class="form-control" placeholder="Your Phone *" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <select name="subject" class="form-control" required>
+                                        <option value="">Select Interest *</option>
+                                        <option value="donation">Make a Donation</option>
+                                        <option value="volunteer">Become a Volunteer</option>
+                                        <option value="sponsor">Sponsor a Child</option>
+                                        <option value="partnership">Partnership Inquiry</option>
+                                        <option value="general">General Inquiry</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" class="form-control" rows="5" placeholder="Your Message *" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" id="submitBtn" class="btn-submit">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<?php include 'includes/footer.php'; ?>

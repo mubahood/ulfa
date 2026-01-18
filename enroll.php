@@ -6,7 +6,7 @@ ini_set('display_errors', 0);
 
 // Database configuration
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'learn_it_with_muhindo');
+define('DB_NAME', 'ulfa_charity');
 define('DB_USER', 'root');
 define('DB_PASS', 'root');
 define('DB_SOCKET', '/Applications/MAMP/tmp/mysql/mysql.sock');
@@ -35,12 +35,12 @@ function createEnrollmentsTable() {
     if (!$pdo) return false;
     
     try {
-        $sql = "CREATE TABLE IF NOT EXISTS enrollments (
+        $sql = "CREATE TABLE IF NOT EXISTS contact_inquiries (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL,
             phone VARCHAR(50) NOT NULL,
-            course VARCHAR(100) NOT NULL,
+            subject VARCHAR(100) NOT NULL,
             message TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             ip_address VARCHAR(45),
@@ -72,13 +72,13 @@ function isValidPhone($phone) {
     return strlen($phone) >= 10;
 }
 
-function isDuplicateEnrollment($email, $course) {
+function isDuplicateEnrollment($email, $subject) {
     $pdo = getDBConnection();
     if (!$pdo) return false;
     
     try {
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM enrollments WHERE email = ? AND course = ? AND created_at > DATE_SUB(NOW(), INTERVAL 1 HOUR)");
-        $stmt->execute([$email, $course]);
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM contact_inquiries WHERE email = ? AND subject = ? AND created_at > DATE_SUB(NOW(), INTERVAL 1 HOUR)");
+        $stmt->execute([$email, $subject]);
         return $stmt->fetchColumn() > 0;
     } catch(PDOException $e) {
         error_log("Duplicate check failed: " . $e->getMessage());
@@ -86,7 +86,7 @@ function isDuplicateEnrollment($email, $course) {
     }
 }
 
-function saveEnrollment($name, $email, $phone, $course, $message = '') {
+function saveEnrollment($name, $email, $phone, $subject, $message = '') {
     $dbError = null;
     $pdo = getDBConnection($dbError);
     if (!$pdo) {
@@ -96,10 +96,10 @@ function saveEnrollment($name, $email, $phone, $course, $message = '') {
     $name = sanitizeInput($name);
     $email = sanitizeInput($email);
     $phone = sanitizeInput($phone);
-    $course = sanitizeInput($course);
+    $subject = sanitizeInput($subject);
     $message = sanitizeInput($message);
     
-    if (empty($name) || empty($email) || empty($phone) || empty($course)) {
+    if (empty($name) || empty($email) || empty($phone) || empty($subject)) {
         return ['success' => false, 'message' => 'All required fields must be filled.'];
     }
     
@@ -111,17 +111,17 @@ function saveEnrollment($name, $email, $phone, $course, $message = '') {
         return ['success' => false, 'message' => 'Invalid phone number.'];
     }
     
-    if (isDuplicateEnrollment($email, $course)) {
-        return ['success' => false, 'message' => 'You have already enrolled in this course recently.'];
+    if (isDuplicateEnrollment($email, $subject)) {
+        return ['success' => false, 'message' => 'You have already submitted this inquiry recently.'];
     }
     
     try {
-        $stmt = $pdo->prepare("INSERT INTO enrollments (name, email, phone, course, message, ip_address) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO contact_inquiries (name, email, phone, subject, message, ip_address) VALUES (?, ?, ?, ?, ?, ?)");
         $ipAddress = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
         
-        $stmt->execute([$name, $email, $phone, $course, $message, $ipAddress]);
+        $stmt->execute([$name, $email, $phone, $subject, $message, $ipAddress]);
         
-        return ['success' => true, 'message' => 'Thank you for enrolling! We will contact you shortly with course details and payment information.'];
+        return ['success' => true, 'message' => 'Thank you for contacting ULFA! We will get back to you soon.'];
     } catch(PDOException $e) {
         error_log("Enrollment save failed: " . $e->getMessage());
         return ['success' => false, 'message' => 'Failed to save enrollment. Please try again.'];
@@ -139,7 +139,7 @@ try {
         $_POST['name'] ?? '',
         $_POST['email'] ?? '',
         $_POST['phone'] ?? '',
-        $_POST['course'] ?? '',
+        $_POST['subject'] ?? '',
         $_POST['message'] ?? ''
     );
 

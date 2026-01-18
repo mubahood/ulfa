@@ -27,12 +27,12 @@ function createEnrollmentsTable() {
     if (!$pdo) return false;
     
     try {
-        $sql = "CREATE TABLE IF NOT EXISTS enrollments (
+        $sql = "CREATE TABLE IF NOT EXISTS contact_inquiries (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL,
             phone VARCHAR(50) NOT NULL,
-            course VARCHAR(100) NOT NULL,
+            subject VARCHAR(100) NOT NULL,
             message TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             ip_address VARCHAR(45),
@@ -67,14 +67,14 @@ function isValidPhone($phone) {
     return strlen($phone) >= 10;
 }
 
-// Check for duplicate enrollment
-function isDuplicateEnrollment($email, $course) {
+// Check for duplicate inquiry
+function isDuplicateEnrollment($email, $subject) {
     $pdo = getDBConnection();
     if (!$pdo) return false;
     
     try {
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM enrollments WHERE email = ? AND course = ? AND created_at > DATE_SUB(NOW(), INTERVAL 1 HOUR)");
-        $stmt->execute([$email, $course]);
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM contact_inquiries WHERE email = ? AND subject = ? AND created_at > DATE_SUB(NOW(), INTERVAL 1 HOUR)");
+        $stmt->execute([$email, $subject]);
         return $stmt->fetchColumn() > 0;
     } catch(PDOException $e) {
         error_log("Duplicate check failed: " . $e->getMessage());
@@ -82,8 +82,8 @@ function isDuplicateEnrollment($email, $course) {
     }
 }
 
-// Save enrollment
-function saveEnrollment($name, $email, $phone, $course, $message = '') {
+// Save contact inquiry
+function saveEnrollment($name, $email, $phone, $subject, $message = '') {
     $dbError = null;
     $pdo = getDBConnection($dbError);
     if (!$pdo) {
@@ -94,11 +94,11 @@ function saveEnrollment($name, $email, $phone, $course, $message = '') {
     $name = sanitizeInput($name);
     $email = sanitizeInput($email);
     $phone = sanitizeInput($phone);
-    $course = sanitizeInput($course);
+    $subject = sanitizeInput($subject);
     $message = sanitizeInput($message);
     
     // Validation
-    if (empty($name) || empty($email) || empty($phone) || empty($course)) {
+    if (empty($name) || empty($email) || empty($phone) || empty($subject)) {
         return ['success' => false, 'message' => 'All required fields must be filled.'];
     }
     
@@ -111,33 +111,33 @@ function saveEnrollment($name, $email, $phone, $course, $message = '') {
     }
     
     // Check for duplicate
-    if (isDuplicateEnrollment($email, $course)) {
-        return ['success' => false, 'message' => 'You have already enrolled in this course recently.'];
+    if (isDuplicateEnrollment($email, $subject)) {
+        return ['success' => false, 'message' => 'You have already submitted this inquiry recently.'];
     }
     
     try {
-        $stmt = $pdo->prepare("INSERT INTO enrollments (name, email, phone, course, message, ip_address) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO contact_inquiries (name, email, phone, subject, message, ip_address) VALUES (?, ?, ?, ?, ?, ?)");
         $ipAddress = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
         
-        $stmt->execute([$name, $email, $phone, $course, $message, $ipAddress]);
+        $stmt->execute([$name, $email, $phone, $subject, $message, $ipAddress]);
         
-        return ['success' => true, 'message' => 'Thank you for enrolling! We will contact you shortly with course details and payment information.'];
+        return ['success' => true, 'message' => 'Thank you for contacting ULFA! We will get back to you soon.'];
     } catch(PDOException $e) {
         error_log("Enrollment save failed: " . $e->getMessage());
         return ['success' => false, 'message' => 'Failed to save enrollment. Please try again.'];
     }
 }
 
-// Get all enrollments
+// Get all contact inquiries
 function getAllEnrollments() {
     $pdo = getDBConnection();
     if (!$pdo) return [];
     
     try {
-        $stmt = $pdo->query("SELECT * FROM enrollments ORDER BY created_at DESC");
+        $stmt = $pdo->query("SELECT * FROM contact_inquiries ORDER BY created_at DESC");
         return $stmt->fetchAll();
     } catch(PDOException $e) {
-        error_log("Failed to fetch enrollments: " . $e->getMessage());
+        error_log("Failed to fetch inquiries: " . $e->getMessage());
         return [];
     }
 }
