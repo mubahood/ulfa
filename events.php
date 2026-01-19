@@ -79,9 +79,9 @@ $totalPages = ceil($totalEvents / $perPage);
                 <?php foreach ($events as $event): ?>
                 <div class="col-lg-4 col-md-6">
                     <div class="event-card" style="border: 2px solid var(--primary-black); border-radius: 0; overflow: hidden; height: 100%; display: flex; flex-direction: column; background: #fff; transition: transform 0.3s;">
-                        <?php if ($event['featured_image']): ?>
+                        <?php if (!empty($event['event_image'])): ?>
                         <div class="event-image" style="height: 220px; overflow: hidden; position: relative;">
-                            <img src="<?php echo htmlspecialchars($event['featured_image']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="uploads/<?php echo htmlspecialchars($event['event_image']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                             <div class="event-date-badge" style="position: absolute; top: 1rem; left: 1rem; background: var(--primary-yellow); color: var(--primary-black); padding: 0.75rem; border: 2px solid var(--primary-black); text-align: center; min-width: 70px;">
                                 <div style="font-size: 1.75rem; font-weight: 800; line-height: 1;"><?php echo date('d', strtotime($event['start_datetime'])); ?></div>
                                 <div style="font-size: 0.875rem; font-weight: 600;"><?php echo strtoupper(date('M', strtotime($event['start_datetime']))); ?></div>
@@ -96,11 +96,11 @@ $totalPages = ceil($totalEvents / $perPage);
                             </h3>
                             <div class="event-details" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.25rem; color: #666; font-size: 0.95rem;">
                                 <div><i class="far fa-clock" style="color: var(--primary-yellow); width: 24px;"></i> <?php echo date('F j, Y - g:i A', strtotime($event['start_datetime'])); ?></div>
-                                <div><i class="fas fa-map-marker-alt" style="color: var(--primary-yellow); width: 24px;"></i> <?php echo htmlspecialchars($event['venue']); ?></div>
-                                <?php if ($event['registration_required'] && $filter === 'upcoming'): ?>
+                                <div><i class="fas fa-map-marker-alt" style="color: var(--primary-yellow); width: 24px;"></i> <?php echo htmlspecialchars($event['venue_name'] ?? ''); ?></div>
+                                <?php if (!empty($event['registration_required']) && $filter === 'upcoming'): ?>
                                 <div><i class="fas fa-users" style="color: var(--primary-yellow); width: 24px;"></i> 
-                                    <?php if ($event['capacity']): ?>
-                                        <?php echo ($event['capacity'] - $event['registered_count']); ?> spots remaining
+                                    <?php if (!empty($event['capacity'])): ?>
+                                        <?php echo (($event['capacity'] ?? 0) - ($event['registered_count'] ?? 0)); ?> spots remaining
                                     <?php else: ?>
                                         Registration required
                                     <?php endif; ?>
