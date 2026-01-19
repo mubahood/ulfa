@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -36,7 +37,7 @@
                             <li><a class="dropdown-item" href="about.php#impact"><i class="fas fa-chart-line"></i>Our Impact</a></li>
                             <li><a class="dropdown-item" href="about.php#team"><i class="fas fa-users"></i>Our Team</a></li>
                             <li><a class="dropdown-item" href="stories.php"><i class="fas fa-comments"></i>Stories</a></li>
-                            <li><a class="dropdown-item" href="news.php"><i class="fas fa-newspaper"></i>News</a></li>
+                            <li><a class="dropdown-item" href="news.php"><i class="fas fa-newspaper"></i>News & Articles</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -46,6 +47,14 @@
                             <li><a class="dropdown-item" href="programs.php#child-welfare"><i class="fas fa-child"></i>Child Welfare</a></li>
                             <li><a class="dropdown-item" href="programs.php#orphanage"><i class="fas fa-home"></i>Orphanage Development</a></li>
                             <li><a class="dropdown-item" href="programs.php#agriculture"><i class="fas fa-seedling"></i>Agriculture Projects</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle <?php echo in_array($currentPage, ['events', 'causes', 'gallery']) ? 'active' : ''; ?>" href="#" role="button">Our Work<span class="dropdown-icon"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="events.php"><i class="far fa-calendar"></i>Events & Activities</a></li>
+                            <li><a class="dropdown-item" href="causes.php"><i class="fas fa-hand-holding-heart"></i>Active Causes</a></li>
+                            <li><a class="dropdown-item" href="gallery.php"><i class="far fa-images"></i>Photo Gallery</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

@@ -85,10 +85,20 @@
                 <li class="nav-item <?php echo ($currentPage == 'inquiries') ? 'active' : ''; ?>">
                     <a href="inquiries.php">
                         <i class="fas fa-envelope"></i>
-                        <span>Contact Inquiries</span>
+                        <span>Inquiries</span>
                         <?php 
-                        // Placeholder for unread count
-                        // echo '<span class="badge">5</span>'; 
+                        // Show unread inquiry count
+                        try {
+                            $pdo = getDBConnection();
+                            $checkCol = $pdo->query("SHOW COLUMNS FROM contact_inquiries LIKE 'status'");
+                            if ($checkCol->fetch()) {
+                                $stmt = $pdo->query("SELECT COUNT(*) FROM contact_inquiries WHERE status = 'new'");
+                                $newInquiries = $stmt->fetchColumn();
+                                if ($newInquiries > 0) {
+                                    echo '<span class="badge">' . $newInquiries . '</span>';
+                                }
+                            }
+                        } catch (Exception $e) {}
                         ?>
                     </a>
                 </li>

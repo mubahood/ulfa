@@ -2,7 +2,13 @@
 $currentPage = 'about';
 $pageTitle = 'About Us';
 $pageDescription = 'Learn about ULFA United Love for All Orphanage Centre, our mission, vision, and the impact we make in Kasese District, Uganda.';
-include 'includes/header.php'; 
+include 'config.php';
+include 'functions.php';
+include 'includes/header.php';
+
+// Fetch team members
+$stmt = $pdo->query("SELECT * FROM team_members WHERE status = 'active' ORDER BY display_order ASC, id ASC");
+$teamMembers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
     <!-- Page Header -->
@@ -130,34 +136,83 @@ include 'includes/header.php';
                 <h2>The People Behind ULFA</h2>
                 <p class="subtitle">Dedicated individuals committed to changing lives</p>
             </div>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="program-card text-center">
-                        <div class="author-avatar" style="width: 100px; height: 100px; font-size: 2.5rem; margin: 0 auto 1.5rem;"><i class="fas fa-user"></i></div>
-                        <h4>Muadhi Abibakar Kisando</h4>
-                        <p style="color: var(--primary-yellow); font-weight: 600; margin-bottom: 1rem;">Founder & Director</p>
-                        <p>Visionary leader dedicated to transforming the lives of vulnerable children in Kasese District.</p>
-                    </div>
+            <?php if (empty($teamMembers)): ?>
+                <div class="text-center" style="padding: 3rem 0;">
+                    <p style="color: #666;">Our team information will be available soon.</p>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="program-card text-center">
-                        <div class="author-avatar" style="width: 100px; height: 100px; font-size: 2.5rem; margin: 0 auto 1.5rem;"><i class="fas fa-user"></i></div>
-                        <h4>Education Team</h4>
-                        <p style="color: var(--primary-yellow); font-weight: 600; margin-bottom: 1rem;">Academic Support</p>
-                        <p>Dedicated teachers and mentors ensuring every child receives quality education and guidance.</p>
+            <?php else: ?>
+                <div class="row g-4">
+                    <?php foreach ($teamMembers as $member): ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="team-member-card" style="border: 2px solid var(--primary-black); border-radius: 0; overflow: hidden; background: #fff; transition: transform 0.3s;">
+                            <?php if ($member['photo']): ?>
+                            <div style="height: 280px; overflow: hidden; position: relative;">
+                                <img src="<?php echo htmlspecialchars($member['photo']); ?>" alt="<?php echo htmlspecialchars($member['name']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <?php else: ?>
+                            <div style="height: 280px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 4rem; color: #ddd;"></i>
+                            </div>
+                            <?php endif; ?>
+                            <div style="padding: 2rem; text-align: center;">
+                                <h4 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary-black);">
+                                    <?php echo htmlspecialchars($member['name']); ?>
+                                </h4>
+                                <p style="color: var(--primary-yellow); font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem;">
+                                    <?php echo htmlspecialchars($member['position']); ?>
+                                </p>
+                                <?php if ($member['department']): ?>
+                                <p style="color: #999; font-size: 0.9rem; margin-bottom: 1rem;">
+                                    <?php echo htmlspecialchars($member['department']); ?>
+                                </p>
+                                <?php endif; ?>
+                                <?php if ($member['bio']): ?>
+                                <p style="color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                                    <?php echo htmlspecialchars(strlen($member['bio']) > 150 ? substr($member['bio'], 0, 150) . '...' : $member['bio']); ?>
+                                </p>
+                                <?php endif; ?>
+                                <?php if ($member['email'] || $member['phone'] || $member['linkedin'] || $member['twitter']): ?>
+                                <div style="display: flex; justify-content: center; gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #e9ecef;">
+                                    <?php if ($member['email']): ?>
+                                    <a href="mailto:<?php echo htmlspecialchars($member['email']); ?>" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); text-decoration: none; transition: all 0.3s;">
+                                        <i class="far fa-envelope"></i>
+                                    </a>
+                                    <?php endif; ?>
+                                    <?php if ($member['phone']): ?>
+                                    <a href="tel:<?php echo htmlspecialchars($member['phone']); ?>" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); text-decoration: none; transition: all 0.3s;">
+                                        <i class="fas fa-phone"></i>
+                                    </a>
+                                    <?php endif; ?>
+                                    <?php if ($member['linkedin']): ?>
+                                    <a href="<?php echo htmlspecialchars($member['linkedin']); ?>" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); text-decoration: none; transition: all 0.3s;">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                    <?php endif; ?>
+                                    <?php if ($member['twitter']): ?>
+                                    <a href="<?php echo htmlspecialchars($member['twitter']); ?>" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); text-decoration: none; transition: all 0.3s;">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <?php endif; ?>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="program-card text-center">
-                        <div class="author-avatar" style="width: 100px; height: 100px; font-size: 2.5rem; margin: 0 auto 1.5rem;"><i class="fas fa-users"></i></div>
-                        <h4>Care Workers</h4>
-                        <p style="color: var(--primary-yellow); font-weight: 600; margin-bottom: 1rem;">Child Welfare</p>
-                        <p>Compassionate professionals providing daily care and support to all children at ULFA.</p>
-                    </div>
-                </div>
-            </div>
+            <?php endif; ?>
         </div>
     </section>
+
+    <style>
+    .team-member-card:hover {
+        transform: translateY(-5px);
+    }
+    .team-member-card a:hover {
+        background: var(--primary-yellow);
+        border-color: var(--primary-yellow);
+    }
+    </style>
 
     <!-- CTA -->
     <section id="cta">

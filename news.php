@@ -1,168 +1,162 @@
 <?php 
 $currentPage = 'news';
-$pageTitle = 'News & Updates';
-$pageDescription = 'Stay updated with the latest news, events, and announcements from ULFA Orphanage Centre.';
-include 'includes/header.php'; 
+$pageTitle = 'News & Articles';
+$pageDescription = 'Stay updated with the latest news, stories, and updates from ULFA - United Love for All.';
+include 'config.php';
+include 'functions.php';
+include 'includes/header.php';
+
+// Pagination
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$perPage = 9;
+$offset = ($page - 1) * $perPage;
+
+// Category filter
+$category = isset($_GET['category']) ? $_GET['category'] : '';
+
+// Build query
+$sql = "SELECT * FROM news_posts WHERE status = 'published'";
+if ($category) {
+    $sql .= " AND category = :category";
+}
+$sql .= " ORDER BY published_at DESC LIMIT :limit OFFSET :offset";
+
+$stmt = $pdo->prepare($sql);
+if ($category) {
+    $stmt->bindParam(':category', $category);
+}
+$stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
+$newsPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Get total count for pagination
+$countSql = "SELECT COUNT(*) FROM news_posts WHERE status = 'published'";
+if ($category) {
+    $countSql .= " AND category = :category";
+}
+$countStmt = $pdo->prepare($countSql);
+if ($category) {
+    $countStmt->bindParam(':category', $category);
+}
+$countStmt->execute();
+$totalPosts = $countStmt->fetchColumn();
+$totalPages = ceil($totalPosts / $perPage);
+
+// Get categories for filter
+$categoriesStmt = $pdo->query("SELECT DISTINCT category FROM news_posts WHERE status = 'published' ORDER BY category");
+$categories = $categoriesStmt->fetchAll(PDO::FETCH_COLUMN);
 ?>
 
-    <!-- Page Header -->
-    <div class="page-header">
-        <div class="container">
-            <h1>News & Updates</h1>
-            <p>Stay informed about our latest activities, events, and impact</p>
+<!-- Page Header -->
+<section style="padding: 120px 0 60px; background: var(--primary-black);">
+    <div class="container">
+        <div class="text-center">
+            <h1 style="color: var(--primary-yellow); font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">News & Articles</h1>
+            <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
+                Stay informed about our latest activities, success stories, and community impact
+            </p>
         </div>
     </div>
+</section>
 
-    <!-- News -->
-    <section id="news">
-        <div class="container">
-            <div class="section-title">
-                <span class="badge-section">LATEST NEWS</span>
-                <h2>What's Happening at ULFA</h2>
-                <p class="subtitle">Recent updates and announcements</p>
+<!-- Category Filter -->
+<section style="padding: 2rem 0; background: #f8f9fa; border-bottom: 2px solid var(--primary-black);">
+    <div class="container">
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <a href="news.php" class="btn btn-sm <?php echo !$category ? 'btn-active' : ''; ?>" style="border: 2px solid var(--primary-black); background: <?php echo !$category ? 'var(--primary-yellow)' : 'transparent'; ?>; color: var(--primary-black); padding: 0.5rem 1.5rem; font-weight: 600; text-decoration: none;">
+                All News
+            </a>
+            <?php foreach ($categories as $cat): ?>
+            <a href="news.php?category=<?php echo urlencode($cat); ?>" class="btn btn-sm <?php echo $category === $cat ? 'btn-active' : ''; ?>" style="border: 2px solid var(--primary-black); background: <?php echo $category === $cat ? 'var(--primary-yellow)' : 'transparent'; ?>; color: var(--primary-black); padding: 0.5rem 1.5rem; font-weight: 600; text-decoration: none;">
+                <?php echo htmlspecialchars($cat); ?>
+            </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- News Grid -->
+<section style="padding: 80px 0; background: #fff;">
+    <div class="container">
+        <?php if (empty($newsPosts)): ?>
+            <div class="text-center" style="padding: 3rem 0;">
+                <i class="fas fa-newspaper" style="font-size: 4rem; color: #ddd; margin-bottom: 1rem;"></i>
+                <h3 style="color: #666;">No news articles found</h3>
+                <p style="color: #999;">Check back soon for updates!</p>
             </div>
+        <?php else: ?>
             <div class="row g-4">
+                <?php foreach ($newsPosts as $news): ?>
                 <div class="col-lg-4 col-md-6">
-                    <div class="news-card">
-                        <div class="news-image">
-                            <span class="news-badge">Education</span>
+                    <div class="news-card" style="border: 2px solid var(--primary-black); border-radius: 0; overflow: hidden; height: 100%; display: flex; flex-direction: column; transition: transform 0.3s;">
+                        <?php if ($news['featured_image']): ?>
+                        <div class="news-image" style="height: 220px; overflow: hidden;">
+                            <img src="<?php echo htmlspecialchars($news['featured_image']); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span><i class="fas fa-calendar me-1"></i>January 15, 2026</span>
-                                <span><i class="fas fa-user me-1"></i>Admin</span>
+                        <?php endif; ?>
+                        <div class="news-content" style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column;">
+                            <div class="news-meta" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.875rem; color: #666;">
+                                <span><i class="far fa-calendar" style="color: var(--primary-yellow);"></i> <?php echo date('M d, Y', strtotime($news['published_at'])); ?></span>
+                                <span><i class="far fa-folder" style="color: var(--primary-yellow);"></i> <?php echo htmlspecialchars($news['category']); ?></span>
                             </div>
-                            <h4><a href="#">New School Term Begins with Record Enrollment</a></h4>
-                            <p>We're excited to welcome 50 new students to our education support program. With your continued support, more children are getting access to quality education.</p>
+                            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4;">
+                                <a href="news-detail.php?id=<?php echo $news['id']; ?>" style="color: var(--primary-black); text-decoration: none;">
+                                    <?php echo htmlspecialchars($news['title']); ?>
+                                </a>
+                            </h3>
+                            <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.25rem; flex: 1;">
+                                <?php echo htmlspecialchars(substr(strip_tags($news['content']), 0, 150)); ?>...
+                            </p>
+                            <a href="news-detail.php?id=<?php echo $news['id']; ?>" class="btn btn-sm" style="border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); padding: 0.5rem 1.5rem; align-self: flex-start; transition: all 0.3s; text-decoration: none;">
+                                Read More <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="news-card">
-                        <div class="news-image">
-                            <span class="news-badge">Infrastructure</span>
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span><i class="fas fa-calendar me-1"></i>January 10, 2026</span>
-                                <span><i class="fas fa-user me-1"></i>Admin</span>
-                            </div>
-                            <h4><a href="#">New Dormitory Construction Completed</a></h4>
-                            <p>Thanks to generous donors, our new dormitory can now accommodate 40 additional children in safe, comfortable living spaces.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="news-card">
-                        <div class="news-image">
-                            <span class="news-badge">Health</span>
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span><i class="fas fa-calendar me-1"></i>December 28, 2025</span>
-                                <span><i class="fas fa-user me-1"></i>Admin</span>
-                            </div>
-                            <h4><a href="#">Annual Health Screening Successfully Completed</a></h4>
-                            <p>All 500+ children under our care received comprehensive health screenings and necessary treatments during our annual health camp.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="news-card">
-                        <div class="news-image">
-                            <span class="news-badge">Community</span>
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span><i class="fas fa-calendar me-1"></i>December 20, 2025</span>
-                                <span><i class="fas fa-user me-1"></i>Admin</span>
-                            </div>
-                            <h4><a href="#">Christmas Celebration Brings Joy to All</a></h4>
-                            <p>Our annual Christmas celebration was a huge success, with gifts, special meals, and entertainment for all children and staff.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="news-card">
-                        <div class="news-image">
-                            <span class="news-badge">Agriculture</span>
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span><i class="fas fa-calendar me-1"></i>December 15, 2025</span>
-                                <span><i class="fas fa-user me-1"></i>Admin</span>
-                            </div>
-                            <h4><a href="#">Successful Harvest from Our Farm Project</a></h4>
-                            <p>Our agriculture program yielded abundant crops this season, providing fresh produce for our children and income for the organization.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="news-card">
-                        <div class="news-image">
-                            <span class="news-badge">Partnership</span>
-                        </div>
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <span><i class="fas fa-calendar me-1"></i>December 5, 2025</span>
-                                <span><i class="fas fa-user me-1"></i>Admin</span>
-                            </div>
-                            <h4><a href="#">New Partnership with Local Schools Announced</a></h4>
-                            <p>We've partnered with three local schools to provide even better educational opportunities and resources for our children.</p>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
-        </div>
-    </section>
 
-    <!-- Upcoming Events -->
-    <section>
-        <div class="container">
-            <div class="section-title">
-                <span class="badge-section">UPCOMING EVENTS</span>
-                <h2>Mark Your Calendar</h2>
-                <p class="subtitle">Join us at these upcoming events</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <div class="program-card">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-                            <h3>Annual Fundraising Gala</h3>
-                            <span style="background: var(--primary-yellow); padding: 0.5rem 1rem; font-weight: 700;">Feb 20, 2026</span>
-                        </div>
-                        <p style="font-size: 1.1rem; line-height: 1.8;">Join us for an evening of inspiration, entertainment, and fundraising to support our programs. Meet the children, hear their stories, and see the impact of your support.</p>
-                        <p style="margin-top: 1rem;"><strong>Location:</strong> Community Hall, Kasese<br><strong>Time:</strong> 6:00 PM</p>
-                        <a href="contact.php" class="btn btn-involvement" style="margin-top: 1rem;">Register Now</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="program-card">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-                            <h3>Volunteer Training Workshop</h3>
-                            <span style="background: var(--primary-yellow); padding: 0.5rem 1rem; font-weight: 700;">Feb 10, 2026</span>
-                        </div>
-                        <p style="font-size: 1.1rem; line-height: 1.8;">Comprehensive training for new and existing volunteers. Learn best practices in child care, education support, and program delivery.</p>
-                        <p style="margin-top: 1rem;"><strong>Location:</strong> ULFA Centre<br><strong>Time:</strong> 9:00 AM - 4:00 PM</p>
-                        <a href="contact.php" class="btn btn-involvement" style="margin-top: 1rem;">Sign Up</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section id="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Stay Connected</h2>
-                <p class="lead" style="font-size: 1.2rem; margin-bottom: 2rem;">Subscribe to our newsletter for regular updates and stories</p>
-                <div class="hero-buttons" style="justify-content: center;">
-                    <a href="contact.php" class="btn btn-hero btn-hero-primary"><span><i class="fas fa-envelope me-2"></i>Subscribe</span></a>
-                    <a href="get-involved.php" class="btn btn-hero btn-hero-outline" style="border-color: var(--primary-black); color: var(--primary-black);"><span>Get Involved</span></a>
-                </div>
-            </div>
-        </div>
-    </section>
+            <!-- Pagination -->
+            <?php if ($totalPages > 1): ?>
+            <nav aria-label="News pagination" style="margin-top: 3rem;">
+                <ul class="pagination justify-content-center" style="gap: 0.5rem;">
+                    <?php if ($page > 1): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="news.php?page=<?php echo $page - 1; ?><?php echo $category ? '&category=' . urlencode($category) : ''; ?>" style="border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); padding: 0.5rem 1rem; text-decoration: none;">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                    
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <?php if ($i == $page): ?>
+                        <li class="page-item active">
+                            <span class="page-link" style="border: 2px solid var(--primary-black); background: var(--primary-yellow); color: var(--primary-black); padding: 0.5rem 1rem; font-weight: 600;">
+                                <?php echo $i; ?>
+                            </span>
+                        </li>
+                        <?php else: ?>
+                        <li class="page-item">
+                            <a class="page-link" href="news.php?page=<?php echo $i; ?><?php echo $category ? '&category=' . urlencode($category) : ''; ?>" style="border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); padding: 0.5rem 1rem; text-decoration: none;">
+                                <?php echo $i; ?>
+                            </a>
+                        </li>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                    
+                    <?php if ($page < $totalPages): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="news.php?page=<?php echo $page + 1; ?><?php echo $category ? '&category=' . urlencode($category) : ''; ?>" style="border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); padding: 0.5rem 1rem; text-decoration: none;">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+</section>
 
 <?php include 'includes/footer.php'; ?>

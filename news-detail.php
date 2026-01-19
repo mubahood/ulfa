@@ -1,0 +1,147 @@
+<?php 
+$currentPage = 'news';
+$pageTitle = 'News Article';
+include 'config.php';
+include 'functions.php';
+
+// Get news article
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$stmt = $pdo->prepare("SELECT * FROM news_posts WHERE id = ? AND status = 'published'");
+$stmt->execute([$id]);
+$news = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$news) {
+    header('Location: news.php');
+    exit;
+}
+
+$pageTitle = $news['title'] . ' - ULFA';
+$pageDescription = substr(strip_tags($news['content']), 0, 160);
+
+// Get related articles (same category, excluding current)
+$relatedStmt = $pdo->prepare("SELECT * FROM news_posts WHERE category = ? AND id != ? AND status = 'published' ORDER BY published_at DESC LIMIT 3");
+$relatedStmt->execute([$news['category'], $id]);
+$relatedArticles = $relatedStmt->fetchAll(PDO::FETCH_ASSOC);
+
+include 'includes/header.php';
+?>
+
+<!-- Page Header -->
+<section style="padding: 120px 0 60px; background: var(--primary-black);">
+    <div class="container">
+        <div class="text-center">
+            <div style="margin-bottom: 1rem;">
+                <a href="news.php" style="color: var(--primary-yellow); text-decoration: none; font-weight: 600;">
+                    <i class="fas fa-arrow-left"></i> Back to News
+                </a>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <span style="display: inline-block; padding: 0.5rem 1rem; background: var(--primary-yellow); color: var(--primary-black); font-weight: 600; font-size: 0.9rem;">
+                    <?php echo htmlspecialchars($news['category']); ?>
+                </span>
+            </div>
+            <h1 style="color: #fff; font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.2;">
+                <?php echo htmlspecialchars($news['title']); ?>
+            </h1>
+            <div style="color: rgba(255,255,255,0.7); font-size: 1rem;">
+                <i class="far fa-calendar"></i> <?php echo date('F j, Y', strtotime($news['published_at'])); ?>
+                <span style="margin: 0 0.5rem;">•</span>
+                <i class="far fa-user"></i> <?php echo htmlspecialchars($news['author']); ?>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Article Content -->
+<section style="padding: 80px 0; background: #fff;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <?php if ($news['featured_image']): ?>
+                <div style="margin-bottom: 3rem; border: 2px solid var(--primary-black); overflow: hidden;">
+                    <img src="<?php echo htmlspecialchars($news['featured_image']); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 100%; height: auto; display: block;">
+                </div>
+                <?php endif; ?>
+                
+                <div style="font-size: 1.1rem; line-height: 1.8; color: #333;">
+                    <?php echo $news['content']; ?>
+                </div>
+
+                <!-- Social Share -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e9ecef;">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">Share this article:</h4>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); text-decoration: none; transition: all 0.3s;">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>&text=<?php echo urlencode($news['title']); ?>" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); text-decoration: none; transition: all 0.3s;">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo urlencode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>&title=<?php echo urlencode($news['title']); ?>" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); text-decoration: none; transition: all 0.3s;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="whatsapp://send?text=<?php echo urlencode($news['title'] . ' - ' . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); text-decoration: none; transition: all 0.3s;">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Articles -->
+<?php if (!empty($relatedArticles)): ?>
+<section style="padding: 80px 0; background: #f8f9fa;">
+    <div class="container">
+        <div class="text-center" style="margin-bottom: 3rem;">
+            <h2 style="font-size: 2rem; font-weight: 700;">Related Articles</h2>
+            <p style="color: #666;">More stories you might be interested in</p>
+        </div>
+        <div class="row g-4">
+            <?php foreach ($relatedArticles as $related): ?>
+            <div class="col-lg-4 col-md-6">
+                <div class="news-card" style="border: 2px solid var(--primary-black); border-radius: 0; overflow: hidden; height: 100%; display: flex; flex-direction: column; background: #fff;">
+                    <?php if ($related['featured_image']): ?>
+                    <div class="news-image" style="height: 200px; overflow: hidden;">
+                        <img src="<?php echo htmlspecialchars($related['featured_image']); ?>" alt="<?php echo htmlspecialchars($related['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <?php endif; ?>
+                    <div class="news-content" style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column;">
+                        <div class="news-meta" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.875rem; color: #666;">
+                            <span><i class="far fa-calendar" style="color: var(--primary-yellow);"></i> <?php echo date('M d, Y', strtotime($related['published_at'])); ?></span>
+                        </div>
+                        <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4;">
+                            <a href="news-detail.php?id=<?php echo $related['id']; ?>" style="color: var(--primary-black); text-decoration: none;">
+                                <?php echo htmlspecialchars($related['title']); ?>
+                            </a>
+                        </h3>
+                        <p style="color: #666; font-size: 0.9rem; margin-bottom: 1.25rem; flex: 1;">
+                            <?php echo htmlspecialchars(substr(strip_tags($related['content']), 0, 100)); ?>...
+                        </p>
+                        <a href="news-detail.php?id=<?php echo $related['id']; ?>" class="btn btn-sm" style="border: 2px solid var(--primary-black); background: transparent; color: var(--primary-black); padding: 0.5rem 1.5rem; align-self: flex-start; text-decoration: none;">
+                            Read More <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- CTA -->
+<section style="padding: 80px 0; background: var(--primary-yellow);">
+    <div class="container text-center">
+        <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: var(--primary-black);">Support Our Mission</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--primary-black);">
+            Help us continue making a difference in the lives of vulnerable children
+        </p>
+        <a href="get-involved.php#donate" class="btn" style="border: 2px solid var(--primary-black); background: var(--primary-black); color: #fff; padding: 1rem 2.5rem; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-block;">
+            <i class="fas fa-heart me-2"></i> Donate Now
+        </a>
+    </div>
+</section>
+
+<?php include 'includes/footer.php'; ?>

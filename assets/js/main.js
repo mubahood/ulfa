@@ -1,3 +1,26 @@
+// Hero Height Calculator - Set hero to full remaining viewport height
+function setHeroHeight() {
+    const hero = document.querySelector('#hero');
+    if (hero) {
+        const navbar = document.querySelector('.navbar');
+        const navbarHeight = navbar ? navbar.offsetHeight : 0;
+        const remainingHeight = window.innerHeight;
+        
+        // Set hero height to full viewport
+        hero.style.minHeight = `${remainingHeight}px`;
+        hero.style.height = `${remainingHeight}px`;
+        
+        // Add padding-top to account for fixed navbar (so content isn't hidden)
+        hero.style.paddingTop = `${navbarHeight}px`;
+    }
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', setHeroHeight);
+
+// Run on window resize
+window.addEventListener('resize', setHeroHeight);
+
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
