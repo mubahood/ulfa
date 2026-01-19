@@ -4,6 +4,9 @@ $pageTitle = 'Album';
 include 'config.php';
 include 'functions.php';
 
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+
 // Get album
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $stmt = $pdo->prepare("SELECT * FROM gallery_albums WHERE id = ? AND status = 'active'");
@@ -15,7 +18,7 @@ if (!$album) {
     exit;
 }
 
-$pageTitle = $album['title'] . ' - ULFA';
+$pageTitle = $album['title'] . ' - ' . $siteShortName;
 $pageDescription = substr($album['description'], 0, 160);
 
 // Get images for this album

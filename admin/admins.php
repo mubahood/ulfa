@@ -139,7 +139,7 @@ include 'includes/header.php';
                                 <div class="actions">
                                     <a href="admins-edit.php?id=<?php echo $admin['id']; ?>" class="btn-icon" title="Edit"><i class="fas fa-edit"></i></a>
                                     <?php if ($admin['id'] != $currentAdmin['id']): ?>
-                                        <a href="admins-delete.php?id=<?php echo $admin['id']; ?>" class="btn-icon btn-danger" title="Delete" onclick="return confirm('Delete this admin user?');"><i class="fas fa-trash"></i></a>
+                                        <a href="admins-delete.php?id=<?php echo $admin['id']; ?>&token=<?php echo generateCSRFToken(); ?>" class="btn-icon btn-danger" title="Delete" onclick="return confirm('Delete this admin user?');"><i class="fas fa-trash"></i></a>
                                     <?php endif; ?>
                                 </div>
                             </td>

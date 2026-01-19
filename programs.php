@@ -1,7 +1,15 @@
 <?php 
 $currentPage = 'programs';
+include 'config.php';
+include 'functions.php';
+
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteName = getSetting('site_name', 'United Love for All');
+$siteDescription = getSetting('site_description', '');
+
 $pageTitle = 'Our Programs';
-$pageDescription = 'Explore ULFA comprehensive programs supporting orphaned children through education, welfare, development, agriculture, and community engagement.';
+$pageDescription = 'Explore ' . $siteShortName . ' comprehensive programs supporting orphaned children through education, welfare, development, agriculture, and community engagement.';
 include 'includes/header.php'; 
 ?>
 

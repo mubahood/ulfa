@@ -89,7 +89,7 @@ include 'includes/header.php';
                         <div class="album-overlay">
                             <a href="gallery-images.php?album=<?php echo $album['id']; ?>" class="overlay-btn" title="Manage Images"><i class="fas fa-th"></i></a>
                             <a href="gallery-edit.php?id=<?php echo $album['id']; ?>" class="overlay-btn" title="Edit"><i class="fas fa-edit"></i></a>
-                            <a href="gallery-delete.php?id=<?php echo $album['id']; ?>" class="overlay-btn danger" title="Delete" onclick="return confirm('Delete this album and all images?');"><i class="fas fa-trash"></i></a>
+                            <a href="gallery-delete.php?id=<?php echo $album['id']; ?>&token=<?php echo generateCSRFToken(); ?>" class="overlay-btn danger" title="Delete" onclick="return confirm('Delete this album and all images?');"><i class="fas fa-trash"></i></a>
                         </div>
                         <?php if ($album['is_featured']): ?>
                             <span class="featured-badge"><i class="fas fa-star"></i></span>

@@ -267,7 +267,7 @@ include 'includes/header.php';
                             <i class="fas fa-phone"></i> Call
                         </a>
                         <?php endif; ?>
-                        <a href="inquiries-delete.php?id=<?php echo $inquiry['id']; ?>" class="btn-sm btn-danger btn-block" onclick="return confirm('Delete this inquiry?');">
+                        <a href="inquiries-delete.php?id=<?php echo $inquiry['id']; ?>&token=<?php echo generateCSRFToken(); ?>" class="btn-sm btn-danger btn-block" onclick="return confirm('Delete this inquiry?');">
                             <i class="fas fa-trash"></i> Delete
                         </a>
                     </div>

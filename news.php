@@ -1,9 +1,14 @@
 <?php 
 $currentPage = 'news';
-$pageTitle = 'News & Articles';
-$pageDescription = 'Stay updated with the latest news, stories, and updates from ULFA - United Love for All.';
 include 'config.php';
 include 'functions.php';
+
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteName = getSetting('site_name', 'United Love for All');
+
+$pageTitle = 'News & Articles';
+$pageDescription = 'Stay updated with the latest news, stories, and updates from ' . $siteShortName . ' - ' . $siteName . '.';
 include 'includes/header.php';
 
 // Pagination

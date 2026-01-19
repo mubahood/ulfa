@@ -158,8 +158,248 @@ function getAllEnrollments() {
     }
 }
 
-// Handle enrollment form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'enroll') {
+// ============================================
+// SITE SETTINGS FUNCTIONS
+// ============================================
+
+/**
+ * Global settings cache
+ */
+$GLOBALS['_site_settings'] = null;
+
+/**
+ * Load all site settings into global cache
+ * Call this once at the start of each page
+ */
+function loadSiteSettings() {
+    if ($GLOBALS['_site_settings'] !== null) {
+        return $GLOBALS['_site_settings'];
+    }
+    
+    $pdo = getDBConnection();
+    if (!$pdo) {
+        $GLOBALS['_site_settings'] = [];
+        return [];
+    }
+    
+    try {
+        $stmt = $pdo->query("SELECT setting_key, setting_value FROM site_settings");
+        $settings = [];
+        while ($row = $stmt->fetch()) {
+            $settings[$row['setting_key']] = $row['setting_value'];
+        }
+        $GLOBALS['_site_settings'] = $settings;
+        return $settings;
+    } catch(PDOException $e) {
+        error_log("Failed to load settings: " . $e->getMessage());
+        $GLOBALS['_site_settings'] = [];
+        return [];
+    }
+}
+
+/**
+ * Get a single setting value
+ * Handles legacy naming conventions (site_* vs contact_*)
+ * 
+ * @param string $key Setting key
+ * @param mixed $default Default value if not found
+ * @return mixed Setting value or default
+ */
+function getSetting($key, $default = '') {
+    // Load settings if not already loaded
+    if ($GLOBALS['_site_settings'] === null) {
+        loadSiteSettings();
+    }
+    
+    // Direct match
+    if (isset($GLOBALS['_site_settings'][$key]) && $GLOBALS['_site_settings'][$key] !== '') {
+        return $GLOBALS['_site_settings'][$key];
+    }
+    
+    // Handle legacy naming: contact_* vs site_*
+    $legacyMappings = [
+        'contact_email' => 'site_email',
+        'contact_phone' => 'site_phone',
+        'contact_address' => 'site_address',
+        'site_email' => 'contact_email',
+        'site_phone' => 'contact_phone',
+        'site_address' => 'contact_address',
+    ];
+    
+    if (isset($legacyMappings[$key])) {
+        $altKey = $legacyMappings[$key];
+        if (isset($GLOBALS['_site_settings'][$altKey]) && $GLOBALS['_site_settings'][$altKey] !== '') {
+            return $GLOBALS['_site_settings'][$altKey];
+        }
+    }
+    
+    return $default;
+}
+
+/**
+ * Get multiple settings at once
+ * 
+ * @param array $keys Array of setting keys
+ * @return array Associative array of settings
+ */
+function getSettings($keys = []) {
+    // Load settings if not already loaded
+    if ($GLOBALS['_site_settings'] === null) {
+        loadSiteSettings();
+    }
+    
+    if (empty($keys)) {
+        return $GLOBALS['_site_settings'];
+    }
+    
+    $result = [];
+    foreach ($keys as $key) {
+        $result[$key] = $GLOBALS['_site_settings'][$key] ?? '';
+    }
+    return $result;
+}
+
+/**
+ * Get settings by prefix (e.g., 'pesapal_', 'social_')
+ * 
+ * @param string $prefix Setting key prefix
+ * @return array Associative array of matching settings
+ */
+function getSettingsByPrefix($prefix) {
+    // Load settings if not already loaded
+    if ($GLOBALS['_site_settings'] === null) {
+        loadSiteSettings();
+    }
+    
+    $result = [];
+    foreach ($GLOBALS['_site_settings'] as $key => $value) {
+        if (strpos($key, $prefix) === 0) {
+            $result[$key] = $value;
+        }
+    }
+    return $result;
+}
+
+/**
+ * Check if a setting has a non-empty value
+ * 
+ * @param string $key Setting key
+ * @return bool True if setting exists and is not empty
+ */
+function hasSetting($key) {
+    $value = getSetting($key, null);
+    return $value !== null && $value !== '';
+}
+
+/**
+ * Get site logo URL
+ * Returns default icon if no logo uploaded
+ */
+function getSiteLogo() {
+    $logo = getSetting('site_logo');
+    if ($logo && file_exists(__DIR__ . '/uploads/' . $logo)) {
+        return 'uploads/' . $logo;
+    }
+    return null;
+}
+
+/**
+ * Get site favicon URL
+ */
+function getSiteFavicon() {
+    $favicon = getSetting('site_favicon');
+    if ($favicon && file_exists(__DIR__ . '/uploads/' . $favicon)) {
+        return 'uploads/' . $favicon;
+    }
+    return null;
+}
+
+/**
+ * Get formatted phone number for display
+ */
+function getFormattedPhone($key = 'contact_phone') {
+    $phone = getSetting($key);
+    if (empty($phone)) return '';
+    return $phone;
+}
+
+/**
+ * Get phone number for tel: link
+ * @param string $phone Phone number string (or setting key if starts with 'contact_')
+ */
+function getPhoneLink($phone = 'contact_phone') {
+    // If it looks like a setting key, get the setting
+    if (strpos($phone, 'contact_') === 0 || $phone === 'whatsapp_number') {
+        $phone = getSetting($phone);
+    }
+    if (empty($phone)) return '';
+    // Remove all non-numeric characters except +
+    return 'tel:' . preg_replace('/[^0-9+]/', '', $phone);
+}
+
+/**
+ * Get WhatsApp link
+ * @param string $phone Phone number (optional, will use setting if not provided)
+ * @param string $message Pre-filled message (optional)
+ */
+function getWhatsAppLink($phone = null, $message = null) {
+    if (empty($phone)) {
+        $phone = getSetting('whatsapp_number');
+        if (empty($phone)) {
+            $phone = getSetting('contact_phone');
+        }
+    }
+    if (empty($phone)) return '';
+    
+    // Remove all non-numeric characters
+    $phone = preg_replace('/[^0-9]/', '', $phone);
+    
+    if ($message === null) {
+        $message = getSetting('whatsapp_default_message', 'Hello, I would like to know more about ULFA.');
+    }
+    $message = urlencode($message);
+    
+    return "https://wa.me/{$phone}?text={$message}";
+}
+
+/**
+ * Get social media links as array
+ */
+function getSocialLinks() {
+    return [
+        'facebook' => getSetting('facebook_url'),
+        'twitter' => getSetting('twitter_url'),
+        'instagram' => getSetting('instagram_url'),
+        'linkedin' => getSetting('linkedin_url'),
+        'youtube' => getSetting('youtube_url'),
+        'tiktok' => getSetting('tiktok_url'),
+    ];
+}
+
+/**
+ * Get currency settings
+ */
+function getCurrency() {
+    return [
+        'code' => getSetting('currency_code', 'UGX'),
+        'symbol' => getSetting('currency_symbol', 'UGX'),
+        'name' => getSetting('currency_name', 'Ugandan Shilling'),
+    ];
+}
+
+/**
+ * Format amount with currency
+ */
+function formatCurrency($amount) {
+    $currency = getCurrency();
+    return $currency['symbol'] . ' ' . number_format($amount);
+}
+
+// Load settings on include (auto-load for convenience)
+loadSiteSettings();
+
+// Handle enrollment form submission (only in web context)
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'enroll') {
     // Create table if not exists
     createEnrollmentsTable();
     

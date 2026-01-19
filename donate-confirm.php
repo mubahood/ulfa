@@ -3,6 +3,9 @@ require_once 'config.php';
 require_once 'functions.php';
 require_once 'includes/pesapal-config.php';
 
+// Get currency settings
+$currency = getCurrency();
+
 // Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: donate.php');
@@ -20,7 +23,7 @@ if ($amount_preset === 'custom') {
 }
 
 if ($amount < 1000) {
-    $_SESSION['error'] = 'Minimum donation amount is UGX 1,000';
+    $_SESSION['error'] = 'Minimum donation amount is ' . $currency['symbol'] . ' 1,000';
     header('Location: donate.php');
     exit;
 }
@@ -265,7 +268,7 @@ include 'includes/header.php';
         <!-- Amount Highlight -->
         <div class="amount-highlight">
             <div class="label">Your Donation Amount</div>
-            <div class="amount">UGX <?= number_format($amount, 0) ?></div>
+            <div class="amount"><?= formatCurrency($amount) ?></div>
         </div>
         
         <!-- Donation Details -->

@@ -7,14 +7,14 @@ $stmt = $pdo->prepare("SELECT id, title, raised_amount, goal_amount FROM causes 
 $stmt->execute();
 $causes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Get site settings
-$stmt = $pdo->query("SELECT setting_key, setting_value FROM site_settings");
-$settings = [];
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $settings[$row['setting_key']] = $row['setting_value'];
-}
+// Get settings using helper functions
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteName = getSetting('site_name', 'United Love for All');
+$currency = getCurrency();
 
-$page_title = 'Make a Donation';
+$currentPage = 'donate';
+$pageTitle = 'Make a Donation';
+$pageDescription = 'Support ' . $siteShortName . ' by making a donation to help orphaned and vulnerable children.';
 include 'includes/header.php';
 ?>
 
@@ -256,23 +256,23 @@ include 'includes/header.php';
                 <div class="amount-grid">
                     <div class="amount-option">
                         <input type="radio" name="amount_preset" id="amount_5000" value="5000">
-                        <label for="amount_5000">UGX 5,000</label>
+                        <label for="amount_5000"><?php echo $currency['symbol']; ?> 5,000</label>
                     </div>
                     <div class="amount-option">
                         <input type="radio" name="amount_preset" id="amount_10000" value="10000">
-                        <label for="amount_10000">UGX 10,000</label>
+                        <label for="amount_10000"><?php echo $currency['symbol']; ?> 10,000</label>
                     </div>
                     <div class="amount-option">
                         <input type="radio" name="amount_preset" id="amount_25000" value="25000">
-                        <label for="amount_25000">UGX 25,000</label>
+                        <label for="amount_25000"><?php echo $currency['symbol']; ?> 25,000</label>
                     </div>
                     <div class="amount-option">
                         <input type="radio" name="amount_preset" id="amount_50000" value="50000">
-                        <label for="amount_50000">UGX 50,000</label>
+                        <label for="amount_50000"><?php echo $currency['symbol']; ?> 50,000</label>
                     </div>
                     <div class="amount-option">
                         <input type="radio" name="amount_preset" id="amount_100000" value="100000">
-                        <label for="amount_100000">UGX 100,000</label>
+                        <label for="amount_100000"><?php echo $currency['symbol']; ?> 100,000</label>
                     </div>
                     <div class="amount-option">
                         <input type="radio" name="amount_preset" id="amount_custom" value="custom">
@@ -283,7 +283,7 @@ include 'includes/header.php';
                 <div class="custom-amount-wrapper" id="customAmountWrapper" style="display: none;">
                     <label for="custom_amount" class="form-label">Enter Custom Amount</label>
                     <div class="custom-amount-input">
-                        <span>UGX</span>
+                        <span><?php echo $currency['symbol']; ?></span>
                         <input type="number" class="form-control" id="custom_amount" name="custom_amount" 
                                min="1000" step="1000" placeholder="Enter amount">
                     </div>
@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const goal = selectedOption.dataset.goal;
             const progress = parseFloat(selectedOption.dataset.progress);
             
-            causeStats.textContent = `UGX ${raised} raised of UGX ${goal} goal`;
+            causeStats.textContent = `<?php echo $currency['symbol']; ?> ${raised} raised of <?php echo $currency['symbol']; ?> ${goal} goal`;
             causeProgressBar.style.width = `${Math.min(progress, 100)}%`;
             causeInfo.classList.add('active');
         } else {
@@ -436,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const customAmount = parseFloat(customAmountInput.value);
             if (!customAmount || customAmount < 1000) {
                 e.preventDefault();
-                alert('Custom amount must be at least UGX 1,000');
+                alert('Custom amount must be at least <?php echo $currency['symbol']; ?> 1,000');
                 customAmountInput.focus();
                 return false;
             }

@@ -1,9 +1,14 @@
 <?php 
 $currentPage = 'events';
-$pageTitle = 'Events';
-$pageDescription = 'Join us at our upcoming events and activities at ULFA - United Love for All.';
 include 'config.php';
 include 'functions.php';
+
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteName = getSetting('site_name', 'United Love for All');
+
+$pageTitle = 'Events';
+$pageDescription = 'Join us at our upcoming events and activities at ' . $siteShortName . ' - ' . $siteName . '.';
 include 'includes/header.php';
 
 // Filter

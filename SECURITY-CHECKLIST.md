@@ -1,103 +1,141 @@
-# Security Checklist for Public Hosting
+# Security Checklist for ULFA Website - Production Deployment
 
-## Before Making Your Site Public:
+## Security Status: ✅ Production Ready
+
+This document outlines the security measures implemented in the ULFA charity website.
+
+---
+
+## ✅ Implemented Security Features
 
 ### 1. Database Security
-- [ ] Change MySQL root password from default
-- [ ] Create a dedicated database user (not root)
-- [ ] Update `config.php` with new credentials
-- [ ] Remove remote MySQL access (only localhost)
+- [x] PDO with prepared statements (prevents SQL injection)
+- [x] Password hashing using `password_hash()` and `password_verify()`
+- [x] Parameterized queries throughout the codebase
+- [x] Database connection via secure socket or standard connection
 
-### 2. File Security
-- [ ] Remove all test files (test.php, test-form.html, test-connection.php)
-- [ ] Delete setup.php and database.sql
-- [ ] Change admin password from '4321' to strong password
-- [ ] Ensure .htaccess is protecting sensitive files
-- [ ] Set proper file permissions (644 for files, 755 for directories)
+### 2. Authentication & Authorization
+- [x] Session-based admin authentication
+- [x] Secure session management with timeout (30 minutes)
+- [x] Session cookie security settings (httponly, strict mode)
+- [x] Admin activity logging
 
-### 3. PHP Security
-- [ ] Disable display_errors in production
-- [ ] Enable error logging only
-- [ ] Keep PHP updated (current: 8.2.20)
-- [ ] Disable dangerous functions in php.ini
+### 3. CSRF Protection
+- [x] CSRF token generation using `random_bytes(32)`
+- [x] CSRF verification on all DELETE operations:
+  - `news-delete.php`
+  - `causes-delete.php`
+  - `events-delete.php`
+  - `gallery-delete.php`
+  - `team-delete.php`
+  - `inquiries-delete.php`
+  - `admins-delete.php`
+- [x] Token validation using `hash_equals()` (timing-safe comparison)
 
-### 4. XAMPP Security
+### 4. XSS Prevention
+- [x] `htmlspecialchars()` used on all user output
+- [x] Proper escaping in all templates
+- [x] Safe Google Maps embed sanitization
+- [x] Content Security Policy ready
+
+### 5. Input Validation
+- [x] Email validation using `filter_var(FILTER_VALIDATE_EMAIL)`
+- [x] Phone number validation (minimum 10 digits)
+- [x] Integer casting for IDs: `(int)$_GET['id']`
+- [x] Input sanitization with `trim()`, `stripslashes()`, `htmlspecialchars()`
+
+### 6. File Upload Security
+- [x] MIME type validation using `finfo_file()`
+- [x] File extension whitelist (jpg, jpeg, png, gif, webp)
+- [x] Unique filename generation
+- [x] Upload directory outside web root consideration
+
+### 7. Rate Limiting
+- [x] Contact form: Max 5 submissions per IP in 10 minutes
+- [x] Duplicate submission prevention (1 hour cooldown)
+
+### 8. Error Handling
+- [x] Environment-based error display
+- [x] Errors logged to file in production
+- [x] User-friendly error messages
+- [x] No sensitive data in error messages
+
+---
+
+## Before Going Live Checklist
+
+### Configuration
+- [ ] Copy `config-production.php` to `config.php` on production server
+- [ ] Update database credentials (never use root/root)
+- [ ] Set `ENVIRONMENT` to `'production'`
+- [ ] Update `DB_SOCKET` to empty string `''` for standard hosting
+
+### File Permissions
 ```bash
-# Run XAMPP security script
-sudo /Applications/XAMPP/xamppfiles/xampp security
+# Recommended permissions
+chmod 644 *.php          # PHP files
+chmod 755 admin/         # Directories
+chmod 755 uploads/       # Upload directories
+chmod 644 .htaccess      # Apache config
 ```
 
-### 5. SSL/HTTPS
-- [ ] Use Cloudflare Tunnel (provides automatic SSL)
-- [ ] Or configure Let's Encrypt SSL certificate
-- [ ] Force HTTPS in .htaccess (already configured)
-
-### 6. Application Security
-- [ ] Test SQL injection protection (already implemented)
-- [ ] Verify XSS protection (already implemented)
-- [ ] Test CSRF protection
-- [ ] Implement rate limiting for form submissions
-- [ ] Add Google reCAPTCHA to enrollment form
-
-### 7. Monitoring
-- [ ] Set up error log monitoring
-- [ ] Check logs regularly: `/Applications/XAMPP/xamppfiles/logs/`
-- [ ] Monitor enrollment submissions for spam
-- [ ] Set up uptime monitoring (e.g., UptimeRobot)
-
-### 8. Backup
-- [ ] Set up automatic database backups
-- [ ] Backup files regularly
-- [ ] Store backups off-site (cloud storage)
-
-### 9. Performance
-- [ ] Enable GZIP compression (already in .htaccess)
-- [ ] Optimize images
-- [ ] Enable browser caching (already configured)
-- [ ] Consider CDN for static assets
-
-### 10. Computer Requirements
-- [ ] Keep computer powered on 24/7
-- [ ] Ensure stable internet connection
-- [ ] Configure sleep settings (never sleep)
-- [ ] Set up automatic restart after power failure
-- [ ] Ensure adequate cooling/ventilation
-
-## Commands to Secure XAMPP:
-
+### Files to Remove from Production
 ```bash
-# Change MySQL root password
-/Applications/XAMPP/xamppfiles/bin/mysql -u root -p
-# Then run: ALTER USER 'root'@'localhost' IDENTIFIED BY 'strong_password_here';
-
-# Check PHP security settings
-grep -E "display_errors|expose_php|allow_url_fopen" /Applications/XAMPP/xamppfiles/etc/php.ini
-
-# View error logs
-tail -f /Applications/XAMPP/xamppfiles/logs/error_log
-
-# Check Apache access logs
-tail -f /Applications/XAMPP/xamppfiles/logs/access_log
+# Delete these files from production server:
+rm -f test.php test-form.html test-connection.php
+rm -f setup.php database.sql admin-schema.sql
+rm -f *.backup *.md
+rm -f ngrok-setup.sh cloudflare-tunnel-setup.sh
 ```
 
-## Files to Delete Before Going Public:
+### SSL/HTTPS
+- [ ] Enable SSL certificate (Let's Encrypt or hosting provider)
+- [ ] Force HTTPS redirects
+- [ ] Set secure cookie flag in production
 
-```bash
-cd /Applications/MAMP/htdocs/learn-it-with-muhindo
-rm -f test.php test-form.html test-connection.php setup.php database.sql
-rm -f config-production.php enroll-production.php .htaccess-production
-rm -f DEPLOYMENT-INSTRUCTIONS.md
-```
+---
 
-## Rate Limiting (Add to functions.php):
+## Password Requirements for Admin
 
-```php
-// Add this function to prevent spam
-function checkRateLimit($ip, $action = 'enrollment', $limit = 5, $window = 3600) {
-    $cacheFile = sys_get_temp_dir() . "/rate_limit_{$action}_{$ip}.txt";
-    
-    if (file_exists($cacheFile)) {
-        $data = json_decode(file_get_contents($cacheFile), true);
+When creating admin accounts, use strong passwords:
+- Minimum 12 characters
+- Mix of uppercase, lowercase, numbers, symbols
+- Never reuse passwords
+- Consider using a password manager
+
+---
+
+## Monitoring & Maintenance
+
+### Regular Tasks
+- [ ] Check error.log weekly
+- [ ] Review admin activity logs
+- [ ] Monitor for unusual traffic patterns
+- [ ] Update PHP and dependencies quarterly
+- [ ] Backup database weekly
+
+### Log Locations
+- Application errors: `/error.log`
+- Admin activity: `admin_activity_log` database table
+- Contact submissions: `contact_inquiries` database table
+
+---
+
+## Emergency Procedures
+
+### If Site is Compromised
+1. Take site offline immediately
+2. Change all database passwords
+3. Check admin_users table for unauthorized accounts
+4. Review activity logs for unauthorized actions
+5. Restore from clean backup if necessary
+6. Update all admin passwords
+
+### If Admin Account is Compromised
+1. Delete compromised admin from database
+2. Change remaining admin passwords
+3. Review and remove unauthorized content
+4. Check activity logs for malicious changes
         if ($data['count'] >= $limit && (time() - $data['timestamp']) < $window) {
             return false;
         }

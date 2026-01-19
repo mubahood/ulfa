@@ -1,9 +1,14 @@
 <?php 
 $currentPage = 'gallery';
-$pageTitle = 'Photo Gallery';
-$pageDescription = 'View photos from our activities, events, and the impact we make in the community.';
 include 'config.php';
 include 'functions.php';
+
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteName = getSetting('site_name', 'United Love for All');
+
+$pageTitle = 'Photo Gallery';
+$pageDescription = 'View photos from our activities, events, and the impact we make in the community at ' . $siteShortName . '.';
 include 'includes/header.php';
 
 // Category filter

@@ -95,7 +95,7 @@ include 'includes/header.php';
         <h1><i class="fas fa-edit"></i> Edit Cause</h1>
         <div class="header-actions">
             <a href="causes.php" class="btn-sm btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
-            <a href="causes-delete.php?id=<?php echo $causeId; ?>" class="btn-sm btn-danger" onclick="return confirm('Delete this cause?');"><i class="fas fa-trash"></i></a>
+            <a href="causes-delete.php?id=<?php echo $causeId; ?>&token=<?php echo generateCSRFToken(); ?>" class="btn-sm btn-danger" onclick="return confirm('Delete this cause?');"><i class="fas fa-trash"></i></a>
         </div>
     </div>
 

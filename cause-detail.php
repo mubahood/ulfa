@@ -4,6 +4,10 @@ $pageTitle = 'Cause Details';
 include 'config.php';
 include 'functions.php';
 
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$currency = getCurrency();
+
 // Get cause
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $stmt = $pdo->prepare("SELECT * FROM causes WHERE id = ?");
@@ -15,7 +19,7 @@ if (!$cause) {
     exit;
 }
 
-$pageTitle = $cause['title'] . ' - ULFA';
+$pageTitle = $cause['title'] . ' - ' . $siteShortName;
 $pageDescription = substr(strip_tags($cause['description']), 0, 160);
 
 $percentage = $cause['goal_amount'] > 0 ? ($cause['raised_amount'] / $cause['goal_amount']) * 100 : 0;
@@ -118,21 +122,21 @@ include 'includes/header.php';
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 3px solid #e9ecef;">
                             <div style="text-align: center;">
                                 <div style="color: #999; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Raised</div>
-                                <div style="font-weight: 800; color: var(--primary-black); font-size: 1.15rem;">UGX <?php echo number_format($cause['raised_amount']); ?></div>
+                                <div style="font-weight: 800; color: var(--primary-black); font-size: 1.15rem;"><?php echo formatCurrency($cause['raised_amount']); ?></div>
                             </div>
                             <div style="text-align: center;">
                                 <div style="color: #999; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Goal</div>
-                                <div style="font-weight: 800; color: var(--primary-black); font-size: 1.15rem;">UGX <?php echo number_format($cause['goal_amount']); ?></div>
+                                <div style="font-weight: 800; color: var(--primary-black); font-size: 1.15rem;"><?php echo formatCurrency($cause['goal_amount']); ?></div>
                             </div>
                         </div>
 
                         <?php if ($cause['status'] === 'active'): ?>
                         <div style="text-align: center; margin-bottom: 2rem; padding: 1.25rem; background: rgba(255,193,7,0.1); border: 2px dashed var(--primary-yellow);">
                             <div style="color: #666; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Still Needed</div>
-                            <div style="font-weight: 900; color: var(--primary-black); font-size: 1.75rem;">UGX <?php echo number_format($remaining); ?></div>
+                            <div style="font-weight: 900; color: var(--primary-black); font-size: 1.75rem;"><?php echo formatCurrency($remaining); ?></div>
                         </div>
 
-                        <a href="get-involved.php#donate" class="btn" style="width: 100%; border: 3px solid var(--primary-black); background: var(--primary-yellow); color: var(--primary-black); padding: 1.25rem; font-weight: 700; text-align: center; text-decoration: none; display: block; font-size: 1.1rem; margin-bottom: 1rem; letter-spacing: 0.5px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='6px 6px 0 var(--primary-black)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <a href="donation-step1.php?cause=<?php echo $cause['id']; ?>" class="btn" style="width: 100%; border: 3px solid var(--primary-black); background: var(--primary-yellow); color: var(--primary-black); padding: 1.25rem; font-weight: 700; text-align: center; text-decoration: none; display: block; font-size: 1.1rem; margin-bottom: 1rem; letter-spacing: 0.5px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='6px 6px 0 var(--primary-black)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE NOW
                         </a>
 
@@ -212,11 +216,11 @@ include 'includes/header.php';
                             <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
                                 <div>
                                     <div style="color: #999; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">Raised</div>
-                                    <div style="font-weight: 800; color: var(--primary-black);">UGX <?php echo number_format($related['raised_amount']); ?></div>
+                                    <div style="font-weight: 800; color: var(--primary-black);"><?php echo formatCurrency($related['raised_amount']); ?></div>
                                 </div>
                                 <div style="text-align: right;">
                                     <div style="color: #999; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">Goal</div>
-                                    <div style="font-weight: 800; color: var(--primary-black);">UGX <?php echo number_format($related['goal_amount']); ?></div>
+                                    <div style="font-weight: 800; color: var(--primary-black);"><?php echo formatCurrency($related['goal_amount']); ?></div>
                                 </div>
                             </div>
                         </div>

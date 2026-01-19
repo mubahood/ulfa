@@ -1,9 +1,15 @@
 <?php 
 $currentPage = 'causes';
-$pageTitle = 'Causes';
-$pageDescription = 'Support our active causes and help us make a difference in the lives of vulnerable children.';
 include 'config.php';
 include 'functions.php';
+
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteName = getSetting('site_name', 'United Love for All');
+$currency = getCurrency();
+
+$pageTitle = 'Causes';
+$pageDescription = 'Support our active causes and help us make a difference in the lives of vulnerable children at ' . $siteShortName . '.';
 include 'includes/header.php';
 
 // Filter
@@ -48,7 +54,7 @@ $totalRaised = $totalRaisedStmt->fetchColumn();
             </p>
             <div style="display: inline-block; padding: 1.5rem 2.5rem; background: var(--primary-yellow); color: var(--primary-black); border: 2px solid var(--primary-yellow);">
                 <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.25rem;">Total Raised So Far</div>
-                <div style="font-size: 2rem; font-weight: 800;">UGX <?php echo number_format($totalRaised); ?></div>
+                <div style="font-size: 2rem; font-weight: 800;"><?php echo formatCurrency($totalRaised); ?></div>
             </div>
         </div>
     </div>
@@ -90,9 +96,9 @@ $totalRaised = $totalRaisedStmt->fetchColumn();
                             <i class="fas fa-star"></i> FEATURED
                         </div>
                         <?php endif; ?>
-                        <?php if ($cause['featured_image']): ?>
+                        <?php if (!empty($cause['cause_image'])): ?>
                         <div class="cause-image" style="height: 240px; overflow: hidden; position: relative;">
-                            <img src="<?php echo htmlspecialchars($cause['featured_image']); ?>" alt="<?php echo htmlspecialchars($cause['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="uploads/<?php echo htmlspecialchars($cause['cause_image']); ?>" alt="<?php echo htmlspecialchars($cause['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                             <?php if ($filter === 'completed'): ?>
                             <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;">
                                 <div style="text-align: center; color: #fff;">
@@ -119,20 +125,26 @@ $totalRaised = $totalRaisedStmt->fetchColumn();
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.95rem;">
                                     <div>
                                         <div style="color: #999; font-size: 0.85rem; margin-bottom: 0.25rem;">Raised</div>
-                                        <div style="font-weight: 700; color: var(--primary-black); font-size: 1.1rem;">UGX <?php echo number_format($cause['raised_amount']); ?></div>
+                                        <div style="font-weight: 700; color: var(--primary-black); font-size: 1.1rem;"><?php echo formatCurrency($cause['raised_amount']); ?></div>
                                     </div>
                                     <div style="text-align: right;">
                                         <div style="color: #999; font-size: 0.85rem; margin-bottom: 0.25rem;">Goal</div>
-                                        <div style="font-weight: 700; color: var(--primary-black); font-size: 1.1rem;">UGX <?php echo number_format($cause['goal_amount']); ?></div>
+                                        <div style="font-weight: 700; color: var(--primary-black); font-size: 1.1rem;"><?php echo formatCurrency($cause['goal_amount']); ?></div>
                                     </div>
                                 </div>
                                 <div style="text-align: center; color: var(--primary-yellow); font-weight: 700; font-size: 1.1rem; margin-bottom: 1.5rem;">
                                     <?php echo number_format($percentage, 1); ?>% Funded
                                 </div>
                             </div>
+                            <?php if ($filter === 'completed'): ?>
                             <a href="cause-detail.php?id=<?php echo $cause['id']; ?>" class="btn btn-sm" style="border: 2px solid var(--primary-black); background: var(--primary-yellow); color: var(--primary-black); padding: 0.75rem 1.75rem; font-weight: 700; text-decoration: none; text-align: center; display: block; font-size: 1rem;">
-                                <?php echo $filter === 'completed' ? 'View Details' : 'Donate Now'; ?> <i class="fas fa-heart ms-2"></i>
+                                View Details <i class="fas fa-arrow-right ms-2"></i>
                             </a>
+                            <?php else: ?>
+                            <a href="donation-step1.php?cause=<?php echo $cause['id']; ?>" class="btn btn-sm" style="border: 2px solid var(--primary-black); background: var(--primary-yellow); color: var(--primary-black); padding: 0.75rem 1.75rem; font-weight: 700; text-decoration: none; text-align: center; display: block; font-size: 1rem;">
+                                Donate Now <i class="fas fa-heart ms-2"></i>
+                            </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

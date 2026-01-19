@@ -95,6 +95,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         if ($action === 'delete' && isset($_POST['image_id'])) {
+            // Verify CSRF token
+            $csrfToken = isset($_POST['csrf_token']) ? $_POST['csrf_token'] : '';
+            if (!verifyCSRFToken($csrfToken)) {
+                $_SESSION['alert'] = ['type' => 'danger', 'message' => 'Invalid security token. Please try again.'];
+                header('Location: gallery-images.php?album=' . $albumId);
+                exit;
+            }
+            
             $imageId = (int)$_POST['image_id'];
             $stmt = $pdo->prepare("SELECT * FROM gallery_images WHERE id = ? AND album_id = ?");
             $stmt->execute([$imageId, $albumId]);
@@ -241,11 +249,13 @@ include 'includes/header.php';
                         <form method="POST" style="display: inline;">
                             <input type="hidden" name="action" value="set_cover">
                             <input type="hidden" name="image_id" value="<?php echo $image['id']; ?>">
+                            <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                             <button type="submit" class="action-btn" title="Set as Cover" <?php echo $image['is_cover'] ? 'disabled' : ''; ?>><i class="fas fa-star"></i></button>
                         </form>
                         <form method="POST" style="display: inline;" onsubmit="return confirm('Delete this image?');">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="image_id" value="<?php echo $image['id']; ?>">
+                            <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                             <button type="submit" class="action-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
                         </form>
                     </div>

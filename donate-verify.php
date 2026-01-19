@@ -3,6 +3,9 @@ require_once 'config.php';
 require_once 'functions.php';
 require_once 'includes/pesapal-config.php';
 
+// Get currency settings
+$currency = getCurrency();
+
 // Get Pesapal callback parameters
 $merchant_reference = $_GET['pesapal_merchant_reference'] ?? $_SESSION['pending_donation']['merchant_reference'] ?? null;
 $tracking_id = $_GET['pesapal_transaction_tracking_id'] ?? null;
@@ -284,7 +287,7 @@ include 'includes/header.php';
                 <div class="donation-summary">
                     <div class="summary-row">
                         <span class="summary-label">Amount Donated:</span>
-                        <span class="summary-value amount">UGX <?= number_format($donation['amount'], 0) ?></span>
+                        <span class="summary-value amount"><?= formatCurrency($donation['amount']) ?></span>
                     </div>
                     <div class="summary-row">
                         <span class="summary-label">Reference Number:</span>
@@ -354,7 +357,7 @@ include 'includes/header.php';
                     </div>
                     <div class="summary-row">
                         <span class="summary-label">Amount:</span>
-                        <span class="summary-value">UGX <?= number_format($donation['amount'], 0) ?></span>
+                        <span class="summary-value"><?= formatCurrency($donation['amount']) ?></span>
                     </div>
                 </div>
                 
@@ -392,7 +395,7 @@ include 'includes/header.php';
                     </div>
                     <div class="summary-row">
                         <span class="summary-label">Amount:</span>
-                        <span class="summary-value">UGX <?= number_format($donation['amount'], 0) ?></span>
+                        <span class="summary-value"><?= formatCurrency($donation['amount']) ?></span>
                     </div>
                     <div class="summary-row">
                         <span class="summary-label">Status:</span>

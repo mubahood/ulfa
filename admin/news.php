@@ -128,7 +128,7 @@ include 'includes/header.php';
                             <td data-label="Actions">
                                 <div class="actions">
                                     <a href="news-edit.php?id=<?php echo $post['id']; ?>" class="btn-icon" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <a href="news-delete.php?id=<?php echo $post['id']; ?>" class="btn-icon btn-danger" title="Delete" onclick="return confirm('Delete this post?');"><i class="fas fa-trash"></i></a>
+                                    <a href="news-delete.php?id=<?php echo $post['id']; ?>&token=<?php echo generateCSRFToken(); ?>" class="btn-icon btn-danger" title="Delete" onclick="return confirm('Delete this post?');"><i class="fas fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>

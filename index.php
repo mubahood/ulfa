@@ -1,9 +1,19 @@
 <?php 
 $currentPage = 'home';
 $pageTitle = 'Home';
-$pageDescription = 'United Love for All (ULFA) provides love, care, education, and sustainable support to orphaned and vulnerable children in Kasese District, Uganda.';
 include 'config.php';
 include 'functions.php';
+
+// Get settings for homepage
+$siteName = getSetting('site_name', 'United Love for All (ULFA)');
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteTagline = getSetting('site_tagline', 'United Love for All');
+$siteDescription = getSetting('site_description', 'United Love for All (ULFA) provides love, care, education, and sustainable support to orphaned and vulnerable children in Kasese District, Uganda.');
+$contactCity = getSetting('contact_city', 'Kasese');
+$contactCountry = getSetting('contact_country', 'Uganda');
+$missionStatement = getSetting('mission_statement', '');
+
+$pageDescription = $siteDescription;
 include 'includes/header.php';
 
 // Fetch latest news
@@ -29,21 +39,21 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
     <!-- Hero Section with Background -->
-    <section id="hero" style="position: relative; min-height: 85vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(255, 193, 7, 0.95) 0%, rgba(255, 193, 7, 0.85) 100%), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920') center/cover; overflow: hidden;">
+    <section id="hero" style="position: relative; min-height: 85vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(255, 193, 7, 0.85) 0%, rgba(255, 193, 7, 0.75) 100%), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920') center/cover; overflow: hidden;">
         <div class="container" style="position: relative; z-index: 2;">
             <div class="row align-items-center">
                 <div class="col-lg-8 mx-auto text-center">
                     <div style="display: inline-block; padding: 0.5rem 1.25rem; background: var(--primary-black); color: var(--primary-yellow); font-weight: 700; font-size: 0.875rem; letter-spacing: 1px; margin-bottom: 1.5rem;">
-                        WELCOME TO ULFA
+                        WELCOME TO <?php echo htmlspecialchars(strtoupper($siteShortName)); ?>
                     </div>
                     <h1 style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; color: var(--primary-black); line-height: 1.1; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -1px;">
-                        Transforming Lives<br>In Kasese District
+                        Transforming Lives<br>In <?php echo htmlspecialchars($contactCity); ?>
                     </h1>
                     <p style="font-size: 1.25rem; color: var(--primary-black); max-width: 650px; margin: 0 auto 2.5rem; line-height: 1.6; font-weight: 500;">
                         Providing love, education, and sustainable support to orphaned and vulnerable children
                     </p>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                        <a href="get-involved.php#donate" style="display: inline-block; padding: 1.25rem 2.5rem; background: var(--primary-black); color: #fff; border: 3px solid var(--primary-black); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='8px 8px 0 rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <a href="donation-step1.php" style="display: inline-block; padding: 1.25rem 2.5rem; background: var(--primary-black); color: #fff; border: 3px solid var(--primary-black); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='8px 8px 0 rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE NOW
                         </a>
                         <a href="about.php" style="display: inline-block; padding: 1.25rem 2.5rem; background: transparent; color: var(--primary-black); border: 3px solid var(--primary-black); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.background='var(--primary-black)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--primary-black)'">
@@ -89,7 +99,7 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 
     <!-- Video Section - Our Impact -->
-    <section id="video-impact" style="position: relative; padding: 6rem 0; background: linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.88) 100%), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920') center/cover fixed;">
+    <section id="video-impact" style="position: relative; padding: 6rem 0; background: linear-gradient(135deg, rgba(0, 0, 0, 0.80) 0%, rgba(0, 0, 0, 0.75) 100%), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920') center/cover fixed;">
         <div class="container">
             <!-- Section Header -->
             <div class="text-center" style="margin-bottom: 4rem;">
@@ -276,7 +286,7 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 
     <!-- Upcoming Events Section -->
-    <section id="upcoming-events" style="position: relative; padding: 5rem 0; background: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.9) 100%), url('https://images.unsplash.com/photo-1511578314322-379afb476865?w=1920') center/cover fixed;">
+    <section id="upcoming-events" style="position: relative; padding: 5rem 0; background: linear-gradient(135deg, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.75) 100%), url('https://images.unsplash.com/photo-1511578314322-379afb476865?w=1920') center/cover fixed;">
         <div class="container">
             <div class="text-center" style="margin-bottom: 3rem;">
                 <div style="display: inline-block; padding: 0.4rem 1rem; background: var(--primary-yellow); color: var(--primary-black); font-weight: 700; font-size: 0.875rem; letter-spacing: 1px; margin-bottom: 1rem;">
@@ -383,16 +393,16 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <div style="display: flex; justify-content: space-between; margin-top: 1rem; gap: 1rem;">
                                     <div style="flex: 1;">
                                         <div style="font-size: 0.75rem; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Raised</div>
-                                        <div style="font-size: 1.1rem; font-weight: 800; color: var(--primary-black);">UGX <?php echo number_format($cause['raised_amount']); ?></div>
+                                        <div style="font-size: 1.1rem; font-weight: 800; color: var(--primary-black);"><?php echo formatCurrency($cause['raised_amount']); ?></div>
                                     </div>
                                     <div style="flex: 1; text-align: right;">
                                         <div style="font-size: 0.75rem; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Goal</div>
-                                        <div style="font-size: 1.1rem; font-weight: 800; color: var(--primary-black);">UGX <?php echo number_format($cause['goal_amount']); ?></div>
+                                        <div style="font-size: 1.1rem; font-weight: 800; color: var(--primary-black);"><?php echo formatCurrency($cause['goal_amount']); ?></div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <a href="cause-detail.php?id=<?php echo $cause['id']; ?>" style="display: block; background: var(--primary-yellow); color: var(--primary-black); padding: 0.875rem 1.5rem; font-weight: 700; text-decoration: none; border: 3px solid var(--primary-black); text-align: center; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary-black)'; this.style.color='#fff'" onmouseout="this.style.background='var(--primary-yellow)'; this.style.color='var(--primary-black)'">
+                            <a href="donation-step1.php?cause=<?php echo $cause['id']; ?>" style="display: block; background: var(--primary-yellow); color: var(--primary-black); padding: 0.875rem 1.5rem; font-weight: 700; text-decoration: none; border: 3px solid var(--primary-black); text-align: center; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary-black)'; this.style.color='#fff'" onmouseout="this.style.background='var(--primary-yellow)'; this.style.color='var(--primary-black)'">
                                 DONATE <i class="fas fa-heart" style="margin-left: 0.5rem;"></i>
                             </a>
                         </div>
@@ -409,7 +419,7 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 
     <!-- CTA Section -->
-    <section id="cta" style="position: relative; padding: 6rem 0; background: linear-gradient(135deg, rgba(255,193,7,0.95) 0%, rgba(255,193,7,0.9) 100%), url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1920') center/cover fixed;">
+    <section id="cta" style="position: relative; padding: 6rem 0; background: linear-gradient(135deg, rgba(255,193,7,0.85) 0%, rgba(255,193,7,0.80) 100%), url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1920') center/cover fixed;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 text-center">
@@ -419,7 +429,7 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h2 style="font-size: 3rem; font-weight: 900; color: var(--primary-black); margin-bottom: 1.5rem; line-height: 1.2;">Transform Lives With Us</h2>
                     <p style="font-size: 1.2rem; color: var(--primary-black); line-height: 1.7; margin-bottom: 3rem; max-width: 750px; margin-left: auto; margin-right: auto;">Every child deserves love, education, and a chance at a better future. Your support makes real change in Kasese District.</p>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                        <a href="get-involved.php#donate" style="display: inline-block; background: var(--primary-black); color: #fff; padding: 1rem 3rem; font-weight: 700; text-decoration: none; border: 3px solid var(--primary-black); font-size: 1rem; letter-spacing: 0.5px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='8px 8px 0 rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <a href="donation-step1.php" style="display: inline-block; background: var(--primary-black); color: #fff; padding: 1rem 3rem; font-weight: 700; text-decoration: none; border: 3px solid var(--primary-black); font-size: 1rem; letter-spacing: 0.5px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='8px 8px 0 rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE NOW
                         </a>
                         <a href="get-involved.php#volunteer" style="display: inline-block; background: transparent; color: var(--primary-black); padding: 1rem 3rem; font-weight: 700; text-decoration: none; border: 3px solid var(--primary-black); font-size: 1rem; letter-spacing: 0.5px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary-black)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--primary-black)'">

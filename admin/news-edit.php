@@ -115,7 +115,7 @@ include 'includes/header.php';
             <a href="news.php" class="btn-sm btn-secondary">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
-            <a href="news-delete.php?id=<?php echo $postId; ?>" class="btn-sm btn-danger" onclick="return confirm('Delete this post?');">
+            <a href="news-delete.php?id=<?php echo $postId; ?>&token=<?php echo generateCSRFToken(); ?>" class="btn-sm btn-danger" onclick="return confirm('Delete this post?');">
                 <i class="fas fa-trash"></i>
             </a>
         </div>

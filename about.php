@@ -9,12 +9,22 @@ include 'includes/header.php';
 // Fetch team members
 $stmt = $pdo->query("SELECT * FROM team_members WHERE status = 'active' ORDER BY display_order ASC, id ASC");
 $teamMembers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Get mission and vision from settings (with defaults)
+$missionStatement = getSetting('mission_statement', 'To provide holistic care, quality education, and sustainable livelihood opportunities to orphaned and vulnerable children in Kasese District, empowering them to become self-reliant and productive members of society. We strive to create an environment where every child feels loved, valued, and supported in reaching their full potential.');
+$visionStatement = getSetting('vision_statement', 'A community where every orphaned and vulnerable child has access to love, quality education, comprehensive healthcare, and opportunities to reach their full potential and contribute meaningfully to society. We envision a future where no child is left behind and every child has the chance to succeed.');
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteName = getSetting('site_name', 'United Love for All');
+$siteDescription = getSetting('site_description', 'ULFA (United Love for All) was founded in Mpondwe Lhubiriha, Kasese District, Uganda, with a simple yet powerful vision: to provide a loving home and brighter future for orphaned and vulnerable children in our community.');
+$foundingYear = getSetting('founding_year', '');
+$contactCity = getSetting('contact_city', 'Kasese');
+$contactCountry = getSetting('contact_country', 'Uganda');
 ?>
 
     <!-- Page Header -->
     <div class="page-header">
         <div class="container">
-            <h1>About ULFA</h1>
+            <h1>About <?php echo htmlspecialchars($siteShortName); ?></h1>
             <p>Discover our story, mission, and the lives we're transforming</p>
         </div>
     </div>
@@ -32,14 +42,14 @@ $teamMembers = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="mission-card">
                         <div class="mission-icon"><i class="fas fa-bullseye"></i></div>
                         <h3>Our Mission</h3>
-                        <p>To provide holistic care, quality education, and sustainable livelihood opportunities to orphaned and vulnerable children in Kasese District, empowering them to become self-reliant and productive members of society. We strive to create an environment where every child feels loved, valued, and supported in reaching their full potential.</p>
+                        <p><?php echo htmlspecialchars($missionStatement); ?></p>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="mission-card">
                         <div class="mission-icon"><i class="fas fa-eye"></i></div>
                         <h3>Our Vision</h3>
-                        <p>A community where every orphaned and vulnerable child has access to love, quality education, comprehensive healthcare, and opportunities to reach their full potential and contribute meaningfully to society. We envision a future where no child is left behind and every child has the chance to succeed.</p>
+                        <p><?php echo htmlspecialchars($visionStatement); ?></p>
                     </div>
                 </div>
             </div>
@@ -52,9 +62,9 @@ $teamMembers = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h2 class="mb-4">Our Story</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text);">ULFA (United Love for All) was founded in Mpondwe Lhubiriha, Kasese District, Uganda, with a simple yet powerful vision: to provide a loving home and brighter future for orphaned and vulnerable children in our community.</p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text);"><?php echo htmlspecialchars($siteName); ?> (<?php echo htmlspecialchars($siteShortName); ?>) was founded<?php if ($foundingYear) echo ' in ' . $foundingYear; ?> in <?php echo htmlspecialchars($contactCity); ?>, <?php echo htmlspecialchars($contactCountry); ?>, with a simple yet powerful vision: to provide a loving home and brighter future for orphaned and vulnerable children in our community.</p>
                     <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text);">What started as a small initiative has grown into a comprehensive organization serving over 500 children through various programs including education support, child welfare, orphanage development, agriculture projects, and community engagement.</p>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text);">Today, ULFA stands as a beacon of hope in Kasese District, transforming lives through compassion, dedication, and sustainable community development.</p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text);">Today, <?php echo htmlspecialchars($siteShortName); ?> stands as a beacon of hope in <?php echo htmlspecialchars($contactCity); ?>, transforming lives through compassion, dedication, and sustainable community development.</p>
                 </div>
                 <div class="col-lg-6">
                     <div style="background: var(--light-yellow); padding: 3rem; border: 3px solid var(--primary-black);">

@@ -8,6 +8,14 @@ require_once 'config/crud-helper.php';
 requireAdmin();
 checkSessionTimeout();
 
+// Verify CSRF token
+$token = isset($_GET['token']) ? $_GET['token'] : '';
+if (!verifyCSRFToken($token)) {
+    $_SESSION['alert'] = ['type' => 'danger', 'message' => 'Invalid security token. Please try again.'];
+    header('Location: gallery.php');
+    exit;
+}
+
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if (!$id) {

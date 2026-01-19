@@ -178,13 +178,13 @@ include 'includes/header.php';
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="start_date" class="form-label required">Start Date</label>
-                                    <input type="date" id="start_date" name="start_date" class="form-control" required value="<?php echo $_POST['start_date'] ?? date('Y-m-d'); ?>">
+                                    <input type="date" id="start_date" name="start_date" class="form-control" required value="<?php echo htmlspecialchars($_POST['start_date'] ?? date('Y-m-d')); ?>">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="end_date" class="form-label">End Date</label>
-                                    <input type="date" id="end_date" name="end_date" class="form-control" value="<?php echo $_POST['end_date'] ?? ''; ?>">
+                                    <input type="date" id="end_date" name="end_date" class="form-control" value="<?php echo htmlspecialchars($_POST['end_date'] ?? ''); ?>">
                                 </div>
                             </div>
                         </div>

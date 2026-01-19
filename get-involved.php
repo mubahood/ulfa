@@ -1,7 +1,16 @@
 <?php 
 $currentPage = 'get-involved';
+include 'config.php';
+include 'functions.php';
+
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteName = getSetting('site_name', 'United Love for All');
+$contactCity = getSetting('contact_city', 'Kasese');
+$contactCountry = getSetting('contact_country', 'Uganda');
+
 $pageTitle = 'Get Involved';
-$pageDescription = 'Join ULFA mission to transform lives. Donate, volunteer, or partner with us to support orphaned children in Uganda.';
+$pageDescription = 'Join ' . $siteShortName . ' mission to transform lives. Donate, volunteer, or partner with us to support orphaned children in ' . $contactCountry . '.';
 include 'includes/header.php'; 
 ?>
 
@@ -36,7 +45,7 @@ include 'includes/header.php';
                                 <li>Support a program</li>
                             </ul>
                         </div>
-                        <a href="#contact-section" class="btn-involvement">Donate Now</a>
+                        <a href="donation-step1.php" class="btn-involvement">Donate Now</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">

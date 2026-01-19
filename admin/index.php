@@ -4,6 +4,7 @@
  */
 require_once 'config/auth.php';
 require_once 'config/crud-helper.php';
+require_once __DIR__ . '/../functions.php';
 
 requireAdmin();
 checkSessionTimeout();
@@ -20,6 +21,7 @@ $stats = [
     'gallery' => ['albums' => 0, 'images' => 0],
     'team' => ['total' => 0, 'active' => 0],
     'inquiries' => ['total' => 0, 'new' => 0, 'replied' => 0],
+    'donations' => ['total' => 0, 'completed' => 0, 'pending' => 0, 'amount' => 0],
     'admins' => 0
 ];
 
@@ -89,6 +91,18 @@ try {
             }
         } catch (PDOException $e) {}
         
+        // Donations stats
+        try {
+            $stmt = $pdo->query("SELECT COUNT(*) FROM donations");
+            $stats['donations']['total'] = $stmt->fetchColumn();
+            $stmt = $pdo->query("SELECT COUNT(*) FROM donations WHERE payment_status = 'completed'");
+            $stats['donations']['completed'] = $stmt->fetchColumn();
+            $stmt = $pdo->query("SELECT COUNT(*) FROM donations WHERE payment_status = 'pending'");
+            $stats['donations']['pending'] = $stmt->fetchColumn();
+            $stmt = $pdo->query("SELECT COALESCE(SUM(amount), 0) FROM donations WHERE payment_status = 'completed'");
+            $stats['donations']['amount'] = $stmt->fetchColumn();
+        } catch (PDOException $e) {}
+        
         // Admin users count
         try {
             $stmt = $pdo->query("SELECT COUNT(*) FROM admin_users WHERE status = 'active'");
@@ -111,6 +125,12 @@ try {
             
             // Recent inquiries
             $stmt = $pdo->query("SELECT 'inquiry' as type, CONCAT(name, ' - ', subject) as item, created_at FROM contact_inquiries ORDER BY created_at DESC LIMIT 4");
+            while ($row = $stmt->fetch()) {
+                $recentActivity[] = $row;
+            }
+            
+            // Recent donations
+            $stmt = $pdo->query("SELECT 'donation' as type, CONCAT(donor_name, ' donated UGX ', FORMAT(amount, 0)) as item, created_at FROM donations WHERE payment_status = 'completed' ORDER BY created_at DESC LIMIT 3");
             while ($row = $stmt->fetch()) {
                 $recentActivity[] = $row;
             }
@@ -253,6 +273,24 @@ include 'includes/header.php';
                 <i class="fas fa-arrow-right"></i>
             </a>
         </div>
+
+        <!-- Donations Stats -->
+        <div class="stat-card highlight">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #28a745, #20c997);">
+                <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number"><?php echo formatCurrency($stats['donations']['amount']); ?></div>
+                <div class="stat-label">Total Donations</div>
+                <div class="stat-details">
+                    <span><?php echo $stats['donations']['completed']; ?> Completed</span>
+                    <span><?php echo $stats['donations']['pending']; ?> Pending</span>
+                </div>
+            </div>
+            <a href="donations.php" class="stat-link">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
     </div>
 
     <!-- Content Grid -->
@@ -277,7 +315,8 @@ include 'includes/header.php';
                                     $icons = [
                                         'news' => 'fa-newspaper',
                                         'event' => 'fa-calendar',
-                                        'inquiry' => 'fa-envelope'
+                                        'inquiry' => 'fa-envelope',
+                                        'donation' => 'fa-hand-holding-usd'
                                     ];
                                     ?>
                                     <i class="fas <?php echo $icons[$activity['type']] ?? 'fa-file'; ?>"></i>

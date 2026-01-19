@@ -125,7 +125,7 @@ include 'includes/header.php';
             <a href="events.php" class="btn-sm btn-secondary">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
-            <a href="events-delete.php?id=<?php echo $eventId; ?>" class="btn-sm btn-danger" onclick="return confirm('Delete this event?');">
+            <a href="events-delete.php?id=<?php echo $eventId; ?>&token=<?php echo generateCSRFToken(); ?>" class="btn-sm btn-danger" onclick="return confirm('Delete this event?');">
                 <i class="fas fa-trash"></i>
             </a>
         </div>

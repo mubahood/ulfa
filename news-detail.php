@@ -4,6 +4,9 @@ $pageTitle = 'News Article';
 include 'config.php';
 include 'functions.php';
 
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+
 // Get news article
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $stmt = $pdo->prepare("SELECT * FROM news_posts WHERE id = ? AND status = 'published'");
@@ -15,7 +18,7 @@ if (!$news) {
     exit;
 }
 
-$pageTitle = $news['title'] . ' - ULFA';
+$pageTitle = $news['title'] . ' - ' . $siteShortName;
 $pageDescription = substr(strip_tags($news['content']), 0, 160);
 
 // Get related articles (same category, excluding current)

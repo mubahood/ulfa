@@ -155,7 +155,7 @@ include 'includes/header.php';
                             <td data-label="Actions">
                                 <div class="actions">
                                     <a href="inquiries-view.php?id=<?php echo $inquiry['id']; ?>" class="btn-icon" title="View"><i class="fas fa-eye"></i></a>
-                                    <a href="inquiries-delete.php?id=<?php echo $inquiry['id']; ?>" class="btn-icon btn-danger" title="Delete" onclick="return confirm('Delete this inquiry?');"><i class="fas fa-trash"></i></a>
+                                    <a href="inquiries-delete.php?id=<?php echo $inquiry['id']; ?>&token=<?php echo generateCSRFToken(); ?>" class="btn-icon btn-danger" title="Delete" onclick="return confirm('Delete this inquiry?');"><i class="fas fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>

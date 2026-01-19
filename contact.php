@@ -3,6 +3,30 @@ $currentPage = 'contact';
 $pageTitle = 'Contact Us';
 $pageDescription = 'Get in touch with ULFA. We\'re here to answer your questions and help you get involved.';
 include 'includes/header.php'; 
+
+// Get contact settings
+$contactAddress = getSetting('contact_address', 'Kasese District, Uganda');
+$contactCity = getSetting('contact_city', 'Kasese');
+$contactCountry = getSetting('contact_country', 'Uganda');
+$contactPhone = getSetting('contact_phone', '+256 700 000 000');
+$contactPhoneAlt = getSetting('contact_phone_alt');
+$contactEmail = getSetting('contact_email', 'info@ulfa.org');
+$officeHours = getSetting('office_hours', 'Monday - Friday: 8:00 AM - 5:00 PM');
+$officeHoursWeekend = getSetting('office_hours_weekend', 'Saturday: 9:00 AM - 2:00 PM');
+$googleMapsEmbed = getSetting('google_maps_embed');
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteName = getSetting('site_name', 'United Love for All');
+
+// Validate Google Maps embed - only allow safe iframe from Google
+function sanitizeGoogleMapsEmbed($embed) {
+    if (empty($embed)) return '';
+    // Check if it contains a valid Google Maps iframe
+    if (preg_match('/<iframe[^>]+src=["\']https:\/\/(www\.)?google\.com\/maps\/embed[^"\']*["\'][^>]*>.*?<\/iframe>/is', $embed, $match)) {
+        return $match[0];
+    }
+    return '';
+}
+$googleMapsEmbed = sanitizeGoogleMapsEmbed($googleMapsEmbed);
 ?>
 
     <!-- Page Header -->
@@ -22,28 +46,39 @@ include 'includes/header.php';
                         <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <h5>Visit Us</h5>
-                            <p>Mpondwe Lhubiriha<br>Kasese District<br>Uganda</p>
+                            <p><?php echo nl2br(htmlspecialchars($contactAddress)); ?></p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
                         <div>
                             <h5>Call Us</h5>
-                            <p>Main: +256 700 000 000<br>Mobile: +256 750 000 000</p>
+                            <p>
+                                <a href="<?php echo getPhoneLink($contactPhone); ?>" style="color: inherit; text-decoration: none;">Main: <?php echo htmlspecialchars($contactPhone); ?></a>
+                                <?php if ($contactPhoneAlt): ?>
+                                <br><a href="<?php echo getPhoneLink($contactPhoneAlt); ?>" style="color: inherit; text-decoration: none;">Mobile: <?php echo htmlspecialchars($contactPhoneAlt); ?></a>
+                                <?php endif; ?>
+                            </p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h5>Email Us</h5>
-                            <p>General: info@ulfa.org<br>Donations: donate@ulfa.org</p>
+                            <p><a href="mailto:<?php echo htmlspecialchars($contactEmail); ?>" style="color: inherit; text-decoration: none;"><?php echo htmlspecialchars($contactEmail); ?></a></p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-item-icon"><i class="fas fa-clock"></i></div>
                         <div>
                             <h5>Office Hours</h5>
-                            <p>Monday - Friday: 8:00 AM - 5:00 PM<br>Saturday: 9:00 AM - 2:00 PM<br>Sunday: Closed</p>
+                            <p>
+                                <?php echo htmlspecialchars($officeHours); ?>
+                                <?php if ($officeHoursWeekend): ?>
+                                <br><?php echo htmlspecialchars($officeHoursWeekend); ?>
+                                <?php endif; ?>
+                                <br>Sunday: Closed
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -92,18 +127,24 @@ include 'includes/header.php';
             <div class="section-title">
                 <span class="badge-section">FIND US</span>
                 <h2>Our Location</h2>
-                <p class="subtitle">Visit us at our centre in Kasese District</p>
+                <p class="subtitle">Visit us at our centre in <?php echo htmlspecialchars($contactCity); ?></p>
             </div>
+            <?php if ($googleMapsEmbed): ?>
+            <div style="background: var(--white); padding: 1rem; border: 3px solid var(--primary-black);">
+                <?php echo $googleMapsEmbed; ?>
+            </div>
+            <?php else: ?>
             <div style="background: var(--white); padding: 3rem; border: 3px solid var(--primary-black); text-align: center;">
                 <i class="fas fa-map-marked-alt" style="font-size: 5rem; color: var(--primary-yellow); margin-bottom: 2rem;"></i>
-                <h3 class="mb-3">ULFA Orphanage Centre</h3>
+                <h3 class="mb-3"><?php echo htmlspecialchars($siteShortName); ?> Orphanage Centre</h3>
                 <p style="font-size: 1.1rem; color: var(--gray-text); max-width: 600px; margin: 0 auto;">
-                    Located in Mpondwe Lhubiriha, Kasese District, Western Uganda. We're accessible by road from Kasese town (45 minutes drive) and Fort Portal (2 hours drive).
+                    <?php echo nl2br(htmlspecialchars($contactAddress)); ?>
                 </p>
                 <div class="mt-4">
-                    <a href="https://maps.google.com" target="_blank" class="btn btn-hero btn-hero-primary"><span><i class="fas fa-map-marker-alt me-2"></i>Get Directions</span></a>
+                    <a href="https://maps.google.com/maps?q=<?php echo urlencode($contactAddress); ?>" target="_blank" class="btn btn-hero btn-hero-primary"><span><i class="fas fa-map-marker-alt me-2"></i>Get Directions</span></a>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
     </section>
 

@@ -1,61 +1,21 @@
 <?php
+/**
+ * Contact Form Handler (AJAX endpoint)
+ * Handles contact form submissions from the frontend
+ */
+
 // Prevent any output before JSON
 ob_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 
-// Database configuration
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'ulfa_charity');
-define('DB_USER', 'root');
-define('DB_PASS', 'root');
-define('DB_SOCKET', '/Applications/MAMP/tmp/mysql/mysql.sock');
+// Use centralized configuration
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/functions.php';
 
-function getDBConnection(&$errorMessage = null) {
-    try {
-        // Use socket for local development (MAMP), standard connection for production
-        if (defined('DB_SOCKET') && !empty(DB_SOCKET) && file_exists(DB_SOCKET)) {
-            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";unix_socket=" . DB_SOCKET;
-        } else {
-            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4";
-        }
-        $pdo = new PDO($dsn, DB_USER, DB_PASS);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        return $pdo;
-    } catch(PDOException $e) {
-        $errorMessage = $e->getMessage();
-        error_log("Database connection failed: " . $errorMessage);
-        return null;
-    }
-}
-
-function createEnrollmentsTable() {
-    $pdo = getDBConnection();
-    if (!$pdo) return false;
-    
-    try {
-        $sql = "CREATE TABLE IF NOT EXISTS contact_inquiries (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL,
-            phone VARCHAR(50) NOT NULL,
-            subject VARCHAR(100) NOT NULL,
-            message TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            ip_address VARCHAR(45),
-            INDEX idx_created_at (created_at DESC),
-            INDEX idx_email (email)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
-        
-        $pdo->exec($sql);
-        return true;
-    } catch(PDOException $e) {
-        error_log("Table creation failed: " . $e->getMessage());
-        return false;
-    }
-}
-
+/**
+ * Sanitize input data
+ */
 function sanitizeInput($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -63,15 +23,24 @@ function sanitizeInput($data) {
     return $data;
 }
 
+/**
+ * Validate email address
+ */
 function isValidEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 }
 
+/**
+ * Validate phone number (minimum 10 digits)
+ */
 function isValidPhone($phone) {
     $phone = preg_replace('/[^0-9+]/', '', $phone);
     return strlen($phone) >= 10;
 }
 
+/**
+ * Check for duplicate submissions within 1 hour
+ */
 function isDuplicateEnrollment($email, $subject) {
     $pdo = getDBConnection();
     if (!$pdo) return false;
@@ -86,21 +55,48 @@ function isDuplicateEnrollment($email, $subject) {
     }
 }
 
+/**
+ * Simple rate limiting by IP
+ */
+function isRateLimited($ipAddress) {
+    $pdo = getDBConnection();
+    if (!$pdo) return false;
+    
+    try {
+        // Max 5 submissions per IP in 10 minutes
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM contact_inquiries WHERE ip_address = ? AND created_at > DATE_SUB(NOW(), INTERVAL 10 MINUTE)");
+        $stmt->execute([$ipAddress]);
+        return $stmt->fetchColumn() >= 5;
+    } catch(PDOException $e) {
+        error_log("Rate limit check failed: " . $e->getMessage());
+        return false;
+    }
+}
+
+/**
+ * Save contact inquiry to database
+ */
 function saveEnrollment($name, $email, $phone, $subject, $message = '') {
-    $dbError = null;
-    $pdo = getDBConnection($dbError);
+    $pdo = getDBConnection();
     if (!$pdo) {
-        return ['success' => false, 'message' => 'Database connection failed. ' . ($dbError ? 'Error: ' . $dbError : 'Please try again later.')];
+        return ['success' => false, 'message' => 'Database connection failed. Please try again later.'];
     }
     
+    // Sanitize all inputs
     $name = sanitizeInput($name);
     $email = sanitizeInput($email);
     $phone = sanitizeInput($phone);
     $subject = sanitizeInput($subject);
     $message = sanitizeInput($message);
+    $ipAddress = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
     
+    // Validation
     if (empty($name) || empty($email) || empty($phone) || empty($subject)) {
         return ['success' => false, 'message' => 'All required fields must be filled.'];
+    }
+    
+    if (strlen($name) > 255) {
+        return ['success' => false, 'message' => 'Name is too long.'];
     }
     
     if (!isValidEmail($email)) {
@@ -111,30 +107,35 @@ function saveEnrollment($name, $email, $phone, $subject, $message = '') {
         return ['success' => false, 'message' => 'Invalid phone number.'];
     }
     
+    // Rate limiting
+    if (isRateLimited($ipAddress)) {
+        return ['success' => false, 'message' => 'Too many requests. Please try again later.'];
+    }
+    
+    // Duplicate check
     if (isDuplicateEnrollment($email, $subject)) {
         return ['success' => false, 'message' => 'You have already submitted this inquiry recently.'];
     }
     
     try {
         $stmt = $pdo->prepare("INSERT INTO contact_inquiries (name, email, phone, subject, message, ip_address) VALUES (?, ?, ?, ?, ?, ?)");
-        $ipAddress = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
-        
         $stmt->execute([$name, $email, $phone, $subject, $message, $ipAddress]);
         
         return ['success' => true, 'message' => 'Thank you for contacting ULFA! We will get back to you soon.'];
     } catch(PDOException $e) {
-        error_log("Enrollment save failed: " . $e->getMessage());
-        return ['success' => false, 'message' => 'Failed to save enrollment. Please try again.'];
+        error_log("Contact form save failed: " . $e->getMessage());
+        return ['success' => false, 'message' => 'Failed to save your inquiry. Please try again.'];
     }
 }
 
+// Main execution
 try {
+    // Only accept POST requests
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         throw new Exception('Invalid request method.');
     }
-
-    createEnrollmentsTable();
-
+    
+    // Process the form
     $result = saveEnrollment(
         $_POST['name'] ?? '',
         $_POST['email'] ?? '',
@@ -148,14 +149,13 @@ try {
     echo json_encode($result);
     
 } catch (Exception $e) {
-    error_log("Enrollment error: " . $e->getMessage());
+    error_log("Contact form error: " . $e->getMessage());
     ob_clean();
     header('Content-Type: application/json');
     echo json_encode([
         'success' => false, 
-        'message' => 'System error: ' . $e->getMessage()
+        'message' => 'An error occurred. Please try again.'
     ]);
 }
 
 ob_end_flush();
-?>

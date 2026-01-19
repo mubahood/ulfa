@@ -1,7 +1,14 @@
 <?php 
 $currentPage = 'stories';
+include 'config.php';
+include 'functions.php';
+
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+$siteName = getSetting('site_name', 'United Love for All');
+
 $pageTitle = 'Stories & Testimonials';
-$pageDescription = 'Read inspiring stories from children, families, and volunteers whose lives have been transformed by ULFA.';
+$pageDescription = 'Read inspiring stories from children, families, and volunteers whose lives have been transformed by ' . $siteShortName . '.';
 include 'includes/header.php'; 
 ?>
 

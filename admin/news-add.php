@@ -183,7 +183,7 @@ include 'includes/header.php';
                                 id="publish_date" 
                                 name="publish_date" 
                                 class="form-control"
-                                value="<?php echo $_POST['publish_date'] ?? date('Y-m-d\TH:i'); ?>"
+                                value="<?php echo htmlspecialchars($_POST['publish_date'] ?? date('Y-m-d\TH:i')); ?>"
                             >
                             <small class="form-text">Leave blank for immediate publish</small>
                         </div>

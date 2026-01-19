@@ -4,6 +4,9 @@ $pageTitle = 'Event Details';
 include 'config.php';
 include 'functions.php';
 
+// Get settings
+$siteShortName = getSetting('site_short_name', 'ULFA');
+
 // Get event
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $stmt = $pdo->prepare("SELECT * FROM events WHERE id = ?");
@@ -15,7 +18,7 @@ if (!$event) {
     exit;
 }
 
-$pageTitle = $event['title'] . ' - ULFA';
+$pageTitle = $event['title'] . ' - ' . $siteShortName;
 $pageDescription = substr(strip_tags($event['description']), 0, 160);
 
 // Check if event is past

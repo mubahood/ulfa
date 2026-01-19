@@ -66,6 +66,24 @@
                     </a>
                 </li>
                 
+                <li class="nav-item <?php echo ($currentPage == 'donations') ? 'active' : ''; ?>">
+                    <a href="donations.php">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span>Donations</span>
+                        <?php 
+                        // Show pending donation count
+                        try {
+                            $pdo = getDBConnection();
+                            $stmt = $pdo->query("SELECT COUNT(*) FROM donations WHERE payment_status = 'pending'");
+                            $pendingDonations = $stmt->fetchColumn();
+                            if ($pendingDonations > 0) {
+                                echo '<span class="badge">' . $pendingDonations . '</span>';
+                            }
+                        } catch (Exception $e) {}
+                        ?>
+                    </a>
+                </li>
+                
                 <li class="nav-item <?php echo ($currentPage == 'gallery') ? 'active' : ''; ?>">
                     <a href="gallery.php">
                         <i class="fas fa-images"></i>
