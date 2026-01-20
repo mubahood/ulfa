@@ -57,9 +57,9 @@ $categories = $categoriesStmt->fetchAll(PDO::FETCH_COLUMN);
 <section style="padding: 120px 0 60px; background: var(--primary-black);">
     <div class="container">
         <div class="text-center">
-            <h1 style="color: var(--primary-yellow); font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">News & Articles</h1>
+            <h1 style="color: var(--primary-yellow); font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">News & Updates</h1>
             <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
-                Stay informed about our latest activities, success stories, and community impact
+                Stories of hope, progress, and the lives being changed at ULFA Orphanage Centre
             </p>
         </div>
     </div>

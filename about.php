@@ -11,14 +11,16 @@ $stmt = $pdo->query("SELECT * FROM team_members WHERE status = 'active' ORDER BY
 $teamMembers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Get mission and vision from settings (with defaults)
-$missionStatement = getSetting('mission_statement', 'To provide holistic care, quality education, and sustainable livelihood opportunities to orphaned and vulnerable children in Kasese District, empowering them to become self-reliant and productive members of society. We strive to create an environment where every child feels loved, valued, and supported in reaching their full potential.');
-$visionStatement = getSetting('vision_statement', 'A community where every orphaned and vulnerable child has access to love, quality education, comprehensive healthcare, and opportunities to reach their full potential and contribute meaningfully to society. We envision a future where no child is left behind and every child has the chance to succeed.');
+$missionStatement = getSetting('mission_statement', 'To provide love, care, education, and sustainable support to orphaned and vulnerable children, while promoting dignity, protection, and community development in Kasese District, Uganda.');
+$visionStatement = getSetting('vision_statement', 'A Uganda where all children are loved, protected, educated, and empowered to reach their full potential and contribute meaningfully to society. We envision a future where no child is left behind simply because of the circumstances of their birth.');
 $siteShortName = getSetting('site_short_name', 'ULFA');
 $siteName = getSetting('site_name', 'United Love for All');
-$siteDescription = getSetting('site_description', 'ULFA (United Love for All) was founded in Mpondwe Lhubiriha, Kasese District, Uganda, with a simple yet powerful vision: to provide a loving home and brighter future for orphaned and vulnerable children in our community.');
+$siteDescription = getSetting('site_description', 'ULFA (United Love for All) Orphanage Centre was founded in Kasese District, Uganda, to ensure that orphaned and vulnerable children do not grow up feeling forgotten or unloved.');
 $foundingYear = getSetting('founding_year', '');
 $contactCity = getSetting('contact_city', 'Kasese');
 $contactCountry = getSetting('contact_country', 'Uganda');
+$founderName = getSetting('founder_name', 'Muadhi Abubakar');
+$founderTitle = getSetting('founder_title', 'Founder & Executive Director');
 ?>
 
     <!-- Page Header -->
@@ -61,34 +63,36 @@ $contactCountry = getSetting('contact_country', 'Uganda');
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h2 class="mb-4">Our Story</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text);"><?php echo htmlspecialchars($siteName); ?> (<?php echo htmlspecialchars($siteShortName); ?>) was founded<?php if ($foundingYear) echo ' in ' . $foundingYear; ?> in <?php echo htmlspecialchars($contactCity); ?>, <?php echo htmlspecialchars($contactCountry); ?>, with a simple yet powerful vision: to provide a loving home and brighter future for orphaned and vulnerable children in our community.</p>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text);">What started as a small initiative has grown into a comprehensive organization serving over 500 children through various programs including education support, child welfare, orphanage development, agriculture projects, and community engagement.</p>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text);">Today, <?php echo htmlspecialchars($siteShortName); ?> stands as a beacon of hope in <?php echo htmlspecialchars($contactCity); ?>, transforming lives through compassion, dedication, and sustainable community development.</p>
+                    <span class="badge-section" style="margin-bottom: 1rem; display: inline-block;">OUR STORY</span>
+                    <h2 class="mb-4">Why <?php echo htmlspecialchars($siteShortName); ?> Was Founded</h2>
+                    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--gray-text);"><?php echo htmlspecialchars($siteName); ?> (<?php echo htmlspecialchars($siteShortName); ?>) Orphanage Centre was founded<?php if ($foundingYear) echo ' in ' . $foundingYear; ?> in <?php echo htmlspecialchars($contactCity); ?> District, <?php echo htmlspecialchars($contactCountry); ?>, because our founder knows what it means to grow up without security, support, or certainty about tomorrow.</p>
+                    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--gray-text);">Growing up in a community where many children struggle to stay in school due to poverty, long distances, and lack of basic necessities, our founder experienced firsthand the struggles that many children still face today — lack of school fees, long distances to school, hunger, and the constant fear of dropping out of education.</p>
+                    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--gray-text);">These experiences shaped a purpose: to ensure that orphaned and vulnerable children do not face these struggles alone. <?php echo htmlspecialchars($siteShortName); ?> exists to provide love, care, education, and protection, while building sustainable solutions that help families and communities support their children with dignity.</p>
+                    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--gray-text); font-style: italic;">"When children are supported early, they grow into confident, capable adults who can transform their communities. <?php echo htmlspecialchars($siteShortName); ?> is not just an organization—it is a promise that no child should be forgotten."</p>
                 </div>
                 <div class="col-lg-6">
-                    <div style="background: var(--light-yellow); padding: 3rem; border: 3px solid var(--primary-black);">
-                        <h3 class="mb-4">Core Values</h3>
+                    <div style="background: var(--light-yellow); padding: 2.5rem; border-left: 4px solid var(--primary-yellow);">
+                        <h3 class="mb-4">Our Core Beliefs</h3>
                         <ul style="list-style: none; padding: 0;">
-                            <li style="margin-bottom: 1.5rem; padding-left: 2rem; position: relative;">
-                                <i class="fas fa-heart" style="position: absolute; left: 0; top: 0; color: var(--primary-yellow); font-size: 1.3rem;"></i>
-                                <strong>Compassion:</strong> We treat every child with love and dignity
+                            <li style="margin-bottom: 1.25rem; padding-left: 2rem; position: relative;">
+                                <i class="fas fa-heart" style="position: absolute; left: 0; top: 0; color: var(--primary-black); font-size: 1.1rem;"></i>
+                                <strong>Love & Dignity:</strong> Every child deserves to feel loved, valued, and respected
                             </li>
-                            <li style="margin-bottom: 1.5rem; padding-left: 2rem; position: relative;">
-                                <i class="fas fa-star" style="position: absolute; left: 0; top: 0; color: var(--primary-yellow); font-size: 1.3rem;"></i>
-                                <strong>Excellence:</strong> We strive for quality in everything we do
+                            <li style="margin-bottom: 1.25rem; padding-left: 2rem; position: relative;">
+                                <i class="fas fa-shield-alt" style="position: absolute; left: 0; top: 0; color: var(--primary-black); font-size: 1.1rem;"></i>
+                                <strong>Protection:</strong> Child safety and wellbeing is our highest priority
                             </li>
-                            <li style="margin-bottom: 1.5rem; padding-left: 2rem; position: relative;">
-                                <i class="fas fa-hands-helping" style="position: absolute; left: 0; top: 0; color: var(--primary-yellow); font-size: 1.3rem;"></i>
-                                <strong>Community:</strong> We build strong, supportive relationships
+                            <li style="margin-bottom: 1.25rem; padding-left: 2rem; position: relative;">
+                                <i class="fas fa-graduation-cap" style="position: absolute; left: 0; top: 0; color: var(--primary-black); font-size: 1.1rem;"></i>
+                                <strong>Empowerment:</strong> Education transforms lives and builds futures
                             </li>
-                            <li style="margin-bottom: 1.5rem; padding-left: 2rem; position: relative;">
-                                <i class="fas fa-seedling" style="position: absolute; left: 0; top: 0; color: var(--primary-yellow); font-size: 1.3rem;"></i>
-                                <strong>Sustainability:</strong> We create lasting, positive change
+                            <li style="margin-bottom: 1.25rem; padding-left: 2rem; position: relative;">
+                                <i class="fas fa-seedling" style="position: absolute; left: 0; top: 0; color: var(--primary-black); font-size: 1.1rem;"></i>
+                                <strong>Sustainability:</strong> We invest in long-term solutions, not just charity
                             </li>
                             <li style="padding-left: 2rem; position: relative;">
-                                <i class="fas fa-check-circle" style="position: absolute; left: 0; top: 0; color: var(--primary-yellow); font-size: 1.3rem;"></i>
-                                <strong>Integrity:</strong> We operate with transparency and honesty
+                                <i class="fas fa-hands-helping" style="position: absolute; left: 0; top: 0; color: var(--primary-black); font-size: 1.1rem;"></i>
+                                <strong>Community:</strong> Together, we can ensure no child is left behind
                             </li>
                         </ul>
                     </div>
@@ -138,12 +142,52 @@ $contactCountry = getSetting('contact_country', 'Uganda');
         </div>
     </section>
 
+    <!-- Founder's Message -->
+    <section id="founder" style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 255, 255, 1) 100%);">
+        <div class="container">
+            <div class="section-title">
+                <span class="badge-section">FOUNDER'S MESSAGE</span>
+                <h2>A Word From Our Founder</h2>
+                <p class="subtitle">The heart and vision behind ULFA</p>
+            </div>
+            <div class="row align-items-center g-4">
+                <div class="col-lg-4 text-center">
+                    <div style="border-left: 4px solid var(--primary-yellow); padding: 1.5rem; background: #fff;">
+                        <div style="width: 150px; height: 150px; background: var(--primary-yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 3rem; color: var(--primary-black);">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--primary-black); margin-bottom: 0.5rem;"><?php echo htmlspecialchars($founderName); ?></h3>
+                        <p style="color: var(--primary-yellow); font-weight: 600; font-size: 1rem; margin: 0;"><?php echo htmlspecialchars($founderTitle); ?></p>
+                        <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">United Love for All (ULFA) Orphanage Centre</p>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div style="border-left: 4px solid var(--primary-yellow); padding-left: 2rem;">
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">I was born and raised in a humble community in <?php echo htmlspecialchars($contactCity); ?> District, <?php echo htmlspecialchars($contactCountry); ?>. Growing up, I experienced firsthand the struggles that many children still face today — lack of school fees, long distances to school, hunger, and the constant fear of dropping out of education. Education for me was not guaranteed; it was something I had to fight for every single day.</p>
+                        
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">There were times when attending school meant completing household chores first, walking long distances barefoot, and sharing limited learning materials. Yet, despite these challenges, I learned an important lesson early in life: <strong>when children are supported with love, dignity, and opportunity, their lives can change forever.</strong></p>
+                        
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;"><?php echo htmlspecialchars($siteShortName); ?> Orphanage Centre was born from that belief. This foundation exists to ensure that orphaned and vulnerable children do not grow up feeling forgotten or unloved.</p>
+                        
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">At <?php echo htmlspecialchars($siteShortName); ?>, we believe that charity alone is not enough. We believe in <strong>empowerment, protection, and long-term solutions</strong>. That is why we support education, provide basic needs, promote child protection, and invest in sustainable projects that help communities care for their children with dignity.</p>
+                        
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">Every child we serve is not just a beneficiary — they are a future leader, a future parent, and a future contributor to society. When we invest in children, we invest in the future of our nation.</p>
+                        
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); font-style: italic; margin-bottom: 1.25rem;">"Together, through <?php echo htmlspecialchars($siteName); ?>, we can ensure that no child is left behind simply because of the circumstances of their birth."</p>
+                        
+                        <p style="font-size: 1rem; color: var(--primary-black); font-weight: 600; margin: 0;">— <?php echo htmlspecialchars($founderName); ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Our Team -->
     <section id="team">
         <div class="container">
             <div class="section-title">
                 <span class="badge-section">MEET OUR TEAM</span>
-                <h2>The People Behind ULFA</h2>
+                <h2>The People Behind <?php echo htmlspecialchars($siteShortName); ?></h2>
                 <p class="subtitle">Dedicated individuals committed to changing lives</p>
             </div>
             <?php if (empty($teamMembers)): ?>

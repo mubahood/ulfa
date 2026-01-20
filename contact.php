@@ -33,7 +33,7 @@ $googleMapsEmbed = sanitizeGoogleMapsEmbed($googleMapsEmbed);
     <div class="page-header">
         <div class="container">
             <h1>Contact Us</h1>
-            <p>We'd love to hear from you. Reach out to learn more or get involved.</p>
+            <p>Have questions or want to support our mission? We'd love to connect with you.</p>
         </div>
     </div>
 

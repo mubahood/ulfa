@@ -44,20 +44,20 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="row align-items-center">
                 <div class="col-lg-8 mx-auto text-center">
                     <div style="display: inline-block; padding: 0.5rem 1.25rem; background: var(--primary-black); color: var(--primary-yellow); font-weight: 700; font-size: 0.875rem; letter-spacing: 1px; margin-bottom: 1.5rem;">
-                        WELCOME TO <?php echo htmlspecialchars(strtoupper($siteShortName)); ?>
+                        <?php echo htmlspecialchars(strtoupper($siteShortName)); ?> ORPHANAGE CENTRE
                     </div>
                     <h1 style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; color: var(--primary-black); line-height: 1.1; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -1px;">
-                        Transforming Lives<br>In <?php echo htmlspecialchars($contactCity); ?>
+                        No Child Should<br>Be Forgotten
                     </h1>
                     <p style="font-size: 1.25rem; color: var(--primary-black); max-width: 650px; margin: 0 auto 2.5rem; line-height: 1.6; font-weight: 500;">
-                        Providing love, education, and sustainable support to orphaned and vulnerable children
+                        Providing love, care, education, and sustainable support to orphaned and vulnerable children in <?php echo htmlspecialchars($contactCity); ?> District, <?php echo htmlspecialchars($contactCountry); ?>
                     </p>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                         <a href="donation-step1.php" style="display: inline-block; padding: 1.25rem 2.5rem; background: var(--primary-black); color: #fff; border: 3px solid var(--primary-black); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='8px 8px 0 rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE NOW
                         </a>
-                        <a href="about.php" style="display: inline-block; padding: 1.25rem 2.5rem; background: transparent; color: var(--primary-black); border: 3px solid var(--primary-black); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.background='var(--primary-black)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--primary-black)'">
-                            <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i> LEARN MORE
+                        <a href="about.php#founder" style="display: inline-block; padding: 1.25rem 2.5rem; background: transparent; color: var(--primary-black); border: 3px solid var(--primary-black); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.background='var(--primary-black)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--primary-black)'">
+                            <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i> OUR STORY
                         </a>
                     </div>
                 </div>
@@ -73,25 +73,25 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     WHO WE ARE
                 </div>
                 <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--primary-black); margin-bottom: 0.75rem;">Our Mission & Vision</h2>
-                <p style="font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto;">Building a Uganda where all children are loved, protected, and empowered</p>
+                <p style="font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto;">Empowerment, protection, and long-term solutions — not just charity</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-6">
-                    <div style="border: 3px solid var(--primary-black); padding: 2.5rem; height: 100%; background: #fff; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='8px 8px 0 var(--primary-yellow)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                        <div style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: var(--primary-yellow); color: var(--primary-black); font-size: 1.75rem; margin-bottom: 1.5rem;">
+                    <div style="border-left: 4px solid var(--primary-yellow); padding: 2rem; height: 100%; background: #fafafa;">
+                        <div style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--primary-yellow); color: var(--primary-black); font-size: 1.5rem; margin-bottom: 1.25rem;">
                             <i class="fas fa-bullseye"></i>
                         </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--primary-black);">Our Mission</h3>
-                        <p style="font-size: 1rem; line-height: 1.7; color: #666; margin: 0;">To provide love, care, education, and sustainable support to orphaned and vulnerable children while promoting dignity, safety, and community development in Kasese District.</p>
+                        <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; color: var(--primary-black);">Our Mission</h3>
+                        <p style="font-size: 1rem; line-height: 1.7; color: #666; margin: 0;">To provide love, care, education, and sustainable support to orphaned and vulnerable children while promoting dignity, protection, and community development in <?php echo htmlspecialchars($contactCity); ?> District.</p>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div style="border: 3px solid var(--primary-black); padding: 2.5rem; height: 100%; background: #fff; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='8px 8px 0 var(--primary-yellow)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                        <div style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: var(--primary-yellow); color: var(--primary-black); font-size: 1.75rem; margin-bottom: 1.5rem;">
+                    <div style="border-left: 4px solid var(--primary-yellow); padding: 2rem; height: 100%; background: #fafafa;">
+                        <div style="display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; background: var(--primary-yellow); color: var(--primary-black); font-size: 1.5rem; margin-bottom: 1.25rem;">
                             <i class="fas fa-eye"></i>
                         </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--primary-black);">Our Vision</h3>
-                        <p style="font-size: 1rem; line-height: 1.7; color: #666; margin: 0;">A Uganda where all children are loved, protected, educated, and empowered to reach their full potential and contribute meaningfully to society.</p>
+                        <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; color: var(--primary-black);">Our Vision</h3>
+                        <p style="font-size: 1rem; line-height: 1.7; color: #666; margin: 0;">A Uganda where no child is left behind simply because of the circumstances of their birth — where every child is loved, protected, educated, and empowered to reach their full potential.</p>
                     </div>
                 </div>
             </div>

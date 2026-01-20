@@ -50,7 +50,7 @@ $totalRaised = $totalRaisedStmt->fetchColumn();
         <div class="text-center">
             <h1 style="color: var(--primary-yellow); font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">Support Our Causes</h1>
             <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem;">
-                Your donations help us provide education, care, and hope to vulnerable children
+                Every cause represents a real need. Your donations provide food, shelter, education, and protection to children in Kasese District, Uganda.
             </p>
             <div style="display: inline-block; padding: 1.5rem 2.5rem; background: var(--primary-yellow); color: var(--primary-black); border: 2px solid var(--primary-yellow);">
                 <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.25rem;">Total Raised So Far</div>

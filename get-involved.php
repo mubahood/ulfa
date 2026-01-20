@@ -18,7 +18,7 @@ include 'includes/header.php';
     <div class="page-header">
         <div class="container">
             <h1>Get Involved</h1>
-            <p>Be part of the change. Every action makes a difference.</p>
+            <p>Together, we can ensure no child is left behind</p>
         </div>
     </div>
 
@@ -27,22 +27,22 @@ include 'includes/header.php';
         <div class="container">
             <div class="section-title">
                 <span class="badge-section">JOIN US</span>
-                <h2>Make an Impact Today</h2>
-                <p class="subtitle">Choose how you want to support our mission</p>
+                <h2>Stand With The Children</h2>
+                <p class="subtitle">Your support gives children hope, restores dignity to families, and builds stronger communities</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
                     <div class="involvement-card" id="donate">
                         <div class="involvement-icon"><i class="fas fa-heart"></i></div>
                         <h4>Donate</h4>
-                        <p>Your financial support helps us provide food, education, healthcare, and shelter to vulnerable children. Every contribution makes a real difference.</p>
+                        <p>Every child deserves love, education, and a chance at a better future. Your financial support provides food, education, healthcare, and protection to vulnerable children.</p>
                         <div style="margin: 1.5rem 0;">
-                            <h5 style="color: var(--primary-yellow); margin-bottom: 1rem;">Donation Options:</h5>
+                            <h5 style="color: var(--primary-yellow); margin-bottom: 1rem;">Your Donation Provides:</h5>
                             <ul style="text-align: left;">
-                                <li>One-time donation</li>
-                                <li>Monthly sponsorship</li>
-                                <li>Sponsor a child</li>
-                                <li>Support a program</li>
+                                <li>Education support (fees, books, uniforms)</li>
+                                <li>Daily nutritious meals</li>
+                                <li>Healthcare and protection</li>
+                                <li>Safe shelter and care</li>
                             </ul>
                         </div>
                         <a href="donation-step1.php" class="btn-involvement">Donate Now</a>
@@ -52,14 +52,14 @@ include 'includes/header.php';
                     <div class="involvement-card" id="volunteer">
                         <div class="involvement-icon"><i class="fas fa-hand-holding-heart"></i></div>
                         <h4>Volunteer</h4>
-                        <p>Share your time, skills, and passion with our children. Volunteers play a crucial role in our programs and activities.</p>
+                        <p>Share your time, skills, and passion with children who need support. When children are supported early, they grow into confident, capable adults who transform their communities.</p>
                         <div style="margin: 1.5rem 0;">
                             <h5 style="color: var(--primary-yellow); margin-bottom: 1rem;">Volunteer Opportunities:</h5>
                             <ul style="text-align: left;">
                                 <li>Teaching & tutoring</li>
-                                <li>Healthcare support</li>
+                                <li>Child care support</li>
                                 <li>Skills training</li>
-                                <li>Administrative help</li>
+                                <li>Community outreach</li>
                             </ul>
                         </div>
                         <a href="#contact-section" class="btn-involvement">Apply to Volunteer</a>
@@ -69,14 +69,14 @@ include 'includes/header.php';
                     <div class="involvement-card" id="partner">
                         <div class="involvement-icon"><i class="fas fa-handshake"></i></div>
                         <h4>Partner With Us</h4>
-                        <p>Organizations and businesses can partner with ULFA to create lasting impact through corporate social responsibility programs.</p>
+                        <p>We believe in empowerment, protection, and long-term solutions — not just charity. Partner with <?php echo htmlspecialchars($siteShortName); ?> to create lasting impact through sustainable programs.</p>
                         <div style="margin: 1.5rem 0;">
-                            <h5 style="color: var(--primary-yellow); margin-bottom: 1rem;">Partnership Benefits:</h5>
+                            <h5 style="color: var(--primary-yellow); margin-bottom: 1rem;">Partnership Options:</h5>
                             <ul style="text-align: left;">
                                 <li>Corporate sponsorship</li>
                                 <li>In-kind donations</li>
-                                <li>Employee engagement</li>
-                                <li>Joint programs</li>
+                                <li>Program support</li>
+                                <li>Sustainable projects</li>
                             </ul>
                         </div>
                         <a href="#contact-section" class="btn-involvement">Become a Partner</a>

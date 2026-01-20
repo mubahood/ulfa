@@ -239,8 +239,8 @@ include 'includes/header.php';
 <section class="donate-hero">
     <div class="container">
         <div class="text-center">
-            <h1>Make a Donation</h1>
-            <p>Your generosity transforms lives. Every donation makes a real difference in our community.</p>
+            <h1>Give Hope to a Child</h1>
+            <p>Every contribution — no matter the size — helps us provide food, shelter, education, and protection to children who need it most.</p>
         </div>
     </div>
 </section>

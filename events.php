@@ -45,7 +45,7 @@ $totalPages = ceil($totalEvents / $perPage);
         <div class="text-center">
             <h1 style="color: var(--primary-yellow); font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">Our Events</h1>
             <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
-                Join us in our activities and community engagement programs
+                Join us as we gather to support our children and build a stronger community together
             </p>
         </div>
     </div>

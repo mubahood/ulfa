@@ -16,9 +16,31 @@ include 'includes/header.php';
     <div class="page-header">
         <div class="container">
             <h1>Stories & Testimonials</h1>
-            <p>Hear from the lives we've touched and the communities we've transformed</p>
+            <p>Real stories of hope, transformation, and community support</p>
         </div>
     </div>
+
+    <!-- Founder's Story Highlight -->
+    <section style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 255, 255, 1) 100%);">
+        <div class="container">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-8">
+                    <span class="badge-section" style="margin-bottom: 1rem; display: inline-block;">FOUNDER'S INSPIRATION</span>
+                    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--primary-black);">Why <?php echo htmlspecialchars($siteShortName); ?> Exists</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text); margin-bottom: 1rem;">"I was born and raised in a humble community in Kasese District. Growing up, I experienced firsthand the struggles that many children still face today — lack of school fees, long distances to school, hunger, and the constant fear of dropping out of education."</p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray-text); margin-bottom: 1rem;">"There were times when attending school meant completing household chores first, walking long distances barefoot, and sharing limited learning materials. Yet, despite these challenges, I learned an important lesson: <strong>when children are supported with love, dignity, and opportunity, their lives can change forever.</strong>"</p>
+                    <p style="font-size: 1rem; color: var(--primary-black); font-weight: 600; margin-top: 1.5rem;">— Muadhi Abubakar, Founder & Executive Director</p>
+                    <a href="about.php#founder" style="display: inline-block; margin-top: 1rem; background: var(--primary-yellow); color: var(--primary-black); padding: 0.75rem 1.5rem; font-weight: 600; text-decoration: none; border: 2px solid var(--primary-black);">Read Full Message</a>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div style="border-left: 4px solid var(--primary-yellow); padding: 2rem; background: #fff;">
+                        <div style="font-size: 3rem; color: var(--primary-yellow); margin-bottom: 1rem;"><i class="fas fa-quote-left"></i></div>
+                        <p style="font-size: 1.1rem; font-style: italic; color: var(--gray-text); line-height: 1.7;">Every child we serve is not just a beneficiary — they are a future leader, a future parent, and a future contributor to society.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Testimonials -->
     <section>
@@ -26,18 +48,18 @@ include 'includes/header.php';
             <div class="section-title">
                 <span class="badge-section">TESTIMONIALS</span>
                 <h2>Voices of Hope</h2>
-                <p class="subtitle">Real stories from our children, families, and volunteers</p>
+                <p class="subtitle">Stories from children, families, and supporters whose lives have been touched</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"ULFA gave me a second chance at life. Through their education program, I'm now in secondary school and dreaming of becoming a teacher to help other children like me."</p>
+                        <p class="testimonial-text">"<?php echo htmlspecialchars($siteShortName); ?> gave me hope when I had none. After losing my parents, I thought my education was over. Now I am in secondary school and dream of becoming a teacher to help other children like me."</p>
                         <div class="testimonial-author">
-                            <div class="author-avatar">S</div>
+                            <div class="author-avatar">A</div>
                             <div>
-                                <strong>Sarah</strong><br>
-                                <span style="color: var(--gray-text); font-size: 0.9rem;">Student, Age 15</span>
+                                <strong>Amina</strong><br>
+                                <span style="color: var(--gray-text); font-size: 0.9rem;">Student, Age 14</span>
                             </div>
                         </div>
                     </div>
@@ -45,11 +67,11 @@ include 'includes/header.php';
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"Volunteering at ULFA has been the most rewarding experience of my life. Seeing the children's smiles and watching them grow is incredibly fulfilling."</p>
+                        <p class="testimonial-text">"Volunteering at <?php echo htmlspecialchars($siteShortName); ?> has been life-changing. Seeing children who once had no hope now smiling, learning, and growing is the greatest reward anyone could ask for."</p>
                         <div class="testimonial-author">
                             <div class="author-avatar">J</div>
                             <div>
-                                <strong>James</strong><br>
+                                <strong>Joseph</strong><br>
                                 <span style="color: var(--gray-text); font-size: 0.9rem;">Volunteer Teacher</span>
                             </div>
                         </div>
@@ -58,12 +80,12 @@ include 'includes/header.php';
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"After losing my parents, ULFA became my family. They provided not just food and shelter, but love, guidance, and hope for a better future."</p>
+                        <p class="testimonial-text">"After losing my parents, I used to walk long distances to school barefoot, often hungry. <?php echo htmlspecialchars($siteShortName); ?> became my family. They gave me not just food and shelter, but love and hope for my future."</p>
                         <div class="testimonial-author">
                             <div class="author-avatar">D</div>
                             <div>
                                 <strong>David</strong><br>
-                                <span style="color: var(--gray-text); font-size: 0.9rem;">ULFA Graduate</span>
+                                <span style="color: var(--gray-text); font-size: 0.9rem;"><?php echo htmlspecialchars($siteShortName); ?> Beneficiary</span>
                             </div>
                         </div>
                     </div>
@@ -71,12 +93,12 @@ include 'includes/header.php';
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"As a sponsor, I've watched my sponsored child grow from a shy little girl to a confident student. The monthly updates and photos keep me connected to her journey."</p>
+                        <p class="testimonial-text">"Supporting <?php echo htmlspecialchars($siteShortName); ?> from abroad has connected me to children who truly need help. The monthly updates remind me that every small contribution makes a real difference in their lives."</p>
                         <div class="testimonial-author">
                             <div class="author-avatar">M</div>
                             <div>
-                                <strong>Mary</strong><br>
-                                <span style="color: var(--gray-text); font-size: 0.9rem;">Child Sponsor, USA</span>
+                                <strong>Margaret</strong><br>
+                                <span style="color: var(--gray-text); font-size: 0.9rem;">International Supporter</span>
                             </div>
                         </div>
                     </div>
@@ -84,12 +106,12 @@ include 'includes/header.php';
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"The agricultural program taught me sustainable farming techniques. Now I can support myself and help my younger siblings continue their education."</p>
+                        <p class="testimonial-text">"The agricultural program taught me how to farm sustainably. Now I can help provide food for the centre and learn skills that will support me in the future. I am grateful for this opportunity."</p>
                         <div class="testimonial-author">
                             <div class="author-avatar">P</div>
                             <div>
-                                <strong>Peter</strong><br>
-                                <span style="color: var(--gray-text); font-size: 0.9rem;">Agriculture Program Graduate</span>
+                                <strong>Patrick</strong><br>
+                                <span style="color: var(--gray-text); font-size: 0.9rem;">Agriculture Program Participant</span>
                             </div>
                         </div>
                     </div>
@@ -97,7 +119,7 @@ include 'includes/header.php';
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"Partnering with ULFA has been a blessing for our community. Together, we're creating lasting change and giving hope to the most vulnerable children."</p>
+                        <p class="testimonial-text">"Working with <?php echo htmlspecialchars($siteShortName); ?> has shown me the power of community. Together, we are giving hope to the most vulnerable children and building a stronger future for Kasese."</p>
                         <div class="testimonial-author">
                             <div class="author-avatar">R</div>
                             <div>
