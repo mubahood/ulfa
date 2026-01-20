@@ -272,10 +272,10 @@ $founderTitle = getSetting('founder_title', 'Founder & Executive Director');
     <section id="cta">
         <div class="container">
             <div class="cta-content">
-                <h2>Partner With Us</h2>
-                <p class="lead" style="font-size: 1.2rem; margin-bottom: 2rem;">Join us in our mission to transform lives. Your support matters.</p>
+                <h2>Join Our Mission</h2>
+                <p class="lead" style="font-size: 1.2rem; margin-bottom: 2rem;">Together, we can ensure no child is forgotten. Your support matters.</p>
                 <div class="hero-buttons" style="justify-content: center;">
-                    <a href="get-involved.php#donate" class="btn btn-hero btn-hero-primary"><span><i class="fas fa-heart me-2"></i>Donate Now</span></a>
+                    <a href="get-involved.php#donate" class="btn btn-hero btn-hero-primary"><span><i class="fas fa-heart me-2"></i>Donate</span></a>
                     <a href="contact.php" class="btn btn-hero btn-hero-outline" style="border-color: var(--primary-black); color: var(--primary-black);"><span>Contact Us</span></a>
                 </div>
             </div>

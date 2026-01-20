@@ -402,28 +402,28 @@ textarea.form-control {
                 
                 <div class="amount-grid">
                     <div class="amount-option">
-                        <input type="radio" name="amount" value="10000" id="amt1" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '10000') ? 'checked' : ''; ?>>
-                        <label for="amt1">10,000</label>
+                        <input type="radio" name="amount" value="5" id="amt1" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '5') ? 'checked' : ''; ?>>
+                        <label for="amt1">5</label>
                     </div>
                     <div class="amount-option">
-                        <input type="radio" name="amount" value="25000" id="amt2" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '25000') ? 'checked' : ''; ?>>
-                        <label for="amt2">25,000</label>
+                        <input type="radio" name="amount" value="10" id="amt2" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '10') ? 'checked' : ''; ?>>
+                        <label for="amt2">10</label>
                     </div>
                     <div class="amount-option">
-                        <input type="radio" name="amount" value="50000" id="amt3" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '50000') ? 'checked' : 'checked'; ?>>
-                        <label for="amt3">50,000</label>
+                        <input type="radio" name="amount" value="25" id="amt3" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '25') ? 'checked' : 'checked'; ?>>
+                        <label for="amt3">25</label>
                     </div>
                     <div class="amount-option">
-                        <input type="radio" name="amount" value="100000" id="amt4" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '100000') ? 'checked' : ''; ?>>
-                        <label for="amt4">100,000</label>
+                        <input type="radio" name="amount" value="50" id="amt4" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '50') ? 'checked' : ''; ?>>
+                        <label for="amt4">50</label>
                     </div>
                     <div class="amount-option">
-                        <input type="radio" name="amount" value="250000" id="amt5" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '250000') ? 'checked' : ''; ?>>
-                        <label for="amt5">250,000</label>
+                        <input type="radio" name="amount" value="100" id="amt5" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '100') ? 'checked' : ''; ?>>
+                        <label for="amt5">100</label>
                     </div>
                     <div class="amount-option">
-                        <input type="radio" name="amount" value="500000" id="amt6" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '500000') ? 'checked' : ''; ?>>
-                        <label for="amt6">500,000</label>
+                        <input type="radio" name="amount" value="250" id="amt6" <?php echo (isset($_POST['amount']) && $_POST['amount'] == '250') ? 'checked' : ''; ?>>
+                        <label for="amt6">250</label>
                     </div>
                 </div>
                 
@@ -431,7 +431,7 @@ textarea.form-control {
                     <label>Or enter custom amount:</label>
                     <div class="custom-amount-input">
                         <span><?php echo $currencySymbol; ?></span>
-                        <input type="number" name="custom_amount" placeholder="Enter amount" min="<?php echo $minDonation; ?>" step="1000" value="<?php echo htmlspecialchars($_POST['custom_amount'] ?? ''); ?>" id="customAmount">
+                        <input type="number" name="custom_amount" placeholder="Enter amount (5-1000)" min="5" max="1000" step="1" value="<?php echo htmlspecialchars($_POST['custom_amount'] ?? ''); ?>" id="customAmount">
                     </div>
                 </div>
                 

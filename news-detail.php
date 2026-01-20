@@ -152,7 +152,7 @@ include 'includes/header.php';
             Help us continue making a difference in the lives of vulnerable children
         </p>
         <a href="get-involved.php#donate" class="btn" style="border: 2px solid var(--primary-black); background: var(--primary-black); color: #fff; padding: 1rem 2.5rem; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-block;">
-            <i class="fas fa-heart me-2"></i> Donate Now
+            <i class="fas fa-heart me-2"></i> Donate
         </a>
     </div>
 </section>

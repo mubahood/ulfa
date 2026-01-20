@@ -103,7 +103,6 @@ $googleMapsEmbed = sanitizeGoogleMapsEmbed($googleMapsEmbed);
                                         <option value="donation">Make a Donation</option>
                                         <option value="volunteer">Become a Volunteer</option>
                                         <option value="sponsor">Sponsor a Child</option>
-                                        <option value="partnership">Partnership Inquiry</option>
                                         <option value="general">General Inquiry</option>
                                     </select>
                                 </div>
@@ -192,7 +191,7 @@ $googleMapsEmbed = sanitizeGoogleMapsEmbed($googleMapsEmbed);
                 <h2>Ready to Make a Difference?</h2>
                 <p class="lead" style="font-size: 1.2rem; margin-bottom: 2rem;">Your journey to transforming lives starts here</p>
                 <div class="hero-buttons" style="justify-content: center;">
-                    <a href="get-involved.php#donate" class="btn btn-hero btn-hero-primary"><span><i class="fas fa-heart me-2"></i>Donate Now</span></a>
+                    <a href="get-involved.php#donate" class="btn btn-hero btn-hero-primary"><span><i class="fas fa-heart me-2"></i>Donate</span></a>
                     <a href="get-involved.php#volunteer" class="btn btn-hero btn-hero-outline" style="border-color: var(--primary-black); color: var(--primary-black);"><span>Volunteer Today</span></a>
                 </div>
             </div>

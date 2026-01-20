@@ -142,7 +142,7 @@ $totalRaised = $totalRaisedStmt->fetchColumn();
                             </a>
                             <?php else: ?>
                             <a href="donation-step1.php?cause=<?php echo $cause['id']; ?>" class="btn btn-sm" style="border: 2px solid var(--primary-black); background: var(--primary-yellow); color: var(--primary-black); padding: 0.75rem 1.75rem; font-weight: 700; text-decoration: none; text-align: center; display: block; font-size: 1rem;">
-                                Donate Now <i class="fas fa-heart ms-2"></i>
+                                Donate <i class="fas fa-heart ms-2"></i>
                             </a>
                             <?php endif; ?>
                         </div>

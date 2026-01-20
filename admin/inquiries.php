@@ -133,7 +133,7 @@ include 'includes/header.php';
                 </thead>
                 <tbody>
                     <?php foreach ($inquiries as $inquiry): ?>
-                        <tr class="<?php echo $inquiry['status'] == 'new' ? 'row-highlight' : ''; ?>">
+                        <tr class="<?php echo ($inquiry['status'] ?? '') == 'new' ? 'row-highlight' : ''; ?>">
                             <td data-label="ID"><?php echo $inquiry['id']; ?></td>
                             <td data-label="Name">
                                 <strong><?php echo htmlspecialchars($inquiry['name']); ?></strong>

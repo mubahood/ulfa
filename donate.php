@@ -255,24 +255,24 @@ include 'includes/header.php';
                 
                 <div class="amount-grid">
                     <div class="amount-option">
-                        <input type="radio" name="amount_preset" id="amount_5000" value="5000">
-                        <label for="amount_5000"><?php echo $currency['symbol']; ?> 5,000</label>
+                        <input type="radio" name="amount_preset" id="amount_5" value="5">
+                        <label for="amount_5"><?php echo $currency['symbol']; ?> 5</label>
                     </div>
                     <div class="amount-option">
-                        <input type="radio" name="amount_preset" id="amount_10000" value="10000">
-                        <label for="amount_10000"><?php echo $currency['symbol']; ?> 10,000</label>
+                        <input type="radio" name="amount_preset" id="amount_10" value="10">
+                        <label for="amount_10"><?php echo $currency['symbol']; ?> 10</label>
                     </div>
                     <div class="amount-option">
-                        <input type="radio" name="amount_preset" id="amount_25000" value="25000">
-                        <label for="amount_25000"><?php echo $currency['symbol']; ?> 25,000</label>
+                        <input type="radio" name="amount_preset" id="amount_25" value="25">
+                        <label for="amount_25"><?php echo $currency['symbol']; ?> 25</label>
                     </div>
                     <div class="amount-option">
-                        <input type="radio" name="amount_preset" id="amount_50000" value="50000">
-                        <label for="amount_50000"><?php echo $currency['symbol']; ?> 50,000</label>
+                        <input type="radio" name="amount_preset" id="amount_50" value="50">
+                        <label for="amount_50"><?php echo $currency['symbol']; ?> 50</label>
                     </div>
                     <div class="amount-option">
-                        <input type="radio" name="amount_preset" id="amount_100000" value="100000">
-                        <label for="amount_100000"><?php echo $currency['symbol']; ?> 100,000</label>
+                        <input type="radio" name="amount_preset" id="amount_100" value="100">
+                        <label for="amount_100"><?php echo $currency['symbol']; ?> 100</label>
                     </div>
                     <div class="amount-option">
                         <input type="radio" name="amount_preset" id="amount_custom" value="custom">
@@ -285,7 +285,7 @@ include 'includes/header.php';
                     <div class="custom-amount-input">
                         <span><?php echo $currency['symbol']; ?></span>
                         <input type="number" class="form-control" id="custom_amount" name="custom_amount" 
-                               min="1000" step="1000" placeholder="Enter amount">
+                               min="5" max="1000" step="1" placeholder="Enter amount (5-1000)">
                     </div>
                 </div>
             </div>

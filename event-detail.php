@@ -63,7 +63,7 @@ include 'includes/header.php';
         <div class="row">
             <!-- Main Content -->
             <div class="col-lg-8">
-                <?php if ($event['featured_image']): ?>
+                <?php if (!empty($event['featured_image'] ?? '')): ?>
                 <div style="margin-bottom: 2.5rem; border: 2px solid var(--primary-black); overflow: hidden;">
                     <img src="<?php echo htmlspecialchars($event['featured_image']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" style="width: 100%; height: auto; display: block;">
                 </div>
@@ -75,15 +75,15 @@ include 'includes/header.php';
                 </div>
 
                 <!-- Additional Details -->
-                <?php if ($event['organizer'] || $event['contact_email'] || $event['contact_phone']): ?>
+                <?php if (!empty($event['organizer'] ?? '') || !empty($event['contact_email'] ?? '') || !empty($event['contact_phone'] ?? '')): ?>
                 <div style="border: 2px solid var(--primary-black); padding: 2rem; background: #f8f9fa; margin-bottom: 2rem;">
                     <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--primary-black);">Contact Information</h3>
-                    <?php if ($event['organizer']): ?>
+                    <?php if (!empty($event['organizer'] ?? '')): ?>
                     <div style="margin-bottom: 1rem;">
                         <strong style="color: var(--primary-black);">Organizer:</strong> <?php echo htmlspecialchars($event['organizer']); ?>
                     </div>
                     <?php endif; ?>
-                    <?php if ($event['contact_email']): ?>
+                    <?php if (!empty($event['contact_email'] ?? '')): ?>
                     <div style="margin-bottom: 1rem;">
                         <strong style="color: var(--primary-black);">Email:</strong> 
                         <a href="mailto:<?php echo htmlspecialchars($event['contact_email']); ?>" style="color: var(--primary-yellow);">
@@ -91,7 +91,7 @@ include 'includes/header.php';
                         </a>
                     </div>
                     <?php endif; ?>
-                    <?php if ($event['contact_phone']): ?>
+                    <?php if (!empty($event['contact_phone'] ?? '')): ?>
                     <div>
                         <strong style="color: var(--primary-black);">Phone:</strong> <?php echo htmlspecialchars($event['contact_phone']); ?>
                     </div>
@@ -137,7 +137,7 @@ include 'includes/header.php';
                                 </div>
                                 <div>
                                     <strong style="display: block; color: var(--primary-black); margin-bottom: 0.25rem;">Location</strong>
-                                    <span style="color: #666;"><?php echo htmlspecialchars($event['venue']); ?></span>
+                                    <span style="color: #666;"><?php echo htmlspecialchars($event['venue'] ?? 'TBA'); ?></span>
                                 </div>
                             </div>
 

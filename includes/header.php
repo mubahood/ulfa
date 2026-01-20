@@ -127,14 +127,13 @@ $customHeadCode = getSetting('custom_head_code');
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle <?php echo in_array($currentPage, ['get-involved', 'donate']) ? 'active' : ''; ?>" href="#" role="button">Get Involved<span class="dropdown-icon"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="donation-step1.php"><i class="fas fa-donate"></i>Donate Now</a></li>
+                            <li><a class="dropdown-item" href="donation-step1.php"><i class="fas fa-donate"></i>Donate</a></li>
                             <li><a class="dropdown-item" href="get-involved.php#volunteer"><i class="fas fa-hand-holding-heart"></i>Volunteer</a></li>
-                            <li><a class="dropdown-item" href="get-involved.php#partner"><i class="fas fa-handshake"></i>Partner With Us</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link <?php echo $currentPage == 'contact' ? 'active' : ''; ?>" href="contact.php">Contact</a></li>
                     <li class="nav-item ms-lg-2">
-                        <a class="btn btn-donate" href="donation-step1.php"><i class="fas fa-heart me-2"></i>Donate Now</a>
+                        <a class="btn btn-donate" href="donation-step1.php"><i class="fas fa-heart me-2"></i>Donate</a>
                     </li>
                 </ul>
             </div>

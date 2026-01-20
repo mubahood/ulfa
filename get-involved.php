@@ -45,7 +45,7 @@ include 'includes/header.php';
                                 <li>Safe shelter and care</li>
                             </ul>
                         </div>
-                        <a href="donation-step1.php" class="btn-involvement">Donate Now</a>
+                        <a href="donation-step1.php" class="btn-involvement">Donate</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
@@ -63,23 +63,6 @@ include 'includes/header.php';
                             </ul>
                         </div>
                         <a href="#contact-section" class="btn-involvement">Apply to Volunteer</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="involvement-card" id="partner">
-                        <div class="involvement-icon"><i class="fas fa-handshake"></i></div>
-                        <h4>Partner With Us</h4>
-                        <p>We believe in empowerment, protection, and long-term solutions — not just charity. Partner with <?php echo htmlspecialchars($siteShortName); ?> to create lasting impact through sustainable programs.</p>
-                        <div style="margin: 1.5rem 0;">
-                            <h5 style="color: var(--primary-yellow); margin-bottom: 1rem;">Partnership Options:</h5>
-                            <ul style="text-align: left;">
-                                <li>Corporate sponsorship</li>
-                                <li>In-kind donations</li>
-                                <li>Program support</li>
-                                <li>Sustainable projects</li>
-                            </ul>
-                        </div>
-                        <a href="#contact-section" class="btn-involvement">Become a Partner</a>
                     </div>
                 </div>
             </div>
@@ -178,7 +161,6 @@ include 'includes/header.php';
                                         <option value="donation">Make a Donation</option>
                                         <option value="volunteer">Become a Volunteer</option>
                                         <option value="sponsor">Sponsor a Child</option>
-                                        <option value="partnership">Partnership Inquiry</option>
                                         <option value="general">General Inquiry</option>
                                     </select>
                                 </div>

@@ -137,7 +137,7 @@ include 'includes/header.php';
                         </div>
 
                         <a href="donation-step1.php?cause=<?php echo $cause['id']; ?>" class="btn" style="width: 100%; border: 3px solid var(--primary-black); background: var(--primary-yellow); color: var(--primary-black); padding: 1.25rem; font-weight: 700; text-align: center; text-decoration: none; display: block; font-size: 1.1rem; margin-bottom: 1rem; letter-spacing: 0.5px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='6px 6px 0 var(--primary-black)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                            <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE NOW
+                            <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE
                         </a>
 
                         <div style="text-align: center; color: #666; font-size: 0.875rem; font-weight: 600;">

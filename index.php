@@ -54,7 +54,7 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </p>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                         <a href="donation-step1.php" style="display: inline-block; padding: 1.25rem 2.5rem; background: var(--primary-black); color: #fff; border: 3px solid var(--primary-black); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='8px 8px 0 rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                            <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE NOW
+                            <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE
                         </a>
                         <a href="about.php#founder" style="display: inline-block; padding: 1.25rem 2.5rem; background: var(--primary-yellow); color: var(--primary-black); border: 3px solid var(--primary-yellow); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='8px 8px 0 rgba(255,193,7,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i> OUR STORY
@@ -450,7 +450,7 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <p style="font-size: 1.2rem; color: var(--primary-black); line-height: 1.7; margin-bottom: 3rem; max-width: 750px; margin-left: auto; margin-right: auto;">Every child deserves love, education, and a chance at a better future. Your support makes real change in Kasese District.</p>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                         <a href="donation-step1.php" style="display: inline-block; background: var(--primary-black); color: #fff; padding: 1rem 3rem; font-weight: 700; text-decoration: none; border: 3px solid var(--primary-black); font-size: 1rem; letter-spacing: 0.5px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='8px 8px 0 rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                            <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE NOW
+                            <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE
                         </a>
                         <a href="get-involved.php#volunteer" style="display: inline-block; background: transparent; color: var(--primary-black); padding: 1rem 3rem; font-weight: 700; text-decoration: none; border: 3px solid var(--primary-black); font-size: 1rem; letter-spacing: 0.5px; transition: all 0.3s;" onmouseover="this.style.background='var(--primary-black)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--primary-black)'">
                             <i class="fas fa-hands-helping" style="margin-right: 0.5rem;"></i> BECOME A VOLUNTEER

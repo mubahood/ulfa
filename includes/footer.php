@@ -72,7 +72,6 @@ $socialLinks = getSocialLinks();
                         <ul>
                             <li><a href="donation-step1.php">Donate</a></li>
                             <li><a href="get-involved.php#volunteer">Volunteer</a></li>
-                            <li><a href="get-involved.php#partner">Partner With Us</a></li>
                             <li><a href="get-involved.php#sponsor">Sponsor a Child</a></li>
                         </ul>
                     </div>
