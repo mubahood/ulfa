@@ -28,9 +28,15 @@ $customHeadCode = getSetting('custom_head_code');
     <meta name="keywords" content="<?php echo htmlspecialchars($metaKeywords); ?>">
     
     <!-- Favicon -->
-    <?php if ($siteFavicon): ?>
-    <link rel="icon" type="image/<?php echo pathinfo($siteFavicon, PATHINFO_EXTENSION) == 'ico' ? 'x-icon' : 'png'; ?>" href="<?php echo $siteFavicon; ?>">
-    <link rel="shortcut icon" href="<?php echo $siteFavicon; ?>">
+    <?php if ($siteFavicon): 
+        $faviconExt = strtolower(pathinfo($siteFavicon, PATHINFO_EXTENSION));
+        $faviconType = ($faviconExt === 'ico') ? 'image/x-icon' : 'image/' . $faviconExt;
+        // Use absolute path from site root
+        $faviconPath = '/' . ltrim($siteFavicon, '/');
+    ?>
+    <link rel="icon" type="<?php echo $faviconType; ?>" href="<?php echo $faviconPath; ?>">
+    <link rel="shortcut icon" type="<?php echo $faviconType; ?>" href="<?php echo $faviconPath; ?>">
+    <link rel="apple-touch-icon" href="<?php echo $faviconPath; ?>">
     <?php endif; ?>
     
     <!-- Open Graph / Social Media -->

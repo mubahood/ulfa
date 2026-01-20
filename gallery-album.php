@@ -22,9 +22,19 @@ $pageTitle = $album['title'] . ' - ' . $siteShortName;
 $pageDescription = substr($album['description'], 0, 160);
 
 // Get images for this album
-$imagesStmt = $pdo->prepare("SELECT * FROM gallery_images WHERE album_id = ? ORDER BY display_order ASC, id ASC");
+$imagesStmt = $pdo->prepare("SELECT * FROM gallery_images WHERE album_id = ? ORDER BY sort_order ASC, id ASC");
 $imagesStmt->execute([$id]);
 $images = $imagesStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Fix image paths for display
+foreach ($images as &$image) {
+    if (strpos($image['image_path'], '/') === false) {
+        $image['image_path'] = 'uploads/gallery/' . $image['image_path'];
+    } elseif (strpos($image['image_path'], 'uploads/') !== 0) {
+        $image['image_path'] = 'uploads/' . $image['image_path'];
+    }
+}
+unset($image);
 
 include 'includes/header.php';
 ?>

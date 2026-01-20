@@ -115,8 +115,13 @@ include 'includes/header.php';
                             <td data-label="ID"><?php echo $post['id']; ?></td>
                             <td data-label="Title">
                                 <div class="title-cell">
-                                    <?php if ($post['featured_image']): ?>
-                                        <img src="../uploads/<?php echo htmlspecialchars($post['featured_image']); ?>" alt="">
+                                    <?php if ($post['featured_image']): 
+                                        $imgPath = $post['featured_image'];
+                                        if (strpos($imgPath, '/') === false) {
+                                            $imgPath = 'news/' . $imgPath;
+                                        }
+                                    ?>
+                                        <img src="../uploads/<?php echo htmlspecialchars($imgPath); ?>" alt="">
                                     <?php endif; ?>
                                     <span><?php echo htmlspecialchars($post['title']); ?></span>
                                 </div>

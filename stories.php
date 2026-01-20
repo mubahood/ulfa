@@ -48,18 +48,18 @@ include 'includes/header.php';
             <div class="section-title">
                 <span class="badge-section">TESTIMONIALS</span>
                 <h2>Voices of Hope</h2>
-                <p class="subtitle">Stories from children, families, and supporters whose lives have been touched</p>
+                <p class="subtitle">Stories from children, families, and supporters whose lives have been touched by Allah's mercy through <?php echo htmlspecialchars($siteShortName); ?></p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"<?php echo htmlspecialchars($siteShortName); ?> gave me hope when I had none. After losing my parents, I thought my education was over. Now I am in secondary school and dream of becoming a teacher to help other children like me."</p>
+                        <p class="testimonial-text">"Alhamdulillah, <?php echo htmlspecialchars($siteShortName); ?> became my family when I lost my parents. I used to walk barefoot to school, often hungry and afraid I would have to drop out. Now I have hope again. I want to become a doctor, In Shaa Allah, so I can help others."</p>
                         <div class="testimonial-author">
-                            <div class="author-avatar">A</div>
+                            <div class="author-avatar">F</div>
                             <div>
-                                <strong>Amina</strong><br>
-                                <span style="color: var(--gray-text); font-size: 0.9rem;">Student, Age 14</span>
+                                <strong>Fatuma Biira</strong><br>
+                                <span style="color: var(--gray-text); font-size: 0.9rem;">Student, Age 15</span>
                             </div>
                         </div>
                     </div>
@@ -67,11 +67,11 @@ include 'includes/header.php';
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"Volunteering at <?php echo htmlspecialchars($siteShortName); ?> has been life-changing. Seeing children who once had no hope now smiling, learning, and growing is the greatest reward anyone could ask for."</p>
+                        <p class="testimonial-text">"When I see these children learning, eating well, and smiling — SubhanAllah, it fills my heart. I know what they went through because I went through the same. Teaching here is my way of giving back what Allah blessed me with."</p>
                         <div class="testimonial-author">
-                            <div class="author-avatar">J</div>
+                            <div class="author-avatar">I</div>
                             <div>
-                                <strong>Joseph</strong><br>
+                                <strong>Ibrahim Kule</strong><br>
                                 <span style="color: var(--gray-text); font-size: 0.9rem;">Volunteer Teacher</span>
                             </div>
                         </div>
@@ -80,12 +80,12 @@ include 'includes/header.php';
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"After losing my parents, I used to walk long distances to school barefoot, often hungry. <?php echo htmlspecialchars($siteShortName); ?> became my family. They gave me not just food and shelter, but love and hope for my future."</p>
+                        <p class="testimonial-text">"I remember the fear of going to sleep hungry, not knowing if tomorrow would be better. <?php echo htmlspecialchars($siteShortName); ?> gave me more than food and shelter — they gave me dignity and love. May Allah bless everyone who supports this work."</p>
                         <div class="testimonial-author">
-                            <div class="author-avatar">D</div>
+                            <div class="author-avatar">Y</div>
                             <div>
-                                <strong>David</strong><br>
-                                <span style="color: var(--gray-text); font-size: 0.9rem;"><?php echo htmlspecialchars($siteShortName); ?> Beneficiary</span>
+                                <strong>Yusuf Baluku</strong><br>
+                                <span style="color: var(--gray-text); font-size: 0.9rem;"><?php echo htmlspecialchars($siteShortName); ?> Graduate</span>
                             </div>
                         </div>
                     </div>
@@ -93,11 +93,11 @@ include 'includes/header.php';
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"Supporting <?php echo htmlspecialchars($siteShortName); ?> from abroad has connected me to children who truly need help. The monthly updates remind me that every small contribution makes a real difference in their lives."</p>
+                        <p class="testimonial-text">"From thousands of miles away, I feel connected to these children. Every update reminds me that sadaqah is not just charity — it's investing in a child's future. These are future leaders, future parents, future contributors to society."</p>
                         <div class="testimonial-author">
-                            <div class="author-avatar">M</div>
+                            <div class="author-avatar">K</div>
                             <div>
-                                <strong>Margaret</strong><br>
+                                <strong>Khadija Mwanga</strong><br>
                                 <span style="color: var(--gray-text); font-size: 0.9rem;">International Supporter</span>
                             </div>
                         </div>
@@ -106,11 +106,11 @@ include 'includes/header.php';
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"The agricultural program taught me how to farm sustainably. Now I can help provide food for the centre and learn skills that will support me in the future. I am grateful for this opportunity."</p>
+                        <p class="testimonial-text">"The farming program taught me that charity alone is not enough — we must learn to sustain ourselves. Now I can grow food and help feed the younger children. This is real empowerment. JazakAllah khair to all who make this possible."</p>
                         <div class="testimonial-author">
-                            <div class="author-avatar">P</div>
+                            <div class="author-avatar">A</div>
                             <div>
-                                <strong>Patrick</strong><br>
+                                <strong>Aisha Mbambu</strong><br>
                                 <span style="color: var(--gray-text); font-size: 0.9rem;">Agriculture Program Participant</span>
                             </div>
                         </div>
@@ -119,11 +119,11 @@ include 'includes/header.php';
                 <div class="col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
-                        <p class="testimonial-text">"Working with <?php echo htmlspecialchars($siteShortName); ?> has shown me the power of community. Together, we are giving hope to the most vulnerable children and building a stronger future for Kasese."</p>
+                        <p class="testimonial-text">"In our community, we believe no child should be forgotten. <?php echo htmlspecialchars($siteShortName); ?> embodies this. They don't just feed children — they protect them, educate them, and give them hope. Wallahi, this is a blessing for Kasese."</p>
                         <div class="testimonial-author">
-                            <div class="author-avatar">R</div>
+                            <div class="author-avatar">S</div>
                             <div>
-                                <strong>Rev. Robert</strong><br>
+                                <strong>Sheikh Muhindo Saidi</strong><br>
                                 <span style="color: var(--gray-text); font-size: 0.9rem;">Community Leader</span>
                             </div>
                         </div>

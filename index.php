@@ -39,24 +39,24 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
     <!-- Hero Section with Background -->
-    <section id="hero" style="position: relative; min-height: 85vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(255, 193, 7, 0.85) 0%, rgba(255, 193, 7, 0.75) 100%), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920') center/cover; overflow: hidden;">
+    <section id="hero" style="position: relative; min-height: 85vh; display: flex; align-items: center; background: linear-gradient(135deg, rgba(0, 0, 0, 0.80) 0%, rgba(0, 0, 0, 0.70) 100%), url('uploads/hero-background.jpg') center/cover; overflow: hidden;">
         <div class="container" style="position: relative; z-index: 2;">
             <div class="row align-items-center">
                 <div class="col-lg-8 mx-auto text-center">
-                    <div style="display: inline-block; padding: 0.5rem 1.25rem; background: var(--primary-black); color: var(--primary-yellow); font-weight: 700; font-size: 0.875rem; letter-spacing: 1px; margin-bottom: 1.5rem;">
+                    <div style="display: inline-block; padding: 0.5rem 1.25rem; background: var(--primary-yellow); color: var(--primary-black); font-weight: 700; font-size: 0.875rem; letter-spacing: 1px; margin-bottom: 1.5rem;">
                         <?php echo htmlspecialchars(strtoupper($siteShortName)); ?> ORPHANAGE CENTRE
                     </div>
-                    <h1 style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; color: var(--primary-black); line-height: 1.1; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -1px;">
+                    <h1 style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
                         No Child Should<br>Be Forgotten
                     </h1>
-                    <p style="font-size: 1.25rem; color: var(--primary-black); max-width: 650px; margin: 0 auto 2.5rem; line-height: 1.6; font-weight: 500;">
+                    <p style="font-size: 1.25rem; color: rgba(255,255,255,0.95); max-width: 650px; margin: 0 auto 2.5rem; line-height: 1.6; font-weight: 500; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
                         Providing love, care, education, and sustainable support to orphaned and vulnerable children in <?php echo htmlspecialchars($contactCity); ?> District, <?php echo htmlspecialchars($contactCountry); ?>
                     </p>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                         <a href="donation-step1.php" style="display: inline-block; padding: 1.25rem 2.5rem; background: var(--primary-black); color: #fff; border: 3px solid var(--primary-black); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='8px 8px 0 rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             <i class="fas fa-heart" style="margin-right: 0.5rem;"></i> DONATE NOW
                         </a>
-                        <a href="about.php#founder" style="display: inline-block; padding: 1.25rem 2.5rem; background: transparent; color: var(--primary-black); border: 3px solid var(--primary-black); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.background='var(--primary-black)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--primary-black)'">
+                        <a href="about.php#founder" style="display: inline-block; padding: 1.25rem 2.5rem; background: var(--primary-yellow); color: var(--primary-black); border: 3px solid var(--primary-yellow); font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; letter-spacing: 0.5px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='8px 8px 0 rgba(255,193,7,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i> OUR STORY
                         </a>
                     </div>
@@ -99,7 +99,7 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 
     <!-- Video Section - Our Impact -->
-    <section id="video-impact" style="position: relative; padding: 6rem 0; background: linear-gradient(135deg, rgba(0, 0, 0, 0.80) 0%, rgba(0, 0, 0, 0.75) 100%), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920') center/cover fixed;">
+    <section id="video-impact" style="position: relative; padding: 6rem 0; background: linear-gradient(135deg, rgba(0, 0, 0, 0.80) 0%, rgba(0, 0, 0, 0.75) 100%), url('uploads/parallax-children.jpg') center/cover fixed;">
         <div class="container">
             <!-- Section Header -->
             <div class="text-center" style="margin-bottom: 4rem;">
@@ -221,9 +221,14 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="col-lg-6">
                     <a href="news-detail.php?id=<?php echo $news['id']; ?>" style="text-decoration: none; display: block;">
                         <div style="border: 3px solid var(--primary-black); background: #fff; height: 100%; overflow: hidden; position: relative; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-                            <?php if (!empty($news['featured_image'])): ?>
+                            <?php if (!empty($news['featured_image'])): 
+                                $newsImgPath = $news['featured_image'];
+                                if (strpos($newsImgPath, '/') === false) {
+                                    $newsImgPath = 'news/' . $newsImgPath;
+                                }
+                            ?>
                             <div style="height: 400px; overflow: hidden; position: relative;">
-                                <img src="<?php echo htmlspecialchars($news['featured_image']); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img src="uploads/<?php echo htmlspecialchars($newsImgPath); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                                 <div style="position: absolute; top: 1rem; left: 1rem; background: var(--primary-yellow); color: var(--primary-black); padding: 0.4rem 0.8rem; font-weight: 700; font-size: 0.75rem; letter-spacing: 1px;">
                                     FEATURED
                                 </div>
@@ -256,9 +261,14 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="col-lg-3 col-md-6">
                     <a href="news-detail.php?id=<?php echo $news['id']; ?>" style="text-decoration: none; display: block; height: 100%;">
                         <div style="border: 2px solid var(--primary-black); background: #fff; height: 100%; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-                            <?php if (!empty($news['featured_image'])): ?>
+                            <?php if (!empty($news['featured_image'])): 
+                                $smallNewsImgPath = $news['featured_image'];
+                                if (strpos($smallNewsImgPath, '/') === false) {
+                                    $smallNewsImgPath = 'news/' . $smallNewsImgPath;
+                                }
+                            ?>
                             <div style="height: 180px; overflow: hidden;">
-                                <img src="<?php echo htmlspecialchars($news['featured_image']); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img src="uploads/<?php echo htmlspecialchars($smallNewsImgPath); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <?php endif; ?>
                             <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
@@ -300,9 +310,14 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="col-lg-4 col-md-6">
                     <a href="event-detail.php?id=<?php echo $event['id']; ?>" style="text-decoration: none; display: block;">
                         <div style="border: 3px solid var(--primary-yellow); background: #fff; height: 100%; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(255,193,7,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                            <?php if (!empty($event['featured_image'])): ?>
+                            <?php if (!empty($event['featured_image'])): 
+                                $eventImgPath = $event['featured_image'];
+                                if (strpos($eventImgPath, '/') === false) {
+                                    $eventImgPath = 'events/' . $eventImgPath;
+                                }
+                            ?>
                             <div style="height: 220px; overflow: hidden; position: relative;">
-                                <img src="<?php echo htmlspecialchars($event['featured_image']); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img src="uploads/<?php echo htmlspecialchars($eventImgPath); ?>" alt="<?php echo htmlspecialchars($event['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                                 <div style="position: absolute; top: 1.25rem; right: 1.25rem; background: var(--primary-yellow); color: var(--primary-black); padding: 0.75rem 1rem; border: 2px solid var(--primary-black); text-align: center; min-width: 75px;">
                                     <div style="font-size: 1.75rem; font-weight: 900; line-height: 1;"><?php echo date('d', strtotime($event['start_datetime'])); ?></div>
                                     <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; margin-top: 0.15rem;"><?php echo strtoupper(date('M', strtotime($event['start_datetime']))); ?></div>
@@ -365,9 +380,14 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 ?>
                 <div class="col-lg-4 col-md-6">
                     <div style="border: 3px solid var(--primary-black); background: #fff; height: 100%; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='8px 8px 0 var(--primary-yellow)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                        <?php if (!empty($cause['featured_image'])): ?>
+                        <?php if (!empty($cause['featured_image'])): 
+                            $causeImgPath = $cause['featured_image'];
+                            if (strpos($causeImgPath, '/') === false) {
+                                $causeImgPath = 'causes/' . $causeImgPath;
+                            }
+                        ?>
                         <div style="height: 250px; overflow: hidden; position: relative;">
-                            <img src="<?php echo htmlspecialchars($cause['featured_image']); ?>" alt="<?php echo htmlspecialchars($cause['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="uploads/<?php echo htmlspecialchars($causeImgPath); ?>" alt="<?php echo htmlspecialchars($cause['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                             <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); padding: 1.5rem 1.25rem 1rem;">
                                 <div style="display: inline-block; background: var(--primary-yellow); color: var(--primary-black); padding: 0.35rem 0.75rem; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 0.5rem;">
                                     <?php echo round($percentage); ?>% FUNDED

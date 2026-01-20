@@ -95,9 +95,15 @@ $categories = $categoriesStmt->fetchAll(PDO::FETCH_COLUMN);
                 <?php foreach ($newsPosts as $news): ?>
                 <div class="col-lg-4 col-md-6">
                     <div class="news-card" style="border: 2px solid var(--primary-black); border-radius: 0; overflow: hidden; height: 100%; display: flex; flex-direction: column; transition: transform 0.3s;">
-                        <?php if ($news['featured_image']): ?>
+                        <?php if ($news['featured_image']): 
+                            // Handle both old format (filename only) and new format (news/filename)
+                            $imagePath = $news['featured_image'];
+                            if (strpos($imagePath, '/') === false) {
+                                $imagePath = 'news/' . $imagePath;
+                            }
+                        ?>
                         <div class="news-image" style="height: 220px; overflow: hidden;">
-                            <img src="<?php echo htmlspecialchars($news['featured_image']); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="uploads/<?php echo htmlspecialchars($imagePath); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <?php endif; ?>
                         <div class="news-content" style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column;">

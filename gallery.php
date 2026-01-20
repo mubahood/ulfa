@@ -103,8 +103,13 @@ foreach ($albums as &$album) {
                 <div class="col-lg-4 col-md-6">
                     <div class="gallery-album-card" style="border: 2px solid var(--primary-black); border-radius: 0; overflow: hidden; position: relative; height: 320px; cursor: pointer; transition: transform 0.3s;">
                         <a href="gallery-album.php?id=<?php echo $album['id']; ?>" style="display: block; height: 100%; text-decoration: none;">
-                            <?php if ($album['cover_image']): ?>
-                            <img src="<?php echo htmlspecialchars($album['cover_image']); ?>" alt="<?php echo htmlspecialchars($album['title']); ?>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;">
+                            <?php if ($album['cover_image']): 
+                                $coverImgPath = $album['cover_image'];
+                                if (strpos($coverImgPath, '/') === false) {
+                                    $coverImgPath = 'gallery/' . $coverImgPath;
+                                }
+                            ?>
+                            <img src="uploads/<?php echo htmlspecialchars($coverImgPath); ?>" alt="<?php echo htmlspecialchars($album['title']); ?>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;">
                             <?php endif; ?>
                             <div class="album-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.75rem;">
                                 <div style="background: var(--primary-yellow); color: var(--primary-black); padding: 0.4rem 0.75rem; font-weight: 700; font-size: 0.8rem; display: inline-block; align-self: flex-start; margin-bottom: 1rem;">

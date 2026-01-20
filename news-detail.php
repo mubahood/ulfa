@@ -60,9 +60,14 @@ include 'includes/header.php';
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <?php if ($news['featured_image']): ?>
+                <?php if ($news['featured_image']): 
+                    $imagePath = $news['featured_image'];
+                    if (strpos($imagePath, '/') === false) {
+                        $imagePath = 'news/' . $imagePath;
+                    }
+                ?>
                 <div style="margin-bottom: 3rem; border: 2px solid var(--primary-black); overflow: hidden;">
-                    <img src="<?php echo htmlspecialchars($news['featured_image']); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 100%; height: auto; display: block;">
+                    <img src="uploads/<?php echo htmlspecialchars($imagePath); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 100%; height: auto; display: block;">
                 </div>
                 <?php endif; ?>
                 
@@ -105,9 +110,14 @@ include 'includes/header.php';
             <?php foreach ($relatedArticles as $related): ?>
             <div class="col-lg-4 col-md-6">
                 <div class="news-card" style="border: 2px solid var(--primary-black); border-radius: 0; overflow: hidden; height: 100%; display: flex; flex-direction: column; background: #fff;">
-                    <?php if ($related['featured_image']): ?>
+                    <?php if ($related['featured_image']): 
+                        $relatedImagePath = $related['featured_image'];
+                        if (strpos($relatedImagePath, '/') === false) {
+                            $relatedImagePath = 'news/' . $relatedImagePath;
+                        }
+                    ?>
                     <div class="news-image" style="height: 200px; overflow: hidden;">
-                        <img src="<?php echo htmlspecialchars($related['featured_image']); ?>" alt="<?php echo htmlspecialchars($related['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="uploads/<?php echo htmlspecialchars($relatedImagePath); ?>" alt="<?php echo htmlspecialchars($related['title']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <?php endif; ?>
                     <div class="news-content" style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column;">
