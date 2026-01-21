@@ -171,11 +171,8 @@ include 'includes/header.php';
                         <!-- Description -->
                         <div class="form-group">
                             <label for="description" class="form-label required">Description</label>
-                            <textarea 
-                                id="description" 
-                                name="description" 
-                                class="form-control"
-                            ><?php echo htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
+                            <input type="hidden" id="description" name="description" value="<?php echo htmlspecialchars($_POST['description'] ?? ''); ?>">
+                            <div id="editor-container" style="height: 350px; background: #fff;"><?php echo $_POST['description'] ?? ''; ?></div>
                         </div>
 
                         <!-- Venue Details -->
@@ -354,42 +351,40 @@ include 'includes/header.php';
     </form>
 </div>
 
-<!-- TinyMCE Editor -->
-<script src="https://cdn.tiny.cloud/1/h0juj1gj1y7ty4yr2ji2k05wm66eefio5hq5vdm6sqshsdfe/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<!-- Quill.js Editor -->
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize TinyMCE
-    tinymce.init({
-        selector: '#description',
-        height: 400,
-        menubar: false,
-        plugins: [
-            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-            'insertdatetime', 'media', 'table', 'help', 'wordcount'
-        ],
-        toolbar: 'undo redo | blocks | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link image | code | help',
-        content_style: 'body { font-family: Inter, sans-serif; font-size: 14px; }',
-        block_formats: 'Paragraph=p; Heading 2=h2; Heading 3=h3; Heading 4=h4; Preformatted=pre',
-        image_advtab: true,
-        image_caption: true,
-        automatic_uploads: false,
-        file_picker_types: 'image',
-        relative_urls: false,
-        remove_script_host: false,
-        branding: false
+    // Initialize Quill editor
+    var quill = new Quill('#editor-container', {
+        theme: 'snow',
+        placeholder: 'Enter event description...',
+        modules: {
+            toolbar: [
+                [{ 'header': [2, 3, 4, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'indent': '-1'}, { 'indent': '+1' }],
+                [{ 'align': [] }],
+                ['link', 'image'],
+                ['clean']
+            ]
+        }
     });
 
     // Form validation
     document.getElementById('eventForm').addEventListener('submit', function(e) {
-        // Get TinyMCE content
-        var description = tinymce.get('description').getContent();
+        // Get Quill content and update hidden input
+        var description = quill.root.innerHTML;
+        document.getElementById('description').value = description;
         
-        // Check if description is empty
-        if (!description || description.trim() === '') {
+        // Check if description is empty (only has empty tags)
+        var textContent = quill.getText().trim();
+        if (!textContent || textContent === '') {
             e.preventDefault();
             alert('Please enter the event description');
-            tinymce.get('description').focus();
+            quill.focus();
             return false;
         }
 

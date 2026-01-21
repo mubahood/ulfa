@@ -655,3 +655,39 @@ textarea.form-control {
         display: none;
     }
 }
+
+/* Quill Editor Styling */
+.ql-toolbar.ql-snow {
+    border: 2px solid var(--gray-300);
+    border-bottom: 1px solid var(--gray-300);
+    border-radius: 4px 4px 0 0;
+    background: var(--gray-100);
+}
+
+.ql-container.ql-snow {
+    border: 2px solid var(--gray-300);
+    border-top: 1px solid var(--gray-300);
+    border-radius: 0 0 4px 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+.ql-editor {
+    min-height: 200px;
+}
+
+.ql-editor:focus {
+    outline: none;
+}
+
+.ql-container.ql-snow:focus-within {
+    border-color: var(--primary-yellow);
+}
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow:focus-within {
+    border-color: var(--primary-yellow);
+}
+
+.ql-toolbar.ql-snow:has(+ .ql-container.ql-snow:focus-within) {
+    border-color: var(--primary-yellow);
+}

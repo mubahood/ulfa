@@ -115,7 +115,8 @@ include 'includes/header.php';
 
                         <div class="form-group">
                             <label for="description" class="form-label required">Description</label>
-                            <textarea id="description" name="description" class="form-control"><?php echo htmlspecialchars($cause['description']); ?></textarea>
+                            <input type="hidden" id="description" name="description" value="<?php echo htmlspecialchars($cause['description']); ?>">
+                            <div id="editor-container" style="height: 300px; background: #fff;"><?php echo $cause['description']; ?></div>
                         </div>
 
                         <div class="row">
@@ -249,25 +250,38 @@ include 'includes/header.php';
     </form>
 </div>
 
-<script src="https://cdn.tiny.cloud/1/h0juj1gj1y7ty4yr2ji2k05wm66eefio5hq5vdm6sqshsdfe/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    tinymce.init({
-        selector: '#description',
-        height: 350,
-        menubar: false,
-        plugins: ['advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview', 'searchreplace', 'visualblocks', 'code', 'fullscreen', 'insertdatetime', 'media', 'table', 'help', 'wordcount'],
-        toolbar: 'undo redo | blocks | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link image | code | help',
-        content_style: 'body { font-family: Inter, sans-serif; font-size: 14px; }',
-        branding: false
+    // Initialize Quill editor
+    var quill = new Quill('#editor-container', {
+        theme: 'snow',
+        placeholder: 'Enter cause description...',
+        modules: {
+            toolbar: [
+                [{ 'header': [2, 3, 4, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'indent': '-1'}, { 'indent': '+1' }],
+                [{ 'align': [] }],
+                ['link', 'image'],
+                ['clean']
+            ]
+        }
     });
 
     document.getElementById('causeForm').addEventListener('submit', function(e) {
-        var description = tinymce.get('description').getContent();
-        if (!description || description.trim() === '') {
+        // Get Quill content and update hidden input
+        var description = quill.root.innerHTML;
+        document.getElementById('description').value = description;
+        
+        // Check if description is empty (only has empty tags)
+        var textContent = quill.getText().trim();
+        if (!textContent || textContent === '') {
             e.preventDefault();
             alert('Please enter the cause description');
-            tinymce.get('description').focus();
+            quill.focus();
             return false;
         }
     });
