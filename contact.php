@@ -5,12 +5,13 @@ $pageDescription = 'Get in touch with ULFA. We\'re here to answer your questions
 include 'includes/header.php'; 
 
 // Get contact settings
-$contactAddress = getSetting('contact_address', 'Kasese District, Uganda');
+$contactAddress = getSetting('contact_address', 'P.O. Box 113004, Mpondwe');
 $contactCity = getSetting('contact_city', 'Kasese');
 $contactCountry = getSetting('contact_country', 'Uganda');
-$contactPhone = getSetting('contact_phone', '+256 700 000 000');
+$contactPhone = getSetting('contact_phone', '+256757689986');
 $contactPhoneAlt = getSetting('contact_phone_alt');
-$contactEmail = getSetting('contact_email', 'info@ulfa.org');
+$contactEmail = getSetting('contact_email', 'ulfaorphanage@gmail.com');
+$siteAddress = getSetting('site_address', 'Mpondwe Lhubiriha Town Council, Kasese District, Uganda');
 $officeHours = getSetting('office_hours', 'Monday - Friday: 8:00 AM - 5:00 PM');
 $officeHoursWeekend = getSetting('office_hours_weekend', 'Saturday: 9:00 AM - 2:00 PM');
 $googleMapsEmbed = getSetting('google_maps_embed');

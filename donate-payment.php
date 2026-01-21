@@ -172,7 +172,7 @@ include 'includes/header.php';
                 <li>Choose your preferred payment method (Mobile Money, Card, Bank)</li>
                 <li>You will be automatically redirected once payment is complete</li>
                 <li>Keep this page open until payment is confirmed</li>
-                <li>If you experience any issues, please contact us at <?= htmlspecialchars($settings['contact_email'] ?? 'info@ulfa.org') ?></li>
+                <li>If you experience any issues, please contact us at <?= htmlspecialchars($settings['contact_email'] ?? 'ulfaorphanage@gmail.com') ?></li>
             </ul>
         </div>
         

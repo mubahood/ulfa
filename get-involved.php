@@ -8,6 +8,9 @@ $siteShortName = getSetting('site_short_name', 'ULFA');
 $siteName = getSetting('site_name', 'United Love for All');
 $contactCity = getSetting('contact_city', 'Kasese');
 $contactCountry = getSetting('contact_country', 'Uganda');
+$contactPhone = getSetting('contact_phone', '+256757689986');
+$contactEmail = getSetting('contact_email', 'ulfaorphanage@gmail.com');
+$contactAddress = getSetting('site_address', 'Mpondwe Lhubiriha Town Council, Kasese District, Uganda');
 
 $pageTitle = 'Get Involved';
 $pageDescription = 'Join ' . $siteShortName . ' mission to transform lives. Donate, volunteer, or partner with us to support orphaned children in ' . $contactCountry . '.';
@@ -123,21 +126,21 @@ include 'includes/header.php';
                         <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
                         <div>
                             <h5>Call Us</h5>
-                            <p style="margin: 0;">+256 700 000 000</p>
+                            <p style="margin: 0;"><?php echo htmlspecialchars($contactPhone); ?></p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h5>Email Us</h5>
-                            <p style="margin: 0;">info@ulfa.org</p>
+                            <p style="margin: 0;"><?php echo htmlspecialchars($contactEmail); ?></p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <h5>Visit Us</h5>
-                            <p style="margin: 0;">Mpondwe Lhubiriha, Kasese District, Uganda</p>
+                            <p style="margin: 0;"><?php echo htmlspecialchars($contactAddress); ?></p>
                         </div>
                     </div>
                 </div>
