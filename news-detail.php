@@ -9,7 +9,7 @@ $siteShortName = getSetting('site_short_name', 'ULFA');
 
 // Get news article
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$stmt = $pdo->prepare("SELECT n.*, COALESCE(a.name, 'ULFA Team') as author 
+$stmt = $pdo->prepare("SELECT n.*, COALESCE(a.full_name, 'ULFA Team') as author 
                        FROM news_posts n 
                        LEFT JOIN admin_users a ON n.author_id = a.id 
                        WHERE n.id = ? AND n.status = 'published'");
