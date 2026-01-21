@@ -381,10 +381,38 @@ function getSocialLinks() {
  */
 function getCurrency() {
     return [
-        'code' => getSetting('currency_code', 'UGX'),
-        'symbol' => getSetting('currency_symbol', 'UGX'),
-        'name' => getSetting('currency_name', 'Ugandan Shilling'),
+        'code' => getSetting('currency_code', 'USD'),
+        'symbol' => getSetting('currency_symbol', '$'),
+        'name' => getSetting('currency_name', 'US Dollar'),
     ];
+}
+
+/**
+ * Get USD to UGX exchange rate
+ * @return float Exchange rate (1 USD = X UGX)
+ */
+function getExchangeRate() {
+    return (float) getSetting('usd_to_ugx_rate', '3600');
+}
+
+/**
+ * Convert USD amount to UGX for Pesapal payment processing
+ * @param float $usdAmount Amount in USD
+ * @return float Amount in UGX
+ */
+function convertUsdToUgx($usdAmount) {
+    $rate = getExchangeRate();
+    return round($usdAmount * $rate, 0); // Round to whole number for UGX
+}
+
+/**
+ * Convert UGX amount back to USD for display
+ * @param float $ugxAmount Amount in UGX
+ * @return float Amount in USD
+ */
+function convertUgxToUsd($ugxAmount) {
+    $rate = getExchangeRate();
+    return round($ugxAmount / $rate, 2);
 }
 
 /**
@@ -392,7 +420,23 @@ function getCurrency() {
  */
 function formatCurrency($amount) {
     $currency = getCurrency();
-    return $currency['symbol'] . ' ' . number_format($amount);
+    return $currency['symbol'] . ' ' . number_format($amount, 2);
+}
+
+/**
+ * Format donation amount for display
+ * Shows USD amount if available, otherwise converts UGX to USD
+ * @param array $donation Donation record from database
+ * @return string Formatted currency string
+ */
+function formatDonationAmount($donation) {
+    // If we have the USD amount stored, use it
+    if (!empty($donation['amount_usd'])) {
+        return '$ ' . number_format($donation['amount_usd'], 2) . ' USD';
+    }
+    // Otherwise convert from UGX
+    $usdAmount = convertUgxToUsd($donation['amount']);
+    return '$ ' . number_format($usdAmount, 2) . ' USD';
 }
 
 // Load settings on include (auto-load for convenience)

@@ -287,7 +287,7 @@ include 'includes/header.php';
                 <div class="donation-summary">
                     <div class="summary-row">
                         <span class="summary-label">Amount Donated:</span>
-                        <span class="summary-value amount"><?= formatCurrency($donation['amount']) ?></span>
+                        <span class="summary-value amount"><?= formatDonationAmount($donation) ?></span>
                     </div>
                     <div class="summary-row">
                         <span class="summary-label">Reference Number:</span>
@@ -357,7 +357,7 @@ include 'includes/header.php';
                     </div>
                     <div class="summary-row">
                         <span class="summary-label">Amount:</span>
-                        <span class="summary-value"><?= formatCurrency($donation['amount']) ?></span>
+                        <span class="summary-value"><?= formatDonationAmount($donation) ?></span>
                     </div>
                 </div>
                 
@@ -395,7 +395,7 @@ include 'includes/header.php';
                     </div>
                     <div class="summary-row">
                         <span class="summary-label">Amount:</span>
-                        <span class="summary-value"><?= formatCurrency($donation['amount']) ?></span>
+                        <span class="summary-value"><?= formatDonationAmount($donation) ?></span>
                     </div>
                     <div class="summary-row">
                         <span class="summary-label">Status:</span>

@@ -155,8 +155,8 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                         <div class="col-12">
                             <div style="border: 3px solid var(--primary-yellow); padding: 1.75rem; text-align: center; background: rgba(255,193,7,0.05); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,193,7,0.1)'; this.style.transform='translateX(8px)'" onmouseout="this.style.background='rgba(255,193,7,0.05)'; this.style.transform='translateX(0)'">
-                                <div style="font-size: 3rem; font-weight: 900; color: var(--primary-yellow); margin-bottom: 0.5rem; line-height: 1;">1000+</div>
-                                <div style="color: #fff; font-size: 1rem; font-weight: 700; letter-spacing: 1px;">DAILY MEALS SERVED</div>
+                                <div style="font-size: 3rem; font-weight: 900; color: var(--primary-yellow); margin-bottom: 0.5rem; line-height: 1;">10+</div>
+                                <div style="color: #fff; font-size: 1rem; font-weight: 700; letter-spacing: 1px;">YEARS OF SERVICE</div>
                             </div>
                         </div>
                     </div>

@@ -285,7 +285,7 @@ include 'includes/header.php';
                     <div class="custom-amount-input">
                         <span><?php echo $currency['symbol']; ?></span>
                         <input type="number" class="form-control" id="custom_amount" name="custom_amount" 
-                               min="5" max="1000" step="1" placeholder="Enter amount (5-1000)">
+                               min="1" max="1000" step="1" placeholder="Enter amount (1-1000)">
                     </div>
                 </div>
             </div>

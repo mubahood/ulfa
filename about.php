@@ -126,9 +126,9 @@ $founderTitle = getSetting('founder_title', 'Founder & Executive Director');
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="impact-card">
-                        <div class="impact-icon"><i class="fas fa-utensils"></i></div>
-                        <div class="impact-number">1000+</div>
-                        <div class="impact-label">Daily Meals Served</div>
+                        <div class="impact-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="impact-number">10+</div>
+                        <div class="impact-label">Years of Service</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -201,7 +201,7 @@ $founderTitle = getSetting('founder_title', 'Founder & Executive Director');
                         <div class="team-member-card" style="border: 2px solid var(--primary-black); border-radius: 0; overflow: hidden; background: #fff; transition: transform 0.3s;">
                             <?php if ($member['photo']): ?>
                             <div style="height: 280px; overflow: hidden; position: relative;">
-                                <img src="<?php echo htmlspecialchars($member['photo']); ?>" alt="<?php echo htmlspecialchars($member['name']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img src="uploads/<?php echo htmlspecialchars($member['photo']); ?>" alt="<?php echo htmlspecialchars($member['name']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <?php else: ?>
                             <div style="height: 280px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">

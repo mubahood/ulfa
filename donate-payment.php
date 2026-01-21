@@ -10,6 +10,12 @@ if (!isset($_SESSION['payment_url']) || !isset($_SESSION['donation_id'])) {
 
 $payment_url = $_SESSION['payment_url'];
 $donation_id = $_SESSION['donation_id'];
+$pending_donation = $_SESSION['pending_donation'] ?? [];
+
+// Get amounts for display
+$amountUsd = $pending_donation['amount_usd'] ?? $pending_donation['amount'] ?? 0;
+$amountUgx = $pending_donation['amount_ugx'] ?? convertUsdToUgx($amountUsd);
+$exchangeRate = $pending_donation['exchange_rate'] ?? getExchangeRate();
 
 $page_title = 'Complete Payment';
 include 'includes/header.php';
@@ -150,6 +156,13 @@ include 'includes/header.php';
         <div class="payment-header">
             <h1><i class="fas fa-credit-card me-2"></i> Complete Your Payment</h1>
             <p>You are being redirected to our secure payment partner, Pesapal</p>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(0,0,0,0.1); border-radius: 8px;">
+                <div style="font-size: 1.5rem; font-weight: 800;">$ <?= number_format($amountUsd, 2) ?> USD</div>
+                <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                    <i class="fas fa-exchange-alt me-1"></i> UGX <?= number_format($amountUgx, 0) ?> 
+                    <span style="font-size: 0.8rem;">(Rate: 1 USD = <?= number_format($exchangeRate, 0) ?> UGX)</span>
+                </div>
+            </div>
         </div>
         
         <div class="iframe-container">

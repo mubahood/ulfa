@@ -14,7 +14,7 @@ require_once 'functions.php';
 $currency = getCurrency();
 $currencyCode = $currency['code'];
 $currencySymbol = $currency['symbol'];
-$minDonation = (int)getSetting('min_donation', 1000);
+$minDonation = (int)getSetting('min_donation', 1);
 $siteShortName = getSetting('site_short_name', 'ULFA');
 
 // Get optional cause from URL
@@ -431,7 +431,7 @@ textarea.form-control {
                     <label>Or enter custom amount:</label>
                     <div class="custom-amount-input">
                         <span><?php echo $currencySymbol; ?></span>
-                        <input type="number" name="custom_amount" placeholder="Enter amount (5-1000)" min="5" max="1000" step="1" value="<?php echo htmlspecialchars($_POST['custom_amount'] ?? ''); ?>" id="customAmount">
+                        <input type="number" name="custom_amount" placeholder="Enter amount (1-1000)" min="1" max="1000" step="1" value="<?php echo htmlspecialchars($_POST['custom_amount'] ?? ''); ?>" id="customAmount">
                     </div>
                 </div>
                 

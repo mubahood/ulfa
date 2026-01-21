@@ -10,14 +10,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/admin.css">
+    <?php
+    // Get site settings for admin
+    $siteLogo = getSetting('site_logo', '');
+    $siteLogoLight = getSetting('site_logo_light', '');
+    $siteShortName = getSetting('site_short_name', 'ULFA');
+    $logoIconClass = getSetting('logo_icon_class', 'fas fa-hands-helping');
+    $siteFavicon = getSetting('site_favicon', '');
+    
+    // Use light logo if available, otherwise use main logo
+    $adminLogo = $siteLogoLight ?: $siteLogo;
+    ?>
+    <?php if ($siteFavicon): ?>
+    <link rel="icon" href="../uploads/<?php echo htmlspecialchars($siteFavicon); ?>" type="image/x-icon">
+    <?php endif; ?>
 </head>
 <body>
     <!-- Sidebar -->
     <aside class="admin-sidebar" id="adminSidebar">
         <div class="sidebar-header">
             <div class="brand">
-                <i class="fas fa-hands-helping"></i>
-                <span>ULFA Admin</span>
+                <?php if ($adminLogo): ?>
+                <img src="../uploads/<?php echo htmlspecialchars($adminLogo); ?>" alt="<?php echo htmlspecialchars($siteShortName); ?>" class="brand-logo">
+                <?php else: ?>
+                <i class="<?php echo htmlspecialchars($logoIconClass); ?>"></i>
+                <?php endif; ?>
+                <span><?php echo htmlspecialchars($siteShortName); ?> Admin</span>
             </div>
             <button class="sidebar-toggle" id="sidebarToggle">
                 <i class="fas fa-times"></i>

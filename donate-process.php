@@ -12,15 +12,20 @@ if (!isset($_SESSION['pending_donation'])) {
 $donation_data = $_SESSION['pending_donation'];
 
 try {
+    // Get exchange rate and convert USD to UGX for Pesapal
+    $exchangeRate = getExchangeRate();
+    $amountUsd = $donation_data['amount']; // User's donation in USD
+    $amountUgx = convertUsdToUgx($amountUsd); // Convert to UGX for Pesapal
+    
     // Insert donation into database
     $stmt = $pdo->prepare("
         INSERT INTO donations (
             donor_name, donor_email, donor_phone,
-            amount, currency, cause_id, message, is_anonymous,
+            amount, amount_usd, exchange_rate, currency, cause_id, message, is_anonymous,
             pesapal_merchant_reference, payment_status,
             ip_address, user_agent
         ) VALUES (
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
         )
     ");
     
@@ -30,8 +35,10 @@ try {
         $donor_name,
         $donation_data['email'],
         $donation_data['phone'] ?? null,
-        $donation_data['amount'],
-        'UGX',
+        $amountUgx,        // Store UGX amount (what Pesapal processes)
+        $amountUsd,        // Store original USD amount
+        $exchangeRate,     // Store exchange rate used
+        'UGX',             // Pesapal currency
         $donation_data['cause_id'],
         $donation_data['message'] ?? null,
         $donation_data['is_anonymous'],
@@ -46,9 +53,14 @@ try {
     // Store donation ID in session
     $_SESSION['donation_id'] = $donation_id;
     
-    // Prepare data for Pesapal
+    // Store both amounts in session for display
+    $_SESSION['pending_donation']['amount_usd'] = $amountUsd;
+    $_SESSION['pending_donation']['amount_ugx'] = $amountUgx;
+    $_SESSION['pending_donation']['exchange_rate'] = $exchangeRate;
+    
+    // Prepare data for Pesapal (send UGX amount)
     $pesapal_data = [
-        'amount' => $donation_data['amount'],
+        'amount' => $amountUgx,  // UGX amount for Pesapal
         'merchant_reference' => $donation_data['merchant_reference'],
         'first_name' => $donation_data['first_name'],
         'last_name' => $donation_data['last_name'],

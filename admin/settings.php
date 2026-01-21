@@ -318,11 +318,18 @@ include 'includes/header.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="min_donation">Minimum Donation Amount</label>
+                            <label for="min_donation">Minimum Donation Amount (USD)</label>
                             <input type="number" id="min_donation" name="settings[min_donation]" class="form-control"
-                                value="<?php echo htmlspecialchars(s('min_donation', '1000')); ?>"
-                                placeholder="1000" min="0">
-                            <small class="form-text">Minimum amount allowed for donations</small>
+                                value="<?php echo htmlspecialchars(s('min_donation', '5')); ?>"
+                                placeholder="5" min="1">
+                            <small class="form-text">Minimum amount allowed for donations in USD</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="usd_to_ugx_rate">USD to UGX Exchange Rate</label>
+                            <input type="number" id="usd_to_ugx_rate" name="settings[usd_to_ugx_rate]" class="form-control"
+                                value="<?php echo htmlspecialchars(s('usd_to_ugx_rate', '3600')); ?>"
+                                placeholder="3600" min="1" step="1">
+                            <small class="form-text">1 USD = X UGX (Pesapal processes payments in UGX)</small>
                         </div>
                     </div>
                 </div>
@@ -338,18 +345,43 @@ include 'includes/header.php';
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="contact_email">Email Address</label>
-                            <input type="email" id="contact_email" name="settings[contact_email]" class="form-control"
-                                value="<?php echo htmlspecialchars(s('contact_email')); ?>"
-                                placeholder="info@example.com">
+                            <label for="site_email">Organization Email</label>
+                            <input type="email" id="site_email" name="settings[site_email]" class="form-control"
+                                value="<?php echo htmlspecialchars(s('site_email')); ?>"
+                                placeholder="ulfaorphanage@gmail.com">
+                            <small class="form-text">Primary organization email</small>
                         </div>
                         
                         <div class="form-group">
-                            <label for="contact_phone">Phone Number</label>
+                            <label for="site_phone">Organization Phone</label>
+                            <input type="text" id="site_phone" name="settings[site_phone]" class="form-control"
+                                value="<?php echo htmlspecialchars(s('site_phone')); ?>"
+                                placeholder="+256757689986">
+                            <small class="form-text">Primary organization phone with country code</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="site_address">Physical Address</label>
+                            <textarea id="site_address" name="settings[site_address]" class="form-control" rows="2"
+                                placeholder="Mpondwe Lhubiriha Town Council, Kasese District, Uganda"><?php echo htmlspecialchars(s('site_address')); ?></textarea>
+                            <small class="form-text">Physical location address</small>
+                        </div>
+                        
+                        <hr style="margin: 1.5rem 0;">
+                        <h4 style="font-size: 0.95rem; margin-bottom: 1rem; color: #666;">Contact Page Settings</h4>
+                        
+                        <div class="form-group">
+                            <label for="contact_email">Display Email</label>
+                            <input type="email" id="contact_email" name="settings[contact_email]" class="form-control"
+                                value="<?php echo htmlspecialchars(s('contact_email')); ?>"
+                                placeholder="ulfaorphanage@gmail.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact_phone">Display Phone</label>
                             <input type="text" id="contact_phone" name="settings[contact_phone]" class="form-control"
                                 value="<?php echo htmlspecialchars(s('contact_phone')); ?>"
-                                placeholder="+256 700 000 000">
-                            <small class="form-text">Include country code</small>
+                                placeholder="+256757689986">
                         </div>
                         
                         <div class="form-group">
@@ -363,7 +395,7 @@ include 'includes/header.php';
                             <label for="whatsapp_number">WhatsApp Number</label>
                             <input type="text" id="whatsapp_number" name="settings[whatsapp_number]" class="form-control"
                                 value="<?php echo htmlspecialchars(s('whatsapp_number')); ?>"
-                                placeholder="+256700000000">
+                                placeholder="+256757689986">
                             <small class="form-text">Without spaces or dashes. Used for WhatsApp chat button.</small>
                         </div>
                     </div>
@@ -375,9 +407,10 @@ include 'includes/header.php';
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="contact_address">Full Address</label>
-                            <textarea id="contact_address" name="settings[contact_address]" class="form-control" rows="3"
-                                placeholder="Street address, City, Country"><?php echo htmlspecialchars(s('contact_address')); ?></textarea>
+                            <label for="contact_address">Postal Address</label>
+                            <textarea id="contact_address" name="settings[contact_address]" class="form-control" rows="2"
+                                placeholder="P.O. Box 113004, Mpondwe"><?php echo htmlspecialchars(s('contact_address')); ?></textarea>
+                            <small class="form-text">Postal/mailing address</small>
                         </div>
                         
                         <div class="form-row">
