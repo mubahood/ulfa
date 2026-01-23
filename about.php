@@ -165,26 +165,32 @@ $founderTitle = getSetting('founder_title', 'Founder & Executive Director');
                         <div style="width: 150px; height: 150px; background: var(--primary-yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 3rem; color: var(--primary-black);">
                             <i class="fas fa-user"></i>
                         </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--primary-black); margin-bottom: 0.5rem;"><?php echo htmlspecialchars($founderName); ?></h3>
-                        <p style="color: var(--primary-yellow); font-weight: 600; font-size: 1rem; margin: 0;"><?php echo htmlspecialchars($founderTitle); ?></p>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--primary-black); margin-bottom: 0.5rem;">Muadhi Abubakar</h3>
+                        <p style="color: var(--primary-yellow); font-weight: 600; font-size: 1rem; margin: 0;">Founder & Director</p>
                         <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">United Love for All (ULFA) Orphanage Centre</p>
                     </div>
                 </div>
                 <div class="col-lg-8">
                     <div style="border-left: 4px solid var(--primary-yellow); padding-left: 2rem;">
-                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">I was born and raised in a humble community in <?php echo htmlspecialchars($contactCity); ?> District, <?php echo htmlspecialchars($contactCountry); ?>. Growing up, I experienced firsthand the struggles that many children still face today — lack of school fees, long distances to school, hunger, and the constant fear of dropping out of education. Education for me was not guaranteed; it was something I had to fight for every single day.</p>
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">I was born and raised in a humble community in Kasese District, Uganda. Growing up, I experienced firsthand the struggles that many children still face today—lack of school fees, long distances to school, hunger, and the constant fear of dropping out of education. Education for me was not guaranteed; it was something I had to fight for every single day.</p>
                         
                         <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">There were times when attending school meant completing household chores first, walking long distances barefoot, and sharing limited learning materials. Yet, despite these challenges, I learned an important lesson early in life: <strong>when children are supported with love, dignity, and opportunity, their lives can change forever.</strong></p>
                         
-                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;"><?php echo htmlspecialchars($siteShortName); ?> was born from that belief. This foundation exists to ensure that orphaned and vulnerable children do not grow up feeling forgotten or unloved.</p>
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">ULFA Orphanage Centre was born from that belief. This foundation exists to ensure that orphaned and vulnerable children do not grow up feeling forgotten or unloved.</p>
                         
-                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">At <?php echo htmlspecialchars($siteShortName); ?>, we believe that charity alone is not enough. We believe in <strong>empowerment, protection, and long-term solutions</strong>. That is why we support education, provide basic needs, promote child protection, and invest in sustainable projects that help communities care for their children with dignity.</p>
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">At ULFA Orphanage Centre, we believe that charity alone is not enough. We believe in <strong>empowerment, protection, and long-term solutions</strong>. That is why we support education, provide basic needs, promote child protection, and invest in sustainable projects that help communities care for their children with dignity.</p>
                         
-                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">Every child we serve is not just a beneficiary — they are a future leader, a future parent, and a future contributor to society. When we invest in children, we invest in the future of our nation.</p>
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">Every child we serve is not just a beneficiary—they are a future leader, a future parent, and a future contributor to society. <strong>When we invest in children, we invest in the future of our nation.</strong></p>
                         
-                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); font-style: italic; margin-bottom: 1.25rem;">"Together, through <?php echo htmlspecialchars($siteName); ?>, we can ensure that no child is left behind simply because of the circumstances of their birth."</p>
+                        <div style="background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffb300 100%); padding: 1.25rem 1.5rem; border-radius: 8px; margin-bottom: 1.25rem;">
+                            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--primary-black); margin: 0; font-weight: 500;">
+                                <i class="fas fa-quote-left" style="margin-right: 0.5rem; opacity: 0.7;"></i>
+                                Together, through United Love for All (ULFA), we can ensure that no child is left behind simply because of the circumstances of their birth.
+                                <i class="fas fa-quote-right" style="margin-left: 0.5rem; opacity: 0.7;"></i>
+                            </p>
+                        </div>
                         
-                        <p style="font-size: 1rem; color: var(--primary-black); font-weight: 600; margin: 0;">— <?php echo htmlspecialchars($founderName); ?></p>
+                        <p style="font-size: 1.1rem; color: var(--primary-black); font-weight: 700; margin: 0;">— Muadhi Abubakar</p>
                     </div>
                 </div>
             </div>
