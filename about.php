@@ -64,11 +64,27 @@ $founderTitle = getSetting('founder_title', 'Founder & Executive Director');
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <span class="badge-section" style="margin-bottom: 1rem; display: inline-block;">OUR STORY</span>
-                    <h2 class="mb-4">Why <?php echo htmlspecialchars($siteShortName); ?> Was Founded</h2>
-                    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--gray-text);"><?php echo htmlspecialchars($siteName); ?> (<?php echo htmlspecialchars($siteShortName); ?>) Orphanage Centre was founded<?php if ($foundingYear) echo ' in ' . $foundingYear; ?> in <?php echo htmlspecialchars($contactCity); ?> District, <?php echo htmlspecialchars($contactCountry); ?>, because our founder knows what it means to grow up without security, support, or certainty about tomorrow.</p>
-                    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--gray-text);">Growing up in a community where many children struggle to stay in school due to poverty, long distances, and lack of basic necessities, our founder experienced firsthand the struggles that many children still face today — lack of school fees, long distances to school, hunger, and the constant fear of dropping out of education.</p>
-                    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--gray-text);">These experiences shaped a purpose: to ensure that orphaned and vulnerable children do not face these struggles alone. <?php echo htmlspecialchars($siteShortName); ?> exists to provide love, care, education, and protection, while building sustainable solutions that help families and communities support their children with dignity.</p>
-                    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--gray-text); font-style: italic;">"When children are supported early, they grow into confident, capable adults who can transform their communities. <?php echo htmlspecialchars($siteShortName); ?> is not just an organization—it is a promise that no child should be forgotten."</p>
+                    <h2 class="mb-4">Why ULFA Orphanage Centre Was Founded</h2>
+                    
+                    <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">
+                        <strong>United Love for All (ULFA)</strong> Orphanage Centre was founded in Kasese District, Uganda, because our founder knows what it means to grow up without security, support, or certainty about tomorrow.
+                    </p>
+                    
+                    <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">
+                        Growing up in a community where many children struggle to stay in school due to poverty, long distances, and lack of basic necessities, our founder experienced firsthand the struggles that many children still face today—<em>lack of school fees, long distances to school, hunger, and the constant fear of dropping out of education</em>.
+                    </p>
+                    
+                    <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">
+                        These experiences shaped a purpose: <strong>to ensure that orphaned and vulnerable children do not face these struggles alone</strong>. ULFA Orphanage Centre exists to provide love, care, education, and protection, while building sustainable solutions that help families and communities support their children with dignity.
+                    </p>
+                    
+                    <div style="background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffb300 100%); padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--primary-black); margin: 0; font-weight: 500;">
+                            <i class="fas fa-quote-left" style="margin-right: 0.5rem; opacity: 0.7;"></i>
+                            When children are supported early, they grow into confident, capable adults who can transform their communities. <strong>ULFA Orphanage Centre is not just an organization—it is a promise that no child should be forgotten.</strong>
+                            <i class="fas fa-quote-right" style="margin-left: 0.5rem; opacity: 0.7;"></i>
+                        </p>
+                    </div>
                 </div>
                 <div class="col-lg-6">
                     <div style="background: var(--light-yellow); padding: 2.5rem; border-left: 4px solid var(--primary-yellow);">
