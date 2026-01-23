@@ -136,7 +136,7 @@ $googleMapsEmbed = sanitizeGoogleMapsEmbed($googleMapsEmbed);
             <?php else: ?>
             <div style="background: var(--white); padding: 3rem; border: 3px solid var(--primary-black); text-align: center;">
                 <i class="fas fa-map-marked-alt" style="font-size: 5rem; color: var(--primary-yellow); margin-bottom: 2rem;"></i>
-                <h3 class="mb-3"><?php echo htmlspecialchars($siteShortName); ?> Orphanage Centre</h3>
+                <h3 class="mb-3"><?php echo htmlspecialchars($siteShortName); ?></h3>
                 <p style="font-size: 1.1rem; color: var(--gray-text); max-width: 600px; margin: 0 auto;">
                     <?php echo nl2br(htmlspecialchars($contactAddress)); ?>
                 </p>
