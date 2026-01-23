@@ -94,7 +94,7 @@ $socialLinks = getSocialLinks();
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> <?php echo htmlspecialchars($siteName); ?>. <?php echo htmlspecialchars($footerText); ?><?php if ($developerName): ?> | Developed by <a href="<?php echo htmlspecialchars($developerUrl); ?>" style="color: var(--primary-yellow); text-decoration: none;"><?php echo htmlspecialchars($developerName); ?></a><?php endif; ?> | <a href="admin/login.php" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem;"><i class="fas fa-lock me-1"></i>Admin</a></p>
+                <p>&copy; <?php echo date('Y'); ?> <?php echo htmlspecialchars($siteName); ?> | <a href="admin/login.php" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem;"><i class="fas fa-lock me-1"></i>Admin</a></p>
             </div>
         </div>
     </footer>
