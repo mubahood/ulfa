@@ -109,33 +109,26 @@ $founderTitle = getSetting('founder_title', 'Founder & Executive Director');
                 <h2>Transforming Lives Daily</h2>
                 <p class="subtitle">Real numbers, real impact, real change</p>
             </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
                     <div class="impact-card">
                         <div class="impact-icon"><i class="fas fa-child"></i></div>
-                        <div class="impact-number">500+</div>
-                        <div class="impact-label">Children Supported</div>
+                        <div class="impact-number">112+</div>
+                        <div class="impact-label">Children Helped</div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="impact-card">
                         <div class="impact-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <div class="impact-number">350+</div>
-                        <div class="impact-label">Students in School</div>
+                        <div class="impact-number">20+</div>
+                        <div class="impact-label">Students Educated</div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="impact-card">
                         <div class="impact-icon"><i class="fas fa-calendar-alt"></i></div>
-                        <div class="impact-number">10+</div>
+                        <div class="impact-number">3+</div>
                         <div class="impact-label">Years of Service</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="impact-card">
-                        <div class="impact-icon"><i class="fas fa-hands-helping"></i></div>
-                        <div class="impact-number">50+</div>
-                        <div class="impact-label">Active Volunteers</div>
                     </div>
                 </div>
             </div>

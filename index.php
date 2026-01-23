@@ -137,25 +137,19 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="row g-3">
                         <div class="col-12">
                             <div style="border: 3px solid var(--primary-yellow); padding: 2rem; text-align: center; background: rgba(255,193,7,0.05); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,193,7,0.1)'; this.style.transform='translateX(8px)'" onmouseout="this.style.background='rgba(255,193,7,0.05)'; this.style.transform='translateX(0)'">
-                                <div style="font-size: 3.5rem; font-weight: 900; color: var(--primary-yellow); margin-bottom: 0.5rem; line-height: 1;">500+</div>
-                                <div style="color: #fff; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px;">CHILDREN SUPPORTED</div>
+                                <div style="font-size: 3.5rem; font-weight: 900; color: var(--primary-yellow); margin-bottom: 0.5rem; line-height: 1;">112+</div>
+                                <div style="color: #fff; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px;">CHILDREN HELPED</div>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div style="border: 3px solid var(--primary-yellow); padding: 1.5rem; text-align: center; background: rgba(255,193,7,0.05); transition: all 0.3s; height: 100%;" onmouseover="this.style.background='rgba(255,193,7,0.1)'; this.style.transform='translateY(-5px)'" onmouseout="this.style.background='rgba(255,193,7,0.05)'; this.style.transform='translateY(0)'">
-                                <div style="font-size: 2.75rem; font-weight: 900; color: var(--primary-yellow); margin-bottom: 0.5rem; line-height: 1;">350+</div>
-                                <div style="color: #fff; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.5px;">IN SCHOOL</div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div style="border: 3px solid var(--primary-yellow); padding: 1.5rem; text-align: center; background: rgba(255,193,7,0.05); transition: all 0.3s; height: 100%;" onmouseover="this.style.background='rgba(255,193,7,0.1)'; this.style.transform='translateY(-5px)'" onmouseout="this.style.background='rgba(255,193,7,0.05)'; this.style.transform='translateY(0)'">
-                                <div style="font-size: 2.75rem; font-weight: 900; color: var(--primary-yellow); margin-bottom: 0.5rem; line-height: 1;">50+</div>
-                                <div style="color: #fff; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.5px;">VOLUNTEERS</div>
+                        <div class="col-12">
+                            <div style="border: 3px solid var(--primary-yellow); padding: 1.5rem; text-align: center; background: rgba(255,193,7,0.05); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,193,7,0.1)'; this.style.transform='translateY(-5px)'" onmouseout="this.style.background='rgba(255,193,7,0.05)'; this.style.transform='translateY(0)'">
+                                <div style="font-size: 2.75rem; font-weight: 900; color: var(--primary-yellow); margin-bottom: 0.5rem; line-height: 1;">20+</div>
+                                <div style="color: #fff; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.5px;">STUDENTS EDUCATED</div>
                             </div>
                         </div>
                         <div class="col-12">
                             <div style="border: 3px solid var(--primary-yellow); padding: 1.75rem; text-align: center; background: rgba(255,193,7,0.05); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,193,7,0.1)'; this.style.transform='translateX(8px)'" onmouseout="this.style.background='rgba(255,193,7,0.05)'; this.style.transform='translateX(0)'">
-                                <div style="font-size: 3rem; font-weight: 900; color: var(--primary-yellow); margin-bottom: 0.5rem; line-height: 1;">10+</div>
+                                <div style="font-size: 3rem; font-weight: 900; color: var(--primary-yellow); margin-bottom: 0.5rem; line-height: 1;">3+</div>
                                 <div style="color: #fff; font-size: 1rem; font-weight: 700; letter-spacing: 1px;">YEARS OF SERVICE</div>
                             </div>
                         </div>
