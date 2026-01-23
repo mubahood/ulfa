@@ -49,16 +49,16 @@ foreach ($images as $image) {
 $stmt = $pdo->prepare("DELETE FROM gallery_images WHERE album_id = ?");
 $stmt->execute([$id]);
 
-if ($album['cover_image'] && file_exists('../uploads/' . $album['cover_image'])) {
+if (!empty($album['cover_image']) && file_exists('../uploads/' . $album['cover_image'])) {
     unlink('../uploads/' . $album['cover_image']);
 }
 
 $result = deleteRecord('gallery_albums', $id);
 
-if ($result['success']) {
+if ($result) {
     $_SESSION['alert'] = ['type' => 'success', 'message' => 'Album and all images deleted successfully!'];
 } else {
-    $_SESSION['alert'] = ['type' => 'danger', 'message' => 'Failed to delete album: ' . $result['error']];
+    $_SESSION['alert'] = ['type' => 'danger', 'message' => 'Failed to delete album.'];
 }
 
 header('Location: gallery.php');
