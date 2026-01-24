@@ -162,8 +162,8 @@ $founderTitle = getSetting('founder_title', 'Founder & Executive Director');
             <div class="row align-items-center g-4">
                 <div class="col-lg-4 text-center">
                     <div style="border-left: 4px solid var(--primary-yellow); padding: 1.5rem; background: #fff;">
-                        <div style="width: 150px; height: 150px; background: var(--primary-yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 3rem; color: var(--primary-black);">
-                            <i class="fas fa-user"></i>
+                        <div style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.5rem; border: 4px solid var(--primary-yellow);">
+                            <img src="uploads/team/muadhi.jpg" alt="Muadhi Abubakar" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--primary-black); margin-bottom: 0.5rem;">Muadhi Abubakar</h3>
                         <p style="color: var(--primary-yellow); font-weight: 600; font-size: 1rem; margin: 0;">Founder & Director</p>
