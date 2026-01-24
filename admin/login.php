@@ -251,12 +251,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             placeholder="Enter your username"
                             required 
                             autofocus
-                            value="<?php echo htmlspecialchars($_POST['username'] ?? 'admin'); ?>"
+                            value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>"
                         >
                     </div>
-                    <small style="display: block; margin-top: 0.5rem; color: #6c757d; font-size: 0.85rem;">
-                        <i class="fas fa-info-circle"></i> Default username: <strong>admin</strong>
-                    </small>
                 </div>
                 
                 <div class="form-group">
@@ -270,12 +267,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             class="form-control" 
                             placeholder="Enter your password"
                             required
-                            value="admin123"
                         >
                     </div>
-                    <small style="display: block; margin-top: 0.5rem; color: #6c757d; font-size: 0.85rem;">
-                        <i class="fas fa-info-circle"></i> Default password: <strong>admin123</strong>
-                    </small>
                 </div>
                 
                 <button type="submit" class="btn-login">
