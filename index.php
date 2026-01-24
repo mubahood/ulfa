@@ -44,7 +44,7 @@ $galleryItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="row align-items-center">
                 <div class="col-lg-8 mx-auto text-center">
                     <div style="display: inline-block; padding: 0.5rem 1.25rem; background: var(--primary-yellow); color: var(--primary-black); font-weight: 700; font-size: 0.875rem; letter-spacing: 1px; margin-bottom: 1.5rem;">
-                        <?php echo htmlspecialchars(strtoupper($siteShortName)); ?> ORPHANAGE CENTRE
+                        <?php echo htmlspecialchars(strtoupper($siteShortName)); ?>
                     </div>
                     <h1 style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
                         No Child Should<br>Be Forgotten
