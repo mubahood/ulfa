@@ -59,7 +59,7 @@ $categories = $categoriesStmt->fetchAll(PDO::FETCH_COLUMN);
         <div class="text-center">
             <h1 style="color: var(--primary-yellow); font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">News & Updates</h1>
             <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
-                Stories of hope, progress, and the lives being changed at ULFA Orphanage Centre
+                Stories of hope, progress, and the lives being changed at ULFA
             </p>
         </div>
     </div>

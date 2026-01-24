@@ -75,13 +75,13 @@ $founderTitle = getSetting('founder_title', 'Founder & Executive Director');
                     </p>
                     
                     <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">
-                        These experiences shaped a purpose: <strong>to ensure that orphaned and vulnerable children do not face these struggles alone</strong>. ULFA Orphanage Centre exists to provide love, care, education, and protection, while building sustainable solutions that help families and communities support their children with dignity.
+                        These experiences shaped a purpose: <strong>to ensure that orphaned and vulnerable children do not face these struggles alone</strong>. ULFA exists to provide love, care, education, and protection, while building sustainable solutions that help families and communities support their children with dignity.
                     </p>
                     
                     <div style="background: linear-gradient(135deg, var(--primary-yellow) 0%, #ffb300 100%); padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
                         <p style="font-size: 1.1rem; line-height: 1.8; color: var(--primary-black); margin: 0; font-weight: 500;">
                             <i class="fas fa-quote-left" style="margin-right: 0.5rem; opacity: 0.7;"></i>
-                            When children are supported early, they grow into confident, capable adults who can transform their communities. <strong>ULFA Orphanage Centre is not just an organization—it is a promise that no child should be forgotten.</strong>
+                            When children are supported early, they grow into confident, capable adults who can transform their communities. <strong>ULFA is not just an organization—it is a promise that no child should be forgotten.</strong>
                             <i class="fas fa-quote-right" style="margin-left: 0.5rem; opacity: 0.7;"></i>
                         </p>
                     </div>
@@ -176,9 +176,9 @@ $founderTitle = getSetting('founder_title', 'Founder & Executive Director');
                         
                         <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">There were times when attending school meant completing household chores first, walking long distances barefoot, and sharing limited learning materials. Yet, despite these challenges, I learned an important lesson early in life: <strong>when children are supported with love, dignity, and opportunity, their lives can change forever.</strong></p>
                         
-                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">ULFA Orphanage Centre was born from that belief. This foundation exists to ensure that orphaned and vulnerable children do not grow up feeling forgotten or unloved.</p>
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">ULFA was born from that belief. This foundation exists to ensure that orphaned and vulnerable children do not grow up feeling forgotten or unloved.</p>
                         
-                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">At ULFA Orphanage Centre, we believe that charity alone is not enough. We believe in <strong>empowerment, protection, and long-term solutions</strong>. That is why we support education, provide basic needs, promote child protection, and invest in sustainable projects that help communities care for their children with dignity.</p>
+                        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">At ULFA, we believe that charity alone is not enough. We believe in <strong>empowerment, protection, and long-term solutions</strong>. That is why we support education, provide basic needs, promote child protection, and invest in sustainable projects that help communities care for their children with dignity.</p>
                         
                         <p style="font-size: 1.05rem; line-height: 1.9; color: var(--gray-text); margin-bottom: 1.25rem;">Every child we serve is not just a beneficiary—they are a future leader, a future parent, and a future contributor to society. <strong>When we invest in children, we invest in the future of our nation.</strong></p>
                         
