@@ -120,23 +120,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Update record
     if (empty($errors)) {
-        $data = [
-            'username' => $username,
-            'full_name' => $fullName,
-            'email' => $email,
-            'phone' => $phone ?: null,
-            'status' => $status
-        ];
-        
-        // Only include avatar if column exists in database
+        // Get actual columns from database to avoid errors
         $pdo = getDBConnection();
-        $stmt = $pdo->query("SHOW COLUMNS FROM admin_users LIKE 'avatar'");
-        if ($stmt->fetch()) {
+        $stmt = $pdo->query("DESCRIBE admin_users");
+        $existingColumns = array_column($stmt->fetchAll(PDO::FETCH_ASSOC), 'Field');
+        
+        // Build data array with only existing columns
+        $data = [];
+        
+        if (in_array('username', $existingColumns)) {
+            $data['username'] = $username;
+        }
+        if (in_array('full_name', $existingColumns)) {
+            $data['full_name'] = $fullName;
+        }
+        if (in_array('email', $existingColumns)) {
+            $data['email'] = $email;
+        }
+        if (in_array('phone', $existingColumns)) {
+            $data['phone'] = $phone ?: null;
+        }
+        if (in_array('status', $existingColumns)) {
+            $data['status'] = $status;
+        }
+        if (in_array('avatar', $existingColumns)) {
             $data['avatar'] = $avatarPath;
         }
         
         // Only update password if provided
-        if (!empty($password)) {
+        if (!empty($password) && in_array('password', $existingColumns)) {
             $data['password'] = password_hash($password, PASSWORD_DEFAULT);
         }
         
