@@ -106,26 +106,37 @@ function insertRecord($table, $data) {
  * @return bool Success status
  */
 function updateRecord($table, $id, $data) {
+    global $lastUpdateError;
     try {
         $pdo = getDBConnection();
-        if (!$pdo) return false;
+        if (!$pdo) {
+            $lastUpdateError = "Database connection failed";
+            return false;
+        }
         
         $sets = [];
         $values = [];
         
         foreach ($data as $column => $value) {
-            $sets[] = "$column = ?";
+            $sets[] = "`$column` = ?";
             $values[] = $value;
         }
         
         $values[] = $id;
         
-        $sql = "UPDATE $table SET " . implode(', ', $sets) . " WHERE id = ?";
+        $sql = "UPDATE `$table` SET " . implode(', ', $sets) . " WHERE id = ?";
         
         $stmt = $pdo->prepare($sql);
-        return $stmt->execute($values);
+        $result = $stmt->execute($values);
+        
+        if (!$result) {
+            $lastUpdateError = implode(", ", $stmt->errorInfo());
+        }
+        
+        return $result;
         
     } catch (PDOException $e) {
+        $lastUpdateError = $e->getMessage();
         error_log("Update record error: " . $e->getMessage());
         return false;
     }
