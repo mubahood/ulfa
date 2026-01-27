@@ -125,9 +125,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'full_name' => $fullName,
             'email' => $email,
             'phone' => $phone ?: null,
-            'status' => $status,
-            'avatar' => $avatarPath
+            'status' => $status
         ];
+        
+        // Only include avatar if column exists in database
+        $pdo = getDBConnection();
+        $stmt = $pdo->query("SHOW COLUMNS FROM admin_users LIKE 'avatar'");
+        if ($stmt->fetch()) {
+            $data['avatar'] = $avatarPath;
+        }
         
         // Only update password if provided
         if (!empty($password)) {
@@ -147,7 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: admins.php');
             exit;
         } else {
-            $errors[] = 'Failed to update admin user.';
+            global $lastUpdateError;
+            $errors[] = 'Failed to update admin user.' . (!empty($lastUpdateError) ? ' Error: ' . $lastUpdateError : '');
         }
     }
     
