@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     // Handle avatar upload
-    $avatarPath = $admin['avatar'];
+    $avatarPath = $admin['avatar'] ?? null;
     if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
         $fileName = $_FILES['avatar']['name'];
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if (move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadPath)) {
                 // Delete old avatar
-                if ($admin['avatar'] && file_exists('../uploads/' . $admin['avatar'])) {
+                if (!empty($admin['avatar']) && file_exists('../uploads/' . $admin['avatar'])) {
                     unlink('../uploads/' . $admin['avatar']);
                 }
                 $avatarPath = 'admins/' . $newFileName;
@@ -326,7 +326,7 @@ include 'includes/header.php';
                     <div class="card-body">
                         <div class="form-group">
                             <div class="avatar-preview" id="avatarPreview">
-                                <?php if ($admin['avatar']): ?>
+                                <?php if (!empty($admin['avatar'])): ?>
                                     <img src="../uploads/<?php echo htmlspecialchars($admin['avatar']); ?>" alt="">
                                 <?php else: ?>
                                     <i class="fas fa-user"></i>
